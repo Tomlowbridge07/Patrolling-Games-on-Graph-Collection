@@ -1,0 +1,94 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{comment}
+\usepackage{natbib}
+%\usepackage{float}
+\usepackage{appendix}
+\usepackage{subfig}
+\usepackage{enumitem}
+\usepackage{newfloat}
+\usepackage[utf8]{inputenc}
+\usepackage{floatrow}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{fit}
+\usetikzlibrary{shapes.misc,calc, positioning, hobby, backgrounds}
+
+
+%\DeclarePairedDelimiter{\floor}{\lfloor}{\rightfloor}
+%\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newcommand{\halflength}{\ensuremath{\floor{\frac{m}{2}}}}
+\newcommand{\floor}[1]{\left \lfloor #1 \right \rfloor}
+\newcommand{\ceil}[1]{\left \lceil #1 \right \rceil}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+ 
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{note}{Note}
+
+\DeclareFloatingEnvironment[fileext=los,
+    listname={List of Example Figures},
+    name=Example Figure,
+    placement=tbhp,
+    within=section,]{examplefigure}
+
+\title{Patrolling games on graphs collection}
+\date{\today}
+\author{Thomas Lowbridge \\ School of Mathematical Sciences \\ University of Nottingham}
+
+\bibliographystyle{plain}
+
+\begin{document}
+
+\pagestyle{empty}
+{
+  \renewcommand{\thispagestyle}[1]{}
+  \maketitle
+  This document houses all work on patrolling games on graphs.
+  \tableofcontents  
+}
+\clearpage
+\pagestyle{plain}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+\newpage
+\pagenumbering{arabic}
+\section{First main section}
+
+
+
+%End of main part of document
+\bibliography{mybib}
+
+\appendix
+\pagenumbering{roman}
+\appendixpage
+\addappheadtotoc
+\section{First appendix section}
+
+\end{document}
