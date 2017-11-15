@@ -1,0 +1,33 @@
+\BOOKMARK [1][-]{section.1}{Introduction to game}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Pure game}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Mixed game}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Properties}{section.1}% 4
+\BOOKMARK [1][-]{section.2}{Current Reduction Tools}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{Symmetry}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.2}{Strategy Domination}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{Bounds}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Basic Bounds\(Attacker and Patroller\)}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Decomposition\(Patroller\)}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.3}{Simplification\(Patroller and Attacker\)}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.4}{Old Diametric attack\(Attacker\)}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.5}{Covering\(Patroller\) and Independence\(Attacker\)}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{Simple Graph bounds and solutions}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{Hamiltonian}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.2}{Biparite}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.3}{Complete Bipartite}{section.4}% 17
+\BOOKMARK [1][-]{section.5}{Line graph}{}% 18
+\BOOKMARK [1][-]{section.6}{New Bounds}{}% 19
+\BOOKMARK [2][-]{subsection.6.1}{Problem and Correction of diametric attack}{section.6}% 20
+\BOOKMARK [2][-]{subsection.6.2}{Extension of diametric attack}{section.6}% 21
+\BOOKMARK [2][-]{subsection.6.3}{Extension of Hamiltonian patrols}{section.6}% 22
+\BOOKMARK [1][-]{section.7}{Elongated star graph}{}% 23
+\BOOKMARK [2][-]{subsection.7.1}{Introduction}{section.7}% 24
+\BOOKMARK [2][-]{subsection.7.2}{Solution for m 2\(k+1\)}{section.7}% 25
+\BOOKMARK [1][-]{section.8}{General star graph}{}% 26
+\BOOKMARK [1][-]{section.9}{Dual star graphs}{}% 27
+\BOOKMARK [1][-]{section.10}{Linked Star graphs}{}% 28
+\BOOKMARK [1][-]{section*.8}{Appendices}{}% 29
+\BOOKMARK [1][-]{appendix.A}{Graph Definitions}{}% 30
+\BOOKMARK [1][-]{appendix.B}{Old Statements about Old diametric}{}% 31
+\BOOKMARK [1][-]{appendix.C}{Proof's}{}% 32
+\BOOKMARK [2][-]{subsection.C.1}{Alternating Random Hamiltonian proof}{appendix.C}% 33

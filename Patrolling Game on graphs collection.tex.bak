@@ -32,14 +32,9 @@
 %\DeclarePairedDelimiter{\floor}{\lfloor}{\rightfloor}
 %\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 
-\newcommand{\denominator}{\ensuremath{n+\sum\limits_{j=1}^{h} k_{j}}}
 \newcommand{\halflength}{\ensuremath{\floor{\frac{m}{2}}}}
 \newcommand{\floor}[1]{\left \lfloor #1 \right \rfloor}
 \newcommand{\ceil}[1]{\left \lceil #1 \right \rceil}
-\newcommand{\pospart}[1]{\left( #1 \right)_{+}}
-\newcommand{\negpart}[1]{\left( #1 \right)_{-}}
-\newcommand{\set}[2]{\left\{ #1 \, | \, #2 \right\}}
-
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}[theorem]{Corollary}
@@ -521,138 +516,7 @@ The value of $S_{n} \equiv K_{1,n}$ is $V=\frac{m}{2n}$.
 \section{New Bounds}
 
 \subsection{Problem and Correction of diametric attack}
-Consider the patroller strategy against a diametric attack that simply oscillates between the two diametric points.
 
-The total number of attacks the attacker is making under this diametric strategy is $2(T-m+1)$, we will now measure how many the simple strategy for the patroller gets.
-
-We will divide the set of captured attacks, depending on what is happening. This division shall be into start captures, middle captures and end captures.
-
-The start captures are captures catching less than $m$ attacks in the early times, i.e before the middle. The middle captures are captures catching exactly $m$ attacks. The end captures are captures catching less than $m$ attacks in the late times.
-
-\begin{example}[Problem with diametric attack]
-Consider the graph $L_{5}$ so $\bar{d}=4$ for $T=20$,$m=6$, then under the diametric attack, the patroller oscillating between diametrics points gets.
-\begin{itemize}
-\item[Start] Capture $1+5=6$ attacks initially.
-\item[Middle] Capture $6+6=12$ attacks when arriving at node $5$.
-\item[End] Capture $4$ attacks when finishing at node $1$.
-\end{itemize}
-Giving $22$ out of $2(20-6+1)=30$ attacks, a better than $\frac{3}{4}$ value.
-\end{example}
-
-First off it is worth considering that the number of end attacks that are going to be caught will come from two values (if more than these would be in the middle). We could suggest that waiting at the start is more preferable to ``stabilize'' into the middle quicker. the cost for doing so is to remove one from each end value, if one of the end values is 1, then the penultimate middle is also reduced by 1 and thus becomes an end value.
-
-While each time we decide to wait gains us 1 for each node in the start values, until it becomes a middle value. As $m \geq \bar{d}$, we are guaranteed that there are at least two start values (as we are looking at times $0$ and $\bar{d}-1 < m$). Therefore it is certain that waiting at the start (at least while there are two start values) is not worse than the just oscillating strategy.
-
-Therefore we can wait until $t=m-(\bar{d}-1)$ (which as $m > \bar{d}-1$ means its is always possible), then this is only the start.
-
-Let us count the pattern under this strategy,
-\begin{itemize}
-\item[Start:] Capture $m-\bar{d}$ attacks initially by waiting.
-\item[Middle:] Capture $m \times (\floor{\frac{T-2m+1}{\bar{d}}}+1)$ attacks in the middle cycles (if any middle times are possible, otherwise zero if negative).
-\item[End:] Capture $T-1-(m-1+(\floor{\frac{T-2m+1}{\bar{d}}}+1)\bar{d})$ (at the penultimate node visit (if possible, this really is zero if its negative) and $T-1-(m-1+(\floor{\frac{T-2m+1}{\bar{d}}}+2)\bar{d})$ at the final node visit (again zero if negative).
-\end{itemize}
-
-This gives \begin{align*}
-& m-\bar{d}+\pospart{m \times (\floor{\frac{T-2m+1}{\bar{d}}}+1)} + \\ &\pospart{T-(m-1+(\floor{\frac{T-2m+1}{\bar{d}}}+1)\bar{d})} + \pospart{T-(m-1+(\floor{\frac{T-2m+1}{\bar{d}}}+2)\bar{d})}
-\end{align*}
-
-We will call $\alpha=\floor{\frac{T-2m+1}{\bar{d}}}$
-
-\begin{lemma}[Condition on $T$ for bound to hold]
-When $T=m-1+(k+1)\bar{d}$ for some $k \in \mathbb{N}_{0}$ then the diametric bound holds. Otherwise as $T \rightarrow \infty$ then the diametric bound holds.
-\end{lemma}
-
-\begin{proof}
-Using $T=m-1+(k+1)\bar{d}$ in the formula gives,
-$\alpha=\floor{\frac{(k+1) \bar{d}-m}{\bar{d}}}=(k+1)+\floor{\frac{-m}{\bar{d}}}=(k+1)-2=(k-1)$ (the final part is because $2>\frac{-m}{\bar{d}} \geq -1$ and we will assume that $m > \bar{d}$ here otherwise waiting at one node is just as good as the bound we are trying to achieve)
-
-$m-\bar{d}+\pospart{m + m(k-1)} + \pospart{m-1-(m-1+(k-1+1)\bar{d})}+\pospart{m-1-(m-1+(k+1)\bar{d})}$
-
-which is $m-\bar{d}+\pospart{mk} + \pospart{(k+1)\bar{d}-k\bar{d}}+\pospart{(k+1)\bar{d}-(k+1)\bar{d}}$
-giving $m-\bar{d}+mk+ \pospart{\bar{d}}+\pospart{0}=m(k+1)$.
-Giving the fraction of $\frac{m(k+1)}{2(k+1)\bar{d}}=\frac{m}{2 \bar{d}}$.
-
-
-For the second part, first we seek to prove that within the choice of $T$ from $m-1+(k+1)\bar{d}+r$ where $0 \leq r < \bar{d}$ is the maximum when $r=m$ (i.e $T=2m-1+(k+1)\bar{d}$).
-
-As the choice of $r$ only affects the final 3 parts (middle and ends values), we can just look at considering these values and seeing what the maximal choice is.
-
-Upon substitution we get that:
-$\alpha=\floor{\frac{(k+1)\bar{d}+r-m}{\bar{d}}}=(k+1)+\floor{\frac{r-m}{\bar{d}}}$
-
-so formula becomes
-$\pospart{m(\alpha+1)}+\pospart{(k+1)\bar{d}+r-(\alpha+1)\bar{d}}+
-\pospart{(k+1)\bar{d}+r-(\alpha+2)\bar{d}}$. To decide $r$ we need to know if middle values or end values are non-zero.
-
-Note. The second end value will never be non-zero as $(k+1)\bar{d}+r-(\alpha+2)\bar{d}=(k+1)\bar{d}+r-((k+1)+\floor{\frac{r-m}{\bar{d}}}+2)\bar{d}=r-(\floor{\frac{r-m}{\bar{d}}+2}\bar{d} < r-(-1+2)\bar{d}=r-\bar{d}<0$.
-
-\begin{itemize}
-\item No middle values and no end values is impossible assuming $k \in \mathbb{N}_{0}$.
-
-\item Middle values but no end values. As we really want to maximize the end value, increasing $r$ up to the point where $\alpha$ increases (giving a raise of $m$ attacks captured) but increases the number of total attacks by 2 each time it is raised. Hence minimal $r$ is chosen to increase $\alpha$. This is when $r-m=-\bar{d}$ i.e $r=m-\bar{d}$ changes $\alpha$ by 1 (as $r<m-\bar{d}$ gives an -1 to $\alpha$, but critical point is when equal to).
-
-\item Middle values and end value. As we are looking at $(m-\bar{d})(\alpha+1)+(k+1)\bar{d}+r$, we still want to increase $\alpha$ without increasing the number of attacks too much, i.e as above.
-\end{itemize}
-
-Then we show that the maximal subsequence tends to the bound as $T \rightarrow \infty$, i.e as $k \rightarrow \infty$.
-When substituted, we get that
-$\alpha=(k+1)$ and so the formula becomes
-$m-\bar{d}+\pospart{m + m(k+2)} + \pospart{2m-1-(m-1+(k+2)\bar{d})}+\pospart{2m-1-(m-1+(k+3)\bar{d})}$
-giving $m-\bar{d}+(k+3)m + \pospart{m-(k+2)\bar{d}}+\pospart{m-(k+3)\bar{d}}$.
-As $m < 2\bar{d}$ then we get $m(k+4) -\bar{d}$ caught out of $2(m+k\bar{d})$
-giving a fraction of $\frac{m(k+4)-\bar{d}}{2(m+k\bar{d}} \rightarrow \frac{m}{2\bar{d}}$.
-
-Hence as the maximal subsequence tends down to the bound, it implies the result.
-\end{proof}
-
-\begin{figure}
-%\includegraphics[scale=0.4]{DiametricAttack(m_45,d_30)1.png}
-\resizebox{0.95\linewidth}{!}{
-\input{Images/DiametricAttack(m_45,d_30).tex}}
-\caption{Best Upper Bound achievable under the diametric strategy}
-\end{figure}
-
-\textbf{Fixing the diametric attack}
-A possible ``fix'' to the problem of the excess time is to limit the diametric attacks window in which attacks are placed.
-
-\begin{definition}[Timed diametric attack]
-Attacking at a pair of diametric nodes equiprobably for the times $I$,$I+1$...,$I+\bar{d}-1$ (i.e starting attacks at $\tau,\tau+1,...,\tau+\bar{d}-1$) is called the \textit{timed diametric attack}.
-\end{definition}
-
-\begin{note}
-The timed diametric attack is only feasible is $T \geq m+\bar{d}-1$.
-\end{note}
-
-\begin{lemma}
-When $T \geq m+ \bar{d}-1$, the diametric bound $V \leq \max\{\frac{1}{2},\frac{m}{2\bar{d}}\}$ is valid.
-\end{lemma} 
-
-\begin{proof}
-First consider all the pure patrolling strategies, $W_{i} \in \mathcal{W}$, Then as the attacker is only attacking two ends, henceforth called $n_{1}$ and $n_{\bar{d}}$, any patrol not starting at $n_{1}$ or $n_{\bar{d}}$ is dominated by one that does.
-This is because the patrol will not capture any attacks until they visit either $n_{1}$ or $n_{\bar{d}}$, and then capture a set of attacks that started there previously. The patrol might as well wait there up until this point and do at least as good as arriving there for the first time.
-
-Formally, assume that $n_{1}$ is the end node first reached by a patrol, $W(t)$ at time, $t_{1}=\min \set{t}{W(t)=n_{1}}$, then we can form the patrol, $U(t)= \left\{ \begin{array}{l}
-n_{1} \text{ for } t \leq t_{1}, \\
-W(t) \text{ for } t>t_{1}. \\
-\end{array} \right.$
-and $P(U,\phi) \geq P(W,\phi)$ where $\phi$ is the timed diametric attack (or infact the normal diametric attack.
-
-Now we are restricted to patrols starting at end points, it is similar to see when leaving an end point, there is no other decision as you must travel to the other end point, assumed to be $n_{\bar{d}}$. Hence the question becomes when to leave $n_{1}$ and travel to $n_{\bar{d}}$. Obviously it should only be undertaken if the journey can be made and more attacks can be caught by doing so.
-
-WLOG assume that $\tau=0$ (other just wait longer initially, as attacks haven't started), then our choice is what leaving time (last time before moving): $t_{l} \in \{0,1,...,m-2 \}$, to pick to maximize the number of attacks caught; or $t_{L}=\infty$, never leaving to get $\bar{d}$ attacks.
-
-\begin{itemize}
-\item[Leaving:]Choosing $t_{L} \in \{0,1,...,m-2 \}$ gives the patroller $\frac{m}{2\bar{d}}$ as,
-
-Leaving at $t_{L}$ gives us $\min(t_{L}+1,\bar{d})$ attacks caught at $n_{L}$, and $\min(m+\bar{d}-2-(t_{L}+\bar{d})+1,\bar{d})=\min(m-1-t_{L},\bar{d})$.
-
-Now choosing $t_{L} > \bar{d}-1$, doesn't improve the first value and possibly lowers the second value. Hence we restrict ourselves to leave if we catch all attacks, i.e $t_{L} \leq \bar{d}-1$. Now in this region lowering $t_{L}$ lowers it by $1$ and raises it only raises the second on by $1$ if $m-1-t_{L} \leq \bar{d}$ (i.e $t_{L} \geq m-1-\bar{d}$ or any $t_{L}$ if $m-1-\bar{d} \leq 0$). Hence any choice of $\pospart{m-1-\bar{d}} \leq t_{L} \leq \bar{d}-1$ is equally as good. This gives a number of attacks caught as $t_{L}+1+m-1-t_{L}=m$ out of $2\bar{d}$ placed attacks. Hence giving $V \leq \frac{m}{2\bar{d}}$.
-
-\item[Staying:]Choosing $t_{L}=\infty$ gives the patroller $\frac{1}{2}$
-\end{itemize}
-
-Hence as the patroller can pick from these two options, it gives $V \leq \max\{\frac{1}{2} , \frac{m}{2\bar{d}} \}$. More explicity it gives $V \leq \frac{1}{2}$ if $m < \bar{d}$, and $V \leq \frac{m}{2\bar{d}}$ is $m \geq \bar{d}$.
-\end{proof}
 
 
 \subsection{Extension of diametric attack}
