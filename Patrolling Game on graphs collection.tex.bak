@@ -26,15 +26,27 @@
 
 \usetikzlibrary{calc}
 \usetikzlibrary{fit}
-\usetikzlibrary{shapes.misc,calc, positioning, hobby, backgrounds}
+\usetikzlibrary{decorations.shapes,shapes.misc,calc, positioning, hobby, backgrounds}
 
 
 %\DeclarePairedDelimiter{\floor}{\lfloor}{\rightfloor}
 %\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 
+\newcommand{\denominator}{\ensuremath{n+\sum\limits_{j=1}^{h} k_{j}}}
 \newcommand{\halflength}{\ensuremath{\floor{\frac{m}{2}}}}
 \newcommand{\floor}[1]{\left \lfloor #1 \right \rfloor}
 \newcommand{\ceil}[1]{\left \lceil #1 \right \rceil}
+\newcommand{\pospart}[1]{\left( #1 \right)_{+}}
+\newcommand{\negpart}[1]{\left( #1 \right)_{-}}
+\newcommand{\set}[2]{\left\{ #1 \, | \, #2 \right\}}
+
+\tikzset{cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},
+%default radius will be 1pt. 
+cross/.default={1pt}}
+
+\tikzset{decorate sep/.style 2 args=
+{decorate,decoration={shape backgrounds,shape=circle,shape size=#1,shape sep=#2}}}
+
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}[theorem]{Corollary}
@@ -516,10 +528,99 @@ The value of $S_{n} \equiv K_{1,n}$ is $V=\frac{m}{2n}$.
 \section{New Bounds}
 
 \subsection{Problem and Correction of diametric attack}
+Consider the patroller strategy against a diametric attack that simply oscillates between the two diametric points.
 
+The total number of attacks the attacker is making under this diametric strategy is $2(T-m+1)$, we will now measure how many the simple strategy for the patroller gets.
+
+We will divide the set of captured attacks, depending on what is happening. This division shall be into start captures, middle captures and end captures.
+
+The start captures are captures catching less than $m$ attacks in the early times, i.e before the middle. The middle captures are captures catching exactly $m$ attacks. The end captures are captures catching less than $m$ attacks in the late times.
+
+\begin{example}[Problem with diametric attack]
+Consider the graph $L_{5}$ so $\bar{d}=4$ for $T=20$,$m=6$, then under the diametric attack, the patroller oscillating between diametrics points gets.
+\begin{itemize}
+\item[Start] Capture $1+5=6$ attacks initially.
+\item[Middle] Capture $6+6=12$ attacks when arriving at node $5$.
+\item[End] Capture $4$ attacks when finishing at node $1$.
+\end{itemize}
+Giving $22$ out of $2(20-6+1)=30$ attacks, a better than $\frac{3}{4}$ value.
+\end{example}
+
+First off it is worth considering that the number of end attacks that are going to be caught will come from two values (if more than these would be in the middle). We could suggest that waiting at the start is more preferable to ``stabilize'' into the middle quicker. the cost for doing so is to remove one from each end value, if one of the end values is 1, then the penultimate middle is also reduced by 1 and thus becomes an end value.
+
+While each time we decide to wait gains us 1 for each node in the start values, until it becomes a middle value. As $m \geq \bar{d}$, we are guaranteed that there are at least two start values (as we are looking at times $0$ and $\bar{d}-1 < m$). Therefore it is certain that waiting at the start (at least while there are two start values) is not worse than the just oscillating strategy.
+
+Therefore we can wait until $t=m-(\bar{d}-1)$ (which as $m > \bar{d}-1$ means its is always possible), then this is only the start.
+
+Let us count the pattern under this strategy,
+\begin{itemize}
+\item[Start:] Capture $m-\bar{d}$ attacks initially by waiting.
+\item[Middle:] Capture $m \times (\floor{\frac{T-2m+1}{\bar{d}}}+1)$ attacks in the middle cycles (if any middle times are possible, otherwise zero if negative).
+\item[End:] Capture $T-1-(m-1+(\floor{\frac{T-2m+1}{\bar{d}}}+1)\bar{d})$ (at the penultimate node visit (if possible, this really is zero if its negative) and $T-1-(m-1+(\floor{\frac{T-2m+1}{\bar{d}}}+2)\bar{d})$ at the final node visit (again zero if negative).
+\end{itemize}
+
+This gives \begin{align*}
+& m-\bar{d}+\pospart{m \times (\floor{\frac{T-2m+1}{\bar{d}}}+1)} + \\ &\pospart{T-(m-1+(\floor{\frac{T-2m+1}{\bar{d}}}+1)\bar{d})} + \pospart{T-(m-1+(\floor{\frac{T-2m+1}{\bar{d}}}+2)\bar{d})}
+\end{align*}
+
+We will call $\alpha=\floor{\frac{T-2m+1}{\bar{d}}}$
+
+\begin{lemma}[Condition on $T$ for bound to hold]
+When $T=m-1+(k+1)\bar{d}$ for some $k \in \mathbb{N}_{0}$ then the diametric bound holds. Otherwise as $T \rightarrow \infty$ then the diametric bound holds.
+\end{lemma}
+
+Proof: \ref{Condition on T for old diametric proof}
+
+\begin{figure}
+%\includegraphics[scale=0.4]{DiametricAttack(m_45,d_30)1.png}
+\resizebox{0.95\linewidth}{!}{
+\input{Images/DiametricAttack(m_45,d_30).tex}}
+\caption{Best Upper Bound achievable under the diametric strategy}
+\end{figure}
+
+\textbf{Fixing the diametric attack}
+
+A possible ``fix'' to the problem of the excess time is to limit the diametric attacks window in which attacks are placed.
+
+\begin{definition}[Time-limited diametric attack]
+Attacking at a pair of diametric nodes equiprobably for the times $I$,$I+1$...,$I+\bar{d}-1$ (i.e starting attacks at $\tau,\tau+1,...,\tau+\bar{d}-1$) is called the \textit{timed diametric attack}.
+\end{definition}
+
+\begin{note}
+The time-limited diametric attack is only feasible is $T \geq m+\bar{d}-1$.
+\end{note}
+
+\begin{lemma}
+When $T \geq m+ \bar{d}-1$, the diametric bound $V \leq \max\{\frac{1}{2},\frac{m}{2\bar{d}}\}$ is valid.
+\end{lemma}
+
+Proof: \ref{Time-limited diametric attack proof}
 
 
 \subsection{Extension of diametric attack}
+
+The idea of the diametric attack, that of attacking points far away from each other can be extended. First of all it is not necessary to use the graph diameter, though on a pair of point this provides the strongest bound.
+
+Consider attacking the points $i$ and $i'$ with $d=d(i,i')$. Then the timed ``diametric'' attack gives the bound $V \leq \max \{ \frac{1}{2} , \frac{m}{2d} \}$.
+
+While if only using a pair of nodes this is pointless as it worse than the standard use of a diametric pair. However consider a set of points $D= \set{i \in N}{ d(i,i')=d}$ , this is a set of nodes mutually a distance $d$ from each other. Then it is possible to use the same type of timed attack to get a bound
+
+\begin{definition}[Polygonal attack]
+A \textit{$d$-polygonal attack} is an attack at a set of nodes $D= \set{i \in N}{ d(i,i')=d}$ at the time intervals $I,I+1,...,I+d-1$ (for a chosen initial $I$)
+\end{definition}
+
+\begin{note}
+Just like the time-limited diametric attack, the polygonal attack is only feasible if $T \geq m+d-1$.
+\end{note}
+
+The idea behind this attack is very similar to the timed diametric attack.
+
+\begin{lemma}
+When $T \geq m+d-1$ and a set $D$ as in the $d$-polygonal attack, the bound $V \leq \max \{ \frac{1}{|D|} , \frac{m}{|D|d} \}$ is valid
+\end{lemma}
+
+Proof: \ref{Polygonal attack proof}
+
 
 \subsection{Extension of Hamiltonian patrols}
 We seek to find a larger class of optimal patrols for hamiltonian graphs, by using groups of nodes.
@@ -573,21 +674,545 @@ If $m$ is odd, say $m=2m'+1$ then in the above we get two possibilities for each
 
 While not getting a better lower bound, the ARHP does give some control on how to perform optimally in a Hamiltonian graph. The idea of distributing the probability $\frac{2}{n}$ between two types of nodes can be extended to the idea of distributing the probability $\frac{k}{n}$ between $k$ types of nodes (as seen in appendix \ref{appendix:Hamiltonian Graph}).
 
-
 \section{Elongated star graph}
 \subsection{Introduction}
 
+The line and star graphs provided a good starting point for attempting to solving the problem with a general tree. If a more general version of the star graph can be solved, it may provide better bounds on a general tree and may in fact provide an exact solution (under certain conditions). 
+
+The idea is to extend the star graph to a more general graph which is a mix between the line and the star, by extending the length of the branches (at first just one branch). This may better model a tightly packed region to search and another that is far away, consider the example of a small town and larger city connected by a road. 
+
+\begin{definition}[Elongated Star Graph]
+The \textit{Elongated Star Graph}, $S_{n}^k$ is made from $S_{n}$, by performing subdivision on one of the edges repeatedly $k$ times, so that one of the external nodes is now $k+1$ away from the centre.
+\end{definition}
+
+The labelling will be done as in Example Figure \ref{myfigure: Example of elongated labeling} and we will from now assume that $n \geq 3$, as otherwise we are just dealing with the line.
+
+
+\begin{myfigure}
+\begin{center}
+\begin{tikzpicture}[-,auto,node distance=1.5cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {$1$};
+  \node[main node] (2) [right of=1] {$2$};
+  \node[main node] (3) [right of=2] {$3$};
+  \node[main node] (4) [right of=3] {$4$};
+  \node[main node] (5) [right of=4] {$5$};
+  \node[main node] (6) [right of=5]  {$6$};
+  \node[main node] (7) [right of=6]  {$c$};
+  \node[main node] (8) [right of=7]  {$*$};
+  \node[main node] (9) [above of=7]  {$*$};
+  \node[main node] (10) [below of=7]  {$*$};
+  
+
+  \path[every node/.style={font=\sffamily}]
+    (1) edge  (2)
+    (2) edge (3)
+    (3) edge (4)
+    (4) edge (5)
+    (5) edge (6)
+    (6) edge (7)
+    (7) edge (8)
+     edge (9)
+     edge (10);
+\end{tikzpicture}
+\end{center}
+\caption{Labeling on the graph $S_{4}^5$.}
+\label{myfigure: Example of elongated labeling}
+\end{myfigure}
+
+\subsection{Basic Analysis}
+To start our analysis of this graph, we can look at an expanded graph which can simplify down to our extended star graph. Consider the cyclic graph $C_{(2k+1)+(2n-1)}=C_{2(n+k)}$, we can simplify this graph by node identifying. The identifying map is one such that we identify nodes $i$ to $2k+2-i$ for $i=1,..,k$ and identify nodes $2k+2,2k+4,..,2k+2n$.
+
+
+\begin{myfigure}
+\begin{center}
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[baseline=(current bounding box.north),-,auto,node distance=1cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\bfseries}]
+
+  \node[main node] (1) {$3$};
+  \node[main node] (2) [above right of=1] {$4$};
+  \node[main node] (3) [right of=2] {$5$};
+  \node[main node] (4) [right of=3] {$6$};
+  \node[main node] (5) [right of=4] {$7$};
+  \node[main node] (6) [below right of=5] {$8$};
+  \node[main node] (7) [below right of=1] {$2$};
+  \node[main node] (8) [right of=7] {$1$};
+  \node[main node] (9) [right of=8] {$10$};
+  \node[main node] (10) [right of=9] {$9$};
+  
+  \node (P1) [right of=6] {};
+  \node (P2) [right of=P1] {};
+  
+  \node[main node] (a) [right of=P2] {$1$};
+  \node[main node] (b) [right of=a] {$2$};
+  \node[main node] (c) [right of=b] {$3$};
+  \node[main node] (d) [right of=c] {$c$};
+  \node[main node] (e) [right of=d] {$*$};
+  \node[main node] (f) [above of=d] {$*$};
+  
+  \draw[->] (P1) edge (P2);
+  
+
+  \path[every node/.style={font=\sffamily}]
+    (1) edge  (2)
+    edge (7)
+    (2) edge (3)
+    (3) edge (4)
+    (4) edge (5)
+    (5) edge (6)
+    (6) edge (10)
+    (7) edge (8)
+    (8) edge (9)
+    (9) edge (10)
+    (a) edge (b)
+    (b) edge (c)
+    (c) edge (d)
+    (d) edge (e)
+    edge (f);
+    
+     \path[dashed,red,every node/.style={font=\sffamily}]
+    (2) edge  (7)
+    (3) edge (8);
+    
+    \path[dashed,blue,every node/.style={font=\sffamily}]
+    (4) edge  (9);
+    
+    \path[dashed,blue,out=-60,in=180,every node/.style={font=\sffamily}]
+    (4) edge (6);
+    
+    \path[dashed,blue,out=60,in=180,every node/.style={font=\sffamily}]
+    (9) edge (6);
+  
+  \node (Box1) [draw,thick,fit=(1) (2) (3) (7) (8),fill,red,opacity=0.2] {};
+  \node (Box2) [draw,thick,fit=(4) (5) (6)  (10),fill,blue,opacity=0.2] {};
+  
+  \node (Box3) [draw,thick,fit=(a) (b) (c),fill,red,opacity=0.2] {}; 
+  \node (Box4) [draw,thick,fit=(d) (e) (f),fill,blue,opacity=0.2] {};   
+  
+\node [left=0.5cm,above=0.5cm,text width=0.5cm] at (2) {$C_{10}$};
+\node [left=0.5cm,above=0.5cm,text width=0.5cm] at (a) {$S_{3}^{2}$};   
+\end{tikzpicture}
+}
+\end{center}
+\caption{$C_{10}$ can be simplified to $S_{3}^{2}$ by node identifying.}
+\end{myfigure}
+
+
+\begin{definition}[Random Oscillation]
+The \textit{Oscillation} on $S_{n}^{k}$ is any embedded Hamiltonian Patrol on $C_{2(n+k)}$ under the simplification above.
+The \textit{Random Oscillation} on $S_{n}^{k}$ is the embedded Random Hamiltonian Patrol on $C_{2(n+k)}$ under the simplification above.
+\end{definition}
+
+\begin{lemma}
+For $m < 2(n+k)$ following the Random Oscillation,
+$$V(S_{n}^{k}) \geq V(C_{2(n+k)})=\frac{m}{2(n+k)}$$
+and if $m \geq 2(n+k)$ then $V(S_{n}^{k})=1$, achieved by any Oscillation.
+\end{lemma}
+
+Hence we have the solution in $m \geq 2(n+k)$ , so we can now restrict ourselves to $m < 2(n+k)$.
+
+
+\begin{myfigure}
+\begin{center}
+\resizebox{.6\textwidth}{!}{
+\begin{tikzpicture}[-,auto,node distance=3cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {$\frac{5}{12}$};
+  \node[main node] (2) [below of=1] {$\frac{1}{12}$};
+  \node[main node] (3) [below right of=1] {$\frac{1}{12}$};
+  \node[main node] (4) [above right of=1]  {$\frac{1}{12}$};
+  \node[main node] (5) [above of=1]  {$\frac{1}{12}$};
+  \node[main node] (6) [left of=1]  {$\frac{1}{6}$};
+  \node[main node] (7) [left of=6] {$\frac{1}{12}$};
+
+  \path[->,bend right,out=-20,in=200,every node/.style={font=\sffamily}]
+    (1) edge node[,midway,left] {$\frac{1}{5}$} (2)
+    edge node[midway,above] {$\frac{1}{5}$} (3) 
+    edge node[midway,above] {$\frac{1}{5}$} (4)
+    edge node[midway,left] {$\frac{1}{5}$} (5) 
+    edge node[midway,above] {$\frac{1}{5}$} (6) 
+    (2) edge node[midway,right] {$1$} (1) 
+    (3) edge node[midway,right] {$1$} (1) 
+    (4) edge node[midway,left] {$1$} (1) 
+    (5) edge node[midway,left] {$1$} (1) 
+    (6) edge node[midway] {$\frac{1}{2}$} (1) 
+    edge node[midway,above] {$\frac{1}{2}$} (7) 
+    (7) edge node[midway] {$1$} (6);
+    
+%\node [right=4cm , text width=5cm,font=\footnotesize] at (1)    
+%{
+%The Starting Probabilities are shown inside the nodes and the initial movement probabilities are shown on the edges.
+%};    
+\end{tikzpicture}
+}
+\end{center}
+\caption{Starting points and initial movements of the Random Oscillation on $S_{5}^{1}$.}
+\end{myfigure}
+
+
+Next we look at getting an attacker bound. In $S_{n}$, the use of the equal weighting at each external nodes is similar to the diametric attack proposed in \cite{Alpern2011} but now picks the set of all points mutually at diameter. A natural analogue of this is to use some weighting depending on the length they are away from the centre.
+
+\begin{definition}[Weighted External Attack]
+The \textit{Weighted External Attack} attacks at node $1$ with probability $\frac{k+1}{n+k} $ and at each $*$ node with probability $\frac{1}{n+k}$ for a random attack interval $I$.
+\end{definition}
+
+The idea of the weighted external attack is that we can form the upper bound $V \leq \frac{m}{2(n+k)}$. However, unlike first thought, it does not seem to give the upper bound as we wished, the problem is clear that for a small time horizon there is an issue of being able to achieve a better patrolling strategy (as seen in example \ref{example:Weightedexternal}).
+
+
+
 \subsection{Solution for $m \geq 2(k+1)$}
 
+We will match the Oscillation bound of $\frac{m}{2(n+k)}$, by developing a further extended version of time-limited attack.
+
+\begin{definition}[Time-delayed attack]
+Let the \textit{time-delayed attack}, be the attack that attacks at the extended node labeled $1$ with probability $\frac{k+1}{n+k}$ and a particular normal node labeled $*$ with probability $\frac{1}{n+k}$.
+
+If node $1$ is chosen have the attack choose probability intervals with equal probability at the times $I,I+1,...,I+2k+1$ for some $I$ (i.e starting attacks at $\tau, \tau+1,...,\tau+2k+1$). If a $*$ node is chosen start the attacks at the times $I+k,I+k+1$ with equal probability.
+\end{definition}
+
+\begin{myfigure}
+\begin{center}
+\begin{tikzpicture}
+ %Drawing Bottom Axis
+ \draw[->] (-4,0) -- (4,0);
+ \node (timelabel) [shift={(0.2,0)}] at (4,0) {$t$};
+ \draw (-3.5,0.2) -- (-3.5,-0.2);
+ \draw (3.5,0.2) -- (3.5,-0.2);
+ 
+ %Drawing Cross and lines 
+ \node (labelc1) at (-3.5,-0.5) {$\tau$};
+ \node (labelc2) at (3.5,-0.5) {$\tau+2k+1$};
+ 
+ \node[cross=5pt,red] (c1) at (-3.5,0.5) {};
+ \node[cross=5pt,red] (c2) at (3.5,0.5) {};
+ \draw[dashed] (c1) -- (c2);
+ \node (linelabel1) at (-4.4,0.5) {Type $1$};
+ 
+ 
+ \draw (-1,0.2) -- (-1,-0.2);
+ \draw (1,0.2) -- (1,-0.2);
+ 
+  \node (labelc3) at (-1,-0.5) {$\tau+k$};
+ \node (labelc4) at (1,-0.5) {$\tau+k+1$};
+ 
+ \node[cross=5pt,red] (c3) at (-1,1) {};
+ \node[cross=5pt,red] (c4) at (1,1) {};
+ \draw[dashed] (c3) -- (c4);
+ \node (linelabel1) at (-1.9,1) {Type $*$}; 
+
+\end{tikzpicture}
+\end{center}
+\end{myfigure}
+
+Note. The time-delayed attack uses the weighted suggested previously but delays the normal star ends starting times (and has them only occur for a shorter period of time)
+
+
+\begin{lemma}
+When $T \geq m+2k$, the analogous `diametric' bound $V \leq \max \{ \frac{k+1}{n+k} , \frac{m}{2(n+k)}   \}$ is valid
+\end{lemma}
+
+Proof: \ref{T-delayed attack proof}
+
+With this result we have the solution in our range
+
+\begin{lemma}[Solution in $m \geq 2(k+1)$]
+By the attacker using the stage-delayed attack and the patroller using a random oscillation patrol, we achieve the value, when $2(k+1) \leq m \leq 2(n+k)$
+$$V=\frac{m}{2(n+k)}$$
+\end{lemma}
+
+Hence we have a solution for 2 regions $m > 2(n+k)$ and $2(k+1) \leq m \leq 2(n+k)$
+
+\begin{myfigure}
+\resizebox{0.95\linewidth}{!}{
+\input{Images/ElongatedStarRegions(S_10_5).tex}}
+\caption{Value of the Star Graph, $S_{10}^{5}$}
+\end{myfigure}
+
+\subsection{Solutions below Hamiltonian boundary}
+We now seek solutions below the Hamiltonian bound of value $ \frac{m}{2(n+k)}$. In this region like in the line graph regions below oscillation boundary, we expect the patroller can do better in some fashion.
+
+Guess: Some concave type region will exist below.
+
+
+\subsection{Solution for $m=2k+1$ and $m=2k$}
+
+\textbf{Solution for $m=2k+1$}
+
+We will now present the solution for $m=2k+1$ which will depend on the comparison of $m$ to $2(n-1)$.
+
+Let us first consider the case of $m \leq 2(n-1)$.
+The patroller can look at the decomposition into $S_{n-1}$ and $L_{k+1}$ giving $V \geq \frac{1}{\frac{1}{V(S_{n-1})}+\frac{1}{V(L_{k+1})}}=\frac{1}{1+\frac{2(n-1)}{2k+1}}=\frac{2k+1}{2k+1+2(n-1)}=\frac{m}{m+2(n-1)}$.
+
+We suggest that the attacker can `augment' their time-delayed strategy, this can be done by placing attacks at times $\tau,...,\tau+2k$ at the elongated node and times $\tau+k,\tau+k+1$ (or $k-1,k$ is proposed to work just as well), giving the bound $V \leq \frac{2k+1}{2k+1+2(n-1)}=\frac{m}{m+2(n-1)}$.
+
+Hence giving $V=\frac{m}{m+2(n-1)}$.
+
+Proof of `augmented' time-delayed strategy: NEEDED TO BE COMPLETE (IDEA: follows the same logic as the time-delayed strategy, the patroller cannot get more than $m$ attacks)
+
+In the case of $m > 2(n-1)$.
+The patroller can use the combinatorial improvement with $R=\emptyset$ , $M=\emptyset$, giving the bound $V \leq \frac{\floor{\frac{m}{2}}}{\floor{\frac{m}{2}}+n-1} = \frac{2k}{2k+2(n-1)}$
+
+Note. Different decompositions give a worse bound. eg. into $S_{n}$,$L_{k}$ give $V \geq \frac{m}{m+2n}=\frac{2k+1}{2k+1+2n}$
+
+The attacker again `augments' their time-delayed attack on to place attacks at times $0,...,2k-1$ at the elongated node and times $k-1,k$ at normal external nodes, giving the bound $V \geq \frac{2k}{2k+2(n-1)}$.
+
+Hence giving $V=\frac{2k}{2k+2(n-1)}=\frac{m-1}{m-1+2(n-1)}$
+
+Proof of `augmented' time-delayed strategy: NEEDED TO BE COMPLETE (IDEA: follows the same logic as the time-delayed strategy, the patroller cannot get more than $2k$ attacks)
+
+So we know that the solution in the region of $m \leq 2(n-1)$ is higher than the solution in the region of $m > 2(n-1)$
+
+\textbf{Solution for $m=2k$}
+
+Here we will notice that we can follow the above, the patroller has both the decomposition into $S_{n-1}$,$L_{k+1}$ (available only if $m \leq 2(n-1)$) and the combinatorial improvement (Always available) giving the same bound of $V \geq \frac{2k}{2k+2(n-1)}=\frac{m}{m+2(n-1)}$.
+
+The patroller as above can use an `augmented' version of the time-delayed strategy 
+
+
 \section{General star graph}
+
+\subsection{Introduction}
+We can extension the 'k long' elongated star graph, $S_{n}^k$, to the '$\bm{k}$ long' elongated star graph, $S^{\bm{k}}_{n}$. Where $\bm{k} \in \mathbb{N}^{h}$ for some $h=0,...,n$. This Vector $\bm{k}$ describes the length of elongation of a subset of the $n$ external nodes.
+
+\begin{myfigure}
+\begin{center}
+\begin{tikzpicture}[-,auto,node distance=2cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {$c$};
+  \node[main node] (2) [below left of=1] {$e_{1}$};
+  \node[main node] (3) [below right of=1] {$p_{3,1}$};
+  \node[main node] (4) [above left of=1] {$p_{1,1}$};
+  \node[main node] (5) [above right of=1] {$p_{2,1}$};
+  \node[main node] (6) [right of=5]  {$p_{2,2}$};
+  \node[main node] (7) [right of=6]  {$p_{2,3}$};
+  \node[main node] (8) [right of=7]  {$e^{2,3}$};
+  \node[main node] (9) [left of=4] {$e^{1,2}$};
+  \node[main node] (10) [right of=3] {$e^{3,2}$};
+  
+  \path[every node/.style={font=\sffamily}]
+    (1) edge  (2)
+    edge(3)
+    edge(4)
+    edge(5)
+    (5) edge (6)
+    (6) edge (7)
+    (7) edge (8)
+    (9) edge (4)
+    (10) edge (3);
+    
+\end{tikzpicture}
+\end{center}
+\caption{Labelling of $S^{1,3,1}_{4}$}
+\end{myfigure}
+
+The relabelling of nodes is such that 'elongations' can be identified by its position in the vector and the value of that position. $p_{i,j}$ is the 'penultimate' node of the $i^{th}$ elongation and is currently $j$ distance from the centre($j=0,...,n-1$) and $e^{i,k_{i}}$ is similar the end of the $i^{th}$ elongation, which is $k_{i}+1$ distance from the centre. Any unaffected external nodes are labelled $e_{i}$ for $i=1,...,n-h$.
+
+For ease of notation we will define $ |k| \equiv \sum\limits_{i=0}^{i=h} k_{i}$ and $ k_{\max} \equiv \max\limits_{i=1,2,..,h} k_{i}$
+
+\begin{definition}[General star graph]
+The \textit{General star graph}, $S^{\bm{k}}_{n}$ ($\bm{k} \in \mathbb{N}^{h}$) is made from $S_{n}$, by performing subdivision on $h$ of the  initial edges each repeated $k_{i}$ for $i=1,...,h$ . 
+\end{definition}
+
+Note. For ease of notation we will use the above format, but will understand that using $k_{i}=0$ is a valid construction, so we can image that $\bm{k} \in \mathbb{N}^n$
+
+
+\subsection{Basic Analysis}
+To start our analysis of this graph, we will look at an expanded graph which can be simplified down to our general star graph. Consider the cyclic graph $C_{2(n+|k|)}$ , we can simplify this graph by node identification to $S^{\bm{k}}_{n}$. The identification mapping is harder to visual from a cycle graph.
+
+For ease of understanding look at an example as in Figure \ref{myfigure: Example of simplification to general star graph}
+
+The mapping is done as such:
+\begin{itemize}
+\item The centre is identified form nodes $1,1+2(k_{1}+1),1+2(\sum\limits_{i=1}^{2} (k_{i}+1)),...,1+2(\sum\limits_{i=1}^{h}(k_{i}+1),1+2(|k|+h)+2),...,1+2(|k|+h)+2(n-h)$
+
+\item The first branch is identified from the nodes between $2$ and $2(k_{1}+1)$ (Inclusive). $n_{1,i}$ for $i=1,...,k_{1}$ are identified by the two nodes $i+1$ and $2k_{1}+3-i$ , the node $n_{1,k_{1}+1}$ is identified by the one node $k_{1}+2$.
+
+\item The $j$\textsuperscript{th} branch is identified from nodes between $2(\sum\limits_{i=1}^{j-1} (k_{i}+1)))$ and $2(\sum\limits_{i=1}^{j} (k_{i}+1)))$ (Inclusive). $n_{j,i}$ for $i=1,....,k_{j}$ are identified by the two nodes $2(\sum\limits_{i=1}^{j-1} (k_{i}+1)))+(i-1)$ and $2(\sum\limits_{i=1}^{j} (k_{i}+1)))-(i-1)$ , the node $n_{j,k_{j}+1}$ is identified by the one node $2(\sum\limits_{i=1}^{j-1} (k_{i}+1)))+k_{j}$.
+\end{itemize}
+
+This mapping gives rise to the general Oscillation
+
+\begin{definition}[General Random Oscillation]
+The \textit{oscillation} on $S^{\bm{k}}_{n}$ is any embedded Hamiltonian patrol on $C_{2(n+|k|)}$ under the simplification above. The \textit{random oscillation} on $S^{\bm{k}}_{n}$ is the embedded random Hamiltonian patrol on $C_{2(n+|k|)}$ under the simplification above.
+\end{definition}
+
+\begin{lemma}
+For $m < 2(n+|k|)$ following the random oscillation
+$$V(S^{\bm{k}}_{n}) \geq V(C_{2(n+|k|)})=\frac{m}{2(n+|k|)}$$
+and if $m \geq 2(n+|k|)$ then $V(S^{\bm{k}}_{n})=1$, achieved by any oscillation. 
+\end{lemma}
+
+
+\begin{myfigure}
+\begin{tikzpicture}[-,auto,node distance=2cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node,color=blue] (1) {$a_{1}$};
+  \node[main node,color=blue] (2) [below of=1] {$a_{2}$};
+  \node[main node,color=blue] (3) [below of=2] {$a_{3}$};
+  \node[main node,color=red] (4) [right of=1] {$b_{1}$};
+  \node[main node,color=red] (5) [right of=2]  {$b_{2}$};
+  \node[main node,color=green] (6) [right of=3]  {$b_{3}$};
+  \node[main node,color=green] (7) [below of=6]  {$b_{4}$};
+  \node[main node] (13) [below of=7] {$b_{5}$};
+  \node[main node,color=cyan] (8) [right of=4]  {$n_{1,1}$};
+  \node[main node,color=purple] (9) [right of=8]  {$n_{1,2}$};
+  \node[main node,color=cyan] (10) [right of=5]  {$n_{1,5}$};
+  \node[main node,color=purple] (11) [right of=10]  {$n_{1,4}$};
+  \node[main node] at (8,-1) (12)  {$n_{1,3}$};
+  \node[main node,color=orange] (14) [right of=6] {$n_{2,1}$};
+  \node[main node,color=orange] (15) [right of=7] {$n_{2,3}$};
+  \node[main node] at (6,-5) (16) {$n_{2,2}$};
+
+  \path[every node/.style={font=\sffamily}]
+    (1) edge  (4)
+    (2) edge  (5)
+        edge  (6)
+    (3) edge  (7)
+    
+    (4) edge (8)
+    (13) edge (3)
+    (13) edge (1)
+    (8) edge (9)
+    (9) edge (12)
+    (12) edge (11)
+    (11) edge (10)
+    (10) edge (5)
+    (6) edge (14)
+    (7) edge (15)
+    (14) edge (16)
+    (15) edge (16);
+  
+  \node[main node,color=blue] (13) [below of=3,node distance=6cm] {$a$};
+  \node[main node,color=red] (14) [right of=13] {$b_{1}$};
+  \node[main node,color=green] (15) [below of=14] {$b_{2}$};
+  \node[main node] (16) [below of=15] {$b_{3}$};
+  \node[main node,color=cyan] (17) [right of=14] {$n_{1,1}$};
+  \node[main node,color=purple] (18) [right of=17] {$n_{1,2}$};
+  \node[main node] at (8,-9) (19) {$n_{1,3}$};      
+  \node[main node,color=orange] (20) [right of=15] {$n_{2,1}$};
+  \node[main node] (21) [right of=20] {$n_{2,2}$}; 
+   
+   \path[every node/.style={font=\sffamily}]
+   (13) edge (14)
+   edge (15)
+   edge (16)
+   (14) edge (17)
+   (17) edge (18)
+   (18) edge (19)
+   (15) edge (20)
+   (20) edge (21);
+  
+\end{tikzpicture}
+\caption{Simplification of $C_{16}$ to $S^{3,2}_{3}$}
+\label{myfigure: Example of simplification to general star graph}
+\end{myfigure}
+
+
+\begin{myfigure}
+
+\end{myfigure} 
+
+\subsection{solution for $m \geq 2(k_{max}+1)$}
+We will match the oscillation bound of $\frac{m}{2(n+|k|)}$, by further extending time-limited attack and time-delayed attack into the type-delayed attack.
+
+\begin{definition}[Node types]
+A \textit{type} $i$ node, is an external node which has been extended $i$ times. Let $k_{max} \equiv \max\limits_{i=1,...,h} k_{i}$ be the maximum node type on the general extended star graph, $S_{n}^{\bm{k}}$.
+\end{definition}
+
+\begin{definition}[Type-delayed attack]
+Let  the \textit{Type-delayed attack}, be the attack that attacks at a type $i$ node with probability $\frac{i+1}{\denominator}$ $\forall \, i$. Choosing an attack interval $I$, the attack at a type $i$ node chooses a interval from the following with equal probability: $I+(k_{max}-i),I+(k_{max}-i)+1,...,I+k_{max}+i+1$ $\forall \, i$ (i.e statring attacks at a type $i$ node at times $\tau+(k_{max}-i)+1,...,\tau+(k_{max}+i)+1$).
+\end{definition}
+
+\begin{myfigure}
+\begin{center}
+\begin{tikzpicture}
+ %Drawing Bottom Axis
+ \draw[->] (-7,0) -- (7,0);
+ \node (timelabel) [shift={(0.2,0)}] at (7,0) {$t$};
+ 
+ 
+ \draw (-6.5,0.2) -- (-6.5,-0.2);
+ \draw (6.5,0.2) -- (6.5,-0.2);
+ 
+ \node (labelc1) at (-6.5,-0.5) {$\tau$};
+ \node (labelc2) at (6.5,-0.5) {$\tau+2k_{max}+1$};
+ 
+ \node[cross=5pt,red] (c1) at (-6.5,0.5) {};
+ \node[cross=5pt,red] (c2) at (6.5,0.5) {};
+ \draw[dashed] (c1) -- (c2);
+ \node (linelabel1) at (-8,0.5) {Type $k_{max}$};
+ 
+ 
+  \draw (-6,0.2) -- (-6,-0.2);
+ \draw (6,0.2) -- (6,-0.2);
+ 
+ %\node (labelc1) at (-5.5,-0.5) {$\tau+1$};
+ %\node (labelc2) at (5.5,-0.5) {$\tau+2k_{max}-1$};
+ 
+ \node[cross=5pt,red] (c1) at (-6,1.5) {};
+ \node[cross=5pt,red] (c2) at (6,1.5) {};
+ \draw[dashed] (c1) -- (c2);
+ \node (linelabel1) at (-7.5,1.5) {Type $k_{max}-1$};
+ 
+ 
+ 
+ \draw[decorate sep={2mm}{4mm},fill] (0,3.5) -- (0,2);
+
+  \draw (-1.5,0.2) -- (-1.5,-0.2);
+ \draw (1.5,0.2) -- (1.5,-0.2);
+ 
+ %\node (labelc1) at (-5.5,-0.5) {$\tau+1$};
+ %\node (labelc2) at (5.5,-0.5) {$\tau+2k_{max}-1$};
+ 
+ \node[cross=5pt,red] (c1) at (-1.5,4) {};
+ \node[cross=5pt,red] (c2) at (1.5,4) {};
+ \draw[dashed] (c1) -- (c2);
+ \node (linelabel1) at (-2.3,4) {Type $1$};
+ 
+ \draw (-1,0.2) -- (-1,-0.2);
+ \draw (1,0.2) -- (1,-0.2);
+ 
+  \node (labelc3) at (-1,-0.5) {$\tau+k_{max}$};
+ \node (labelc4) at (1,-0.5) {$\tau+k_{max}+1$};
+ 
+ \node[cross=5pt,red] (c3) at (-1,5) {};
+ \node[cross=5pt,red] (c4) at (1,5) {};
+ \draw[dashed] (c3) -- (c4);
+ \node (linelabel1) at (-1.9,5) {Type $0$}; 
+
+\end{tikzpicture}
+\end{center}
+\end{myfigure}
+
+\begin{theorem}
+When $T \geq m+2k_{max}$, the analogous `diametric' bound is given by
+$$V(S_{n}^{\bm{k}}) \leq \max \left\{ \frac{k_{max}+1}{\denominator} , \frac{m}{2 \left( \denominator \right)} \right\}$$
+\end{theorem}
+
+Proof: \ref{Type-deayed attack proof}
+
+
+\begin{corollary}[Solution in $m \geq 2(k_{max}+1)$]
+By the attack using the type-delayed attack and the patroller using the random oscillation we achieve the value, when $2(k_{max}+1) \leq m \leq 2(n+|k|)$,
+$$V= \frac{m}{2(n+|k|)} $$
+and when $m > 2(n+|k|)$ then $V=1$.
+\end{corollary}
 
 \section{Dual star graphs}
 
 \section{Linked Star graphs}
 
+
+%%%%%%%%%%%%%%%%%%%%%
 %End of main part of document
 \bibliography{mybib}
 
+%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \appendix
 \pagenumbering{roman}
@@ -968,6 +1593,7 @@ Hence in the region of $m \geq 4$ we get that $V=\frac{m}{16}$
 
 \subsection{Alternating Random Hamiltonian proof}
 \label{Alternating Random Hamiltonian proof}
+
 \begin{proof}
 During any attack interval $I$ which is of even length, then $W(I)$ contains $m'$ ``even'' and $m'$ ``odd'' nodes for a total of $m=2m'$ nodes. Therefore by following the Alternating Random Hamiltonian Patrol, $\pmb{\pi}_{ARHP}$, with probability $p$ at ``even'' nodes and probability $\frac{2}{n}-p$ at ``odd'' nodes. Then
 
@@ -981,6 +1607,639 @@ Hence $V \geq \frac{m}{n}$ .
 \end{proof}
 
 If $m$ is odd, say $m=2m'+1$ then in the above we get two possibilities for each node depending on the interval choice either $p+\frac{m-1}{n}$ or $\frac{m+1}{n}-p$. So choosing anything other than $p=\frac{1}{n}$ (which is the Random Hamiltonian Patrol strategy) gives a worse result for the patroller.
+
+\subsection{Condition on T for old diametric proof}
+\label{Condition on T for old diametric proof}
+
+\begin{proof}
+Using $T=m-1+(k+1)\bar{d}$ in the formula gives,
+$\alpha=\floor{\frac{(k+1) \bar{d}-m}{\bar{d}}}=(k+1)+\floor{\frac{-m}{\bar{d}}}=(k+1)-2=(k-1)$ (the final part is because $2>\frac{-m}{\bar{d}} \geq -1$ and we will assume that $m > \bar{d}$ here otherwise waiting at one node is just as good as the bound we are trying to achieve)
+
+$m-\bar{d}+\pospart{m + m(k-1)} + \pospart{m-1-(m-1+(k-1+1)\bar{d})}+\pospart{m-1-(m-1+(k+1)\bar{d})}$
+
+which is $m-\bar{d}+\pospart{mk} + \pospart{(k+1)\bar{d}-k\bar{d}}+\pospart{(k+1)\bar{d}-(k+1)\bar{d}}$
+giving $m-\bar{d}+mk+ \pospart{\bar{d}}+\pospart{0}=m(k+1)$.
+Giving the fraction of $\frac{m(k+1)}{2(k+1)\bar{d}}=\frac{m}{2 \bar{d}}$.
+
+
+For the second part, first we seek to prove that within the choice of $T$ from $m-1+(k+1)\bar{d}+r$ where $0 \leq r < \bar{d}$ is the maximum when $r=m$ (i.e $T=2m-1+(k+1)\bar{d}$).
+
+As the choice of $r$ only affects the final 3 parts (middle and ends values), we can just look at considering these values and seeing what the maximal choice is.
+
+Upon substitution we get that:
+$\alpha=\floor{\frac{(k+1)\bar{d}+r-m}{\bar{d}}}=(k+1)+\floor{\frac{r-m}{\bar{d}}}$
+
+so formula becomes
+$\pospart{m(\alpha+1)}+\pospart{(k+1)\bar{d}+r-(\alpha+1)\bar{d}}+
+\pospart{(k+1)\bar{d}+r-(\alpha+2)\bar{d}}$. To decide $r$ we need to know if middle values or end values are non-zero.
+
+Note. The second end value will never be non-zero as $(k+1)\bar{d}+r-(\alpha+2)\bar{d}=(k+1)\bar{d}+r-((k+1)+\floor{\frac{r-m}{\bar{d}}}+2)\bar{d}=r-(\floor{\frac{r-m}{\bar{d}}+2}\bar{d} < r-(-1+2)\bar{d}=r-\bar{d}<0$.
+
+\begin{itemize}
+\item No middle values and no end values is impossible assuming $k \in \mathbb{N}_{0}$.
+
+\item Middle values but no end values. As we really want to maximize the end value, increasing $r$ up to the point where $\alpha$ increases (giving a raise of $m$ attacks captured) but increases the number of total attacks by 2 each time it is raised. Hence minimal $r$ is chosen to increase $\alpha$. This is when $r-m=-\bar{d}$ i.e $r=m-\bar{d}$ changes $\alpha$ by 1 (as $r<m-\bar{d}$ gives an -1 to $\alpha$, but critical point is when equal to).
+
+\item Middle values and end value. As we are looking at $(m-\bar{d})(\alpha+1)+(k+1)\bar{d}+r$, we still want to increase $\alpha$ without increasing the number of attacks too much, i.e as above.
+\end{itemize}
+
+Then we show that the maximal subsequence tends to the bound as $T \rightarrow \infty$, i.e as $k \rightarrow \infty$.
+When substituted, we get that
+$\alpha=(k+1)$ and so the formula becomes
+$m-\bar{d}+\pospart{m + m(k+2)} + \pospart{2m-1-(m-1+(k+2)\bar{d})}+\pospart{2m-1-(m-1+(k+3)\bar{d})}$
+giving $m-\bar{d}+(k+3)m + \pospart{m-(k+2)\bar{d}}+\pospart{m-(k+3)\bar{d}}$.
+As $m < 2\bar{d}$ then we get $m(k+4) -\bar{d}$ caught out of $2(m+k\bar{d})$
+giving a fraction of $\frac{m(k+4)-\bar{d}}{2(m+k\bar{d}} \rightarrow \frac{m}{2\bar{d}}$.
+
+Hence as the maximal subsequence tends down to the bound, it implies the result.
+\end{proof}
+
+\subsection{Time-limited diametric attack proof}
+\label{Time-limited diametric attack proof}
+
+\begin{proof}
+First consider all the pure patrolling strategies, $W_{i} \in \mathcal{W}$, Then as the attacker is only attacking two ends, henceforth called $n_{1}$ and $n_{\bar{d}}$, any patrol not starting at $n_{1}$ or $n_{\bar{d}}$ is dominated by one that does.
+This is because the patrol will not capture any attacks until they visit either $n_{1}$ or $n_{\bar{d}}$, and then capture a set of attacks that started there previously. The patrol might as well wait there up until this point and do at least as good as arriving there for the first time.
+
+Formally, assume that $n_{1}$ is the end node first reached by a patrol, $W(t)$ at time, $t_{1}=\min \set{t}{W(t)=n_{1}}$, then we can form the patrol, $U(t)= \left\{ \begin{array}{l}
+n_{1} \text{ for } t \leq t_{1}, \\
+W(t) \text{ for } t>t_{1}. \\
+\end{array} \right.$
+and $P(U,\phi) \geq P(W,\phi)$ where $\phi$ is the timed diametric attack (or infact the normal diametric attack.
+
+Now we are restricted to patrols starting at end points, it is similar to see when leaving an end point, there is no other decision as you must travel to the other end point, assumed to be $n_{\bar{d}}$. Hence the question becomes when to leave $n_{1}$ and travel to $n_{\bar{d}}$. Obviously it should only be undertaken if the journey can be made and more attacks can be caught by doing so.
+
+WLOG assume that $\tau=0$ (other just wait longer initially, as attacks haven't started), then our choice is what leaving time (last time before moving): $t_{l} \in \{0,1,...,m-2 \}$, to pick to maximize the number of attacks caught; or $t_{L}=\infty$, never leaving to get $\bar{d}$ attacks.
+
+\begin{itemize}
+\item[Leaving:]Choosing $t_{L} \in \{0,1,...,m-2 \}$ gives the patroller $\frac{m}{2\bar{d}}$ as,
+
+Leaving at $t_{L}$ gives us $\min(t_{L}+1,\bar{d})$ attacks caught at $n_{L}$, and $\min(m+\bar{d}-2-(t_{L}+\bar{d})+1,\bar{d})=\min(m-1-t_{L},\bar{d})$.
+
+Now choosing $t_{L} > \bar{d}-1$, doesn't improve the first value and possibly lowers the second value. Hence we restrict ourselves to leave if we catch all attacks, i.e $t_{L} \leq \bar{d}-1$. Now in this region lowering $t_{L}$ lowers it by $1$ and raises it only raises the second on by $1$ if $m-1-t_{L} \leq \bar{d}$ (i.e $t_{L} \geq m-1-\bar{d}$ or any $t_{L}$ if $m-1-\bar{d} \leq 0$). Hence any choice of $\pospart{m-1-\bar{d}} \leq t_{L} \leq \bar{d}-1$ is equally as good. This gives a number of attacks caught as $t_{L}+1+m-1-t_{L}=m$ out of $2\bar{d}$ placed attacks. Hence giving $V \leq \frac{m}{2\bar{d}}$.
+
+\item[Staying:]Choosing $t_{L}=\infty$ gives the patroller $\frac{1}{2}$
+\end{itemize}
+
+Hence as the patroller can pick from these two options, it gives $V \leq \max\{\frac{1}{2} , \frac{m}{2\bar{d}} \}$. More explicity it gives $V \leq \frac{1}{2}$ if $m < \bar{d}$, and $V \leq \frac{m}{2\bar{d}}$ is $m \geq \bar{d}$.
+\end{proof}
+
+\subsection{Polygonal attack proof}
+\label{Polygonal attack proof}
+
+\begin{proof}
+First consider all the pure patrolling startegies, $W_{i} \in \mathcal{W}$, Then we immediately restrict ourselves to pure patrols starting at an attack point, assumed WLOG $n_{1}$ is the first node hit by a patrol. This restriction is possibly as if our current strategy, $W$, doesn't hit $n_{1}$ until time $t_{hit}=\min \set{t}{W(t)=n_{1}}$, then we can form the patrol $U(t)=\left\{ \begin{array}{l} 
+n_{1} \text{ for } t \leq t_{hit}, \\
+W(t) \text{ for } t > t_{1}. \\
+\end{array} \right. $ with $P(U,\phi) \geq P(W,\phi)$, where $\phi$ is the polygonal attack.
+
+Now we are restricted to start at $n_{1}$, and when we leave $n_{1}$ we will not return immediately for a similar reason to the above (as we could form a patrol which waits longer before leaving to do at least as good). So when we leave we can only go to one of the other end points, say WLOG $n_{2}$ (as all end points attacks are equivalent). Similarly from this position we will be waiting until we leave and then head to another end point, which is not yet visited.
+
+Note. We cannot every have a unvisited end point as $m \leq |D|d$ (otherwise the value is $1$) and we will therefore never visit the same node twice.
+
+This means the patroller will be performing a strategy that only chooses when to leave a currently at node. This means a choice among the vector $\mathbf{t}=(t_{1},...,t_{|D|})$ where $t_{i}=\max \set{t}{W(t)=n_{i}}$, with $t_{i}=\infty$ meaning never leave and the vector increasing by at least $d$ for increase in index, i.e $t_{i+1} \geq t_{i}+d$ (and so by induction $t_{i} \geq (i-1)d$).
+
+Now we will suppose that $kd \leq m < (k+1)d$ for some $k \in \{ 0,1,...,|D|-1 \}$, as this will determine the behaviour of the vector $\mathbf{t}$ and assume WLOG that $\tau=0$ (so $I=\{0,1,...,m-1 \}$)
+
+We can first argue that when leaving, if the current time,$t \geq d$ then there is no point waiting for any time at a node. This is because past this time, no more attack at that node are being carried out and hence the maximum number has been caught when arriving at a node. Hence we really only have a decision for the first node $t_{1}$ (as $t_{i} \geq d$ for $i \geq 2$), and this decision will be based on the total number of attacks caught.
+
+Now as $m <(k+1)d$ along our strategy the maximum number of end points we will visit it $(k+1)$.
+
+The formula under this patrol for the number of attacks caught will be
+\begin{align*}
+&\min(t_{1}+1,d)+\min(m+d-2-(t_{1}+d)+1,d)+\min(m+d-2-(t_{1}+2d)+1,d)+...
++\min(m+d-2-(t_{1}+kd),d)
+&=\min(t_{1}+1,d)+\min(m-1-t_{1},d)+\min(m-1-t_{1}-d,d)+...+\min(m-1-t_{1}-(k-1)d,d)
+\end{align*}
+Note. No negative values are to be summed
+
+As $t_{1}$ is limited to pick $d-1$ or below (as otherwise picking up no additional attacks), we can note that decreases $t_{1}$ the first term decreases, and the second term increases only if $0 \leq m-1-t_{1} \leq d$, i.e $m-1-d \leq t_{1} \leq m-1$.
+
+Now as $m-1-d \geq kd-1-d=(k-1)d-1$ this means that we require that $(k-1)d-1 \leq t_{1} \leq d-1$ meaning unless $k=1$, this will not increase, the value will always be $d$ as $\min(m-1-d,d) \geq \min(kd-1-d,d)=\min((k-1)d-1,d)=d$ (for $k \geq 2$).
+
+Similary the $j$\textsuperscript{th} value, past the first value, has the contribution of $\min(m-1-t_{1}-(j-1)d,d)$ , so for a increase we only get it if $ 0 \leq m-1-t_{1}-(j-1)d \leq d \implies m-1-(j-1)d \geq t_{1} \geq m-1-jd \geq (k-j)d-1$ and as $t_{1} \leq d-1$ it means it will only be increasing if $j=k$ (note. $j=k-1$ gives an acceptable range of $t_{1}$ but does not allow it to decrease in the first place).
+
+
+So decreasing $t_{1}$ from $d-1$ by $1$ increases the last value by $1$ only if $t_{1} \geq m-1-kd$. However this still provides overall number of attacks caught.
+Now note by our 
+
+\begin{align*}
+&\min(t_{1}+1,d)+\underbrace{d+d+...+d}_{k-1 \text{ lots of } d}+\min(m-1-t_{1}+(k-1)d,d)
+&\min(d-1+1,d)+(k-1)d+\min(m-1-(d-1)-(k-1)d,d)
+&=d+(k-2)d+\min(m-kd,d)=d+(k-1)d+m-kd=m
+\end{align*}  
+As noting $m-kd \geq 0$ by assumption earlier.
+This gives $V \leq \frac{m}{|D|d}$
+
+It has already been noted that any choice of $t_{i}$ for $i \geq 2$ should be $t_{i}=t_{i}+(i-1)d$. So there will never be option to use these as $t_{i}=\infty$. However $t_{1}$ could be chosen to be $\infty$, this would give a bound of $V \leq \frac{1}{|D|}$.
+
+Hence the patroller can pick from these two options, giving $V \leq \max \{ \frac{1}{|D|} , \frac{m}{|D|d} \}$. More explicitly it gives $V \leq \frac{1}{|D|}$ if $m < d$ and $V \leq \frac{m}{|D|d}$ if $m \geq d$.
+\end{proof}
+
+\subsection{Time-delayed attack proof}
+\label{Time-delayed attack proof}
+\begin{proof}
+First Consider a patrolling strategy that is at a $*$ node at time $t \geq k$ (i.e $*$ node attacks have begun) and seek to show that staying amongst the $*$ nodes until the attacks end is at least as good as moving to node $1$ and waiting, and possibly returning to $*$ (if time allows).
+
+We will consider two cases of $m \leq 2(k+1)$ and $m > 2(k+1)$.
+\begin{itemize}
+\item[1.] In this case we will first show that returning to $*$ type nodes is never an option once it is left, consider leaving at $t$, then the first possible return would be $t+2(k+2) \geq k + 2(k+2) > k+m$ and hence all the attacks would be caught and there would be no point returning. Hence the only option in this scenario is whether it is worth it leave at this point $t$ and go to node $1$ and wait until the end of the game.
+
+If she was to stay around the end nodes then from this point onwards (not including the node we are at , at time $t$) we would get a payoff of $\frac{k+m-t-1}{2(n+k)}$.
+
+This is becuase we either get:
+\begin{itemize}
+\item[$k+m$ odd] $\underbrace{\frac{1}{n+k}+...+\frac{1}{n+k}}_{\frac{k+m-t}{2} \text{times}}$
+\item[$k+m$ even] $\underbrace{\frac{1}{n+k}+...+\frac{1}{n+k}}_{\frac{k+m-1-t}{2}-1 \text{times}} +\frac{1}{2(n+k)}$
+\end{itemize}
+
+In either case the payoff for moving about at the $*$ type nodes is as above.
+
+Now consider moving away to $1$, which will be reached at time $t+k+2$ and as we must wait here the payoff depends on a few things. It is 
+$$\frac{\min (m,t+k+2,m-(t+k+2-(2k+1))}{2(k+1)} \times \frac{k+1}{n+k} =
+\frac{\min (m,t+k+2,k+m-t-1)}{2(n+k)}$$
+
+now note as $t \geq k \implies m > k+m-t-1$ and as $m \leq 2(k+1) \implies t+k+2 \geq m$. Moreover this implies we will be in the final stretch of attacks and no new attacks will be taking place, so no more attacks will be claimed by waiting here (though moving back is just as fruitless)
+
+Hence in this case the payoff is $\frac{k+m-t-1}{2(n+k)}$. The exact same benefit as to staying around the $*$ nodes, hence both moving and staying are equally as good, so once left a $*$ node she will have to wait at $1$ (and infact the game will be over) and we have no incentive not to do it (INFACT IF THE CONDITION ABOUT LIMITED number of $*$ nodes is brought up it is infact the best option).
+
+Hence for any $t \geq k$ when we are at a $*$ node we might as well move to $1$ and end the game.
+
+
+Now consider being at $*$ for some time $s \leq k-1$, then we can decided to wait to time $k$ and then make the decision as above and move to $1$ or we can move immediately to $1$.
+
+Waiting to time $k$ gives us $\frac{1}{2(n+k)} + \frac{k+m-k-1}{2(n+k)}=\frac{m}{2(n+k)}$.
+
+Now leaving at time $s$ means we arrive at $1$ at time $s+k+2$ , however, if this is the plan then it is clear that starting at $1$ is optimal (which we will deal with next).
+
+Now starting at $1$ at time $0$, consider the decision to move to $1$ at time $q$ (under which the decision will complete the game, as moving get us there at time $q+k+2 \geq k$ so the decision to move back immediately is chosen), This means we get a payoff of
+
+$$ \frac{q+1}{2(n+k)} +\frac{1}{n+k} + \frac{m-(q+2(k+2)-(2k+1))}{2(n+k)}
+=\frac{q+1}{2(n+k)}+\frac{1}{n+k}+\frac{m-q-3}{2(n+k)}=\frac{m}{2(n+k)} $$
+
+With the knowledge that the choice of $q$'s choice to achieve this, if $q \geq m-2$ is chosen it is worse than the sum as, not as good on arriving and nothing gained on coming back, hence it only achieves $\frac{q+1}{2(n+k)}$, so $q=2k+1$ might as well be chosen for $\frac{k+1}{n+k}$ (note. here that $q=2k+1$ is always in this zone as $m \leq 2(k+1)$)
+
+Hence it is best to wait for all time at node $1$ and achieve $\frac{k+1}{n+k} \geq \frac{m}{2(n+k)}$ (for $m \leq 2(k+1)$)
+
+\item[2.] When $m > 2(k+1)$, we shall again first consider starting at a $*$ at time $t \geq k$, however now it is not possible to state that once it is left that it can never be returned to.
+We care about what to do between $t$ and $k+m$, now we will first seek to show that moving and waiting at $1$ is just as good as moving around $*$ types.
+
+Moving purely around $*$ nodes will get us as before $\frac{k+m-t-1}{2(n+k)}$.
+Moving and waiting at $1$ gets us $\frac{2(k+1)-(t-m+k+1)_{+}}{2(k+1)} \times \frac{k+1}{n+k}=\frac{k+m-t-1}{2(n+k)}$. (or $\frac{2(k+1)}{2(n+k)}=\frac{k+1}{n+k}$ , if they go early enough to catch all attacks)
+
+The only idea that could possibly be better is to move to $1$ and then wait for period of time, say $q$ times waiting, and then move back. This would yeild
+
+$$\frac{q+ \min(2(k+1),t+k+2,t+k+2-(t-m+k+1))}{2(k+1)} \times \frac{k+1}{n+k} =\frac{q+2(k+1)}{2(n+k)} $$ ($+\frac{1}{n+k}$ or $+\frac{1}{2(n+k)}$ if arriving before all attacks at $*$ have completed) from being there for a period and then remake the decision of what to do from $t+q+2(k+2)$. During this time period between $t$ and $t+q+2(k+2)$ (assuming the game at $*$ is not over yet) then we will get
+
+$$\underbrace{\frac{1}{n+k}+...+\frac{1}{n+k}}_{\frac{q+2k+2}{2} \text{times}}=\frac{q+2k+2}{2(n+k)}$$ ($+\frac{1}{n+k}$ or $+\frac{1}{2(n+k)}$
+at end)
+
+Hence it is better to move an wait at $1$ then return if we want to, however returning serves no purpose as we will leave immediately. Hence moving to $1$ and waiting is the best option if $t \geq k$. Hence consider starting at a $*$, it would be either wait till $k$ and move back or move earlier. Moving earlier would mean that she might as well have started at node $1$.
+
+Hence the only option for starting at node $*$ is to get $\frac{1}{2(n+k)}+\frac{k+m-t-1}{2(n+k)}$ (or $\frac{1}{2(n+k)}+\frac{k+1}{n+k}$ if all attacks are caught at node $1$ at time $2k+2$ (i.e $m > 2k+3$)).
+
+So starting at $*$ means getting $\frac{k+1}{n+k}+\frac{1}{2(n+k)}$ 
+
+\end{itemize}
+
+
+Let $m=2(k+1)+r$ for $r \in \mathbb{N}$.
+Then considering starting at $*$ nodes, then we must decide to move to $1$ or wait till $k$ then make a decision. However deciding to move to $1$ , means we might as well have started at $1$.
+
+If we at a $*$ node at some time $t \geq k$ (let $t=k+t_{e}$), then we can decide to (wait only if $t=k$ until $t=k+1$) move to another $*$ node arriving at $t+2$ or move to $1$ arriving at $t+k+2$. Now we aim to show that the option of moving to another $*$ node is not strictly better. Assume it is then it is a repeated action until time $k+m-2=3k+r$ or $k+m-1=3k+r+1$ (depending on which parity we are in).
+
+We will get a payoff of $\frac{3k+r-t}{2(n+k)}=\frac{k+m-2-t}{2(n+k)}$ or $\frac{3k+r+1-t}{2(n+k)}=\frac{k+m-1-t}{2(n+k)}$ (depending on parity). Then it will have to move to node $1$ arriving at $2k+2+m$ (and the game will be over)
+
+Now consider moving to $1$ and waiting , arrive at time $t+k+2=2k+2+t_{e}$. Then the payoff is $\frac{\min(2(k+1),k+m-t-1)}{2(n+k)}$. Which of these is chosen as the minimum will be decided by whether they still arrive in time to collect the first few attacks (i.e it depends on the second part $k+m-t-1=2k+r-t_{e}+1$ which means if its greater than $2k+2$ i.e depending on the distant between $r-1-t_{e}$)
+
+More explicitly the term $k+m-t-1 \geq 2k+2$ if $r-1-t_{e} \geq 0$, in this case however it is possible to make up the difference of $r-1-t-{e}$ by only waiting till $2k+1$ (we will be there at $t+k+2 \geq 2(k+1)$, so will leave immediately back) then returning to the $*$ at $3k+4$ this is in comparison to $k+m=3k+2+r$ meaning that we get an additional payoff depending on $r$'s parity.
+If $r$ is odd then we gain $\frac{1}{2(n+k)}+\frac{r-2}{2(n+k)}=\frac{r-1}{2(n+k)}$.
+If $r$ is even then we gain $\frac{r-1}{2(n+k)}$.
+
+So we will be on $\frac{2(k+1)+r-1}{2(n+k)}=\frac{m-1}{2(n+k)}$ which is better than $\frac{k+m-1-t}{2(n+k)}$ and hence moving to $1$ and moving back at $2k+2$ (arriving back at $3k+4$) is better.
+
+Similarly in the case of $2k+2> k+m-t-1$ if $r-1-t_{e} < 0$, then we can still do better by moving off, as we hit here at time $2k+2+t_{e}$ (so all attacks that are catchable have been caught), so leave and get back to star at $*$ nodes at $3k+4+t_{e}$ in comparison to $k+m=3k+2+r$ means an additional payoff depending on $r$'s parity with $t_{e}$.
+In either case we get $\frac{r-t_{e}-1}{2(n+k)}$. But as this is negative it really means that all the attacks have already ended here, as $*$ attacks end at $k+m=3k+2+r$ and as we arrive at $3k+4+t_{e}$ (and $r-1-t_{e} < 0$). 
+Hence no additional values can be given and an overall value of $\frac{k+m-t-1}{2(n+k)}$ is given for this case.
+
+But in both given scenario's it is still better than waiting and playing round all the  $*$'s to end the game.
+
+Hence it is at least as good to follow this strategy rather than repeatedly move between $*$ nodes. This means it is better than a single choice and therefore is the best thing to do in such a position.
+
+Meaning the only option for starting at a $*$ node is to wait until $t=k$, the first real decision and decided to move to $1$ getting a payoff of either
+$\frac{1}{2(n+k)}+\frac{m-1}{2(n+k)}=\frac{m}{2(n+k)}$
+
+
+If we start at $1$, then we can choose when to leave and visit $*$, say leave at time $q$ and arrive at $*$ at $q+k+2 \geq k$ as we know that from this position she will move back immediately (arriving back at $q+2(k+2)$ and hence will only get one of the nodes value of $\frac{1}{n+k}$ , onece back at $1$ we will travel back to $*$, as all attacks here are over (arriving at $q+3(k+2)$). This type of strategy will get her a payoff of
+$$\frac{q+1}{2(k+1)} \times \frac{k+1}{n+k} +\frac{1}{k+1} +\frac{2(k+1)-(q+1)}{2(k+1)} \times \frac{k+1}{n+k} +\frac{\pospart{r-q-3}}{2(n+k)} =\frac{k+2+\pospart{r-q-3}}{n+k} $$.
+
+The other choice is not to visit in the middle and get all the attacks at $1$, then move across, suggest $q=2k+1$, now there is an opportunity to move to capture $*$ still occuring at $k+m=3k+2+r$ when we arrive at $3k+3$. (The complete sum depends on the parity of $r$)
+We will get $\frac{r}{2(n+k)}$.
+Meaning the overall payoff for playing this strategy is $\frac{k+1}{n+k}+\frac{r}{2(n+k)}=\frac{m}{2(n+k)}$.
+
+In the case of $r-q-3 \geq 0$ then we are comparing $\frac{k+r-q-1}{2(n+k)} < \frac{m}{2(n+k)}$
+
+In the case of $r-q-3 < 0 $ then we are comparing $\frac{k+2}{2(n+k)} < \frac{m}{2(n+k)}=\frac{2k+2+r}{2(n+k)}$.
+
+Hence the avaiable strategy to her if starting at $1$ is to wait until $2k+1$ and move to the $*$ nodes claiming $\frac{m}{2(n+k)}$. If starting at $*$ has to wait until $k$ then move to $1$ and then back to $*$ claiming a payoff of $\frac{m}{2(n+k)}$.
+
+Hence the best she can do in this situation is to follow one of the strategies.  
+\end{proof}
+
+It would be `recommended' to follow the wait at $1$ until time $2k+1$ and then move as it is also optimal for all cases of $m$, whereas starting at $*$ is only valid for $m > 2(k+1)$. 
+
+Altered proof below
+\begin{proof}
+We shall first consider the case of $m \leq 2(k+1)$. Consider starting at a $*$ node then the options for any time $t<k$ is wait (one time period and reconsider moving then) or move to another $*$ node or move to node $1$.
+
+Now immediately we can remove moving to another $*$ node as this is dominated by just waiting for two time periods. Now If waiting is the dominant strategy then we must continue to wait until time $k$ upon which attacks at $*$ nodes begin.
+
+Now consider being at a $*$ node for a time $k \leq t \leq k+m$ (when attacks are commencing), then the options are to move to another $*$ node claiming some benefit (if $t<k+m-1$, otherwise no point in moving and infact the game is over at this point) or moving to $1$ (arriving at $t+k+2$) and catching some attacks there hopefully (if $t < k+m-1$, otherwise no point in moving and infact the game is over).
+
+Note. The special case of $t=k$ in which she can wait for one time period will be covered later
+
+Now consider that if moving to another $*$ node dominates moving to $1$ then it will be done for all time (as the generated payoff is the same, for all time, apart from possibly, from time $t=k+m-2$ in which the generated payoff either way will be $\frac{1}{2(n+k)}$).
+
+Now moving around the star nodes from time $t$ until time $k+m-1$ or $k+m$ (depending on the parity of these values i.e $t=6$ $k+m-1=10$ (even parity) or $t=7$ $k+m=11$ (odd parity)) gives us a payoff of exactly $\frac{1}{2(n+k)}$ per unit time, or more concretely
+$$\frac{k+m-1-t}{2} \times \frac{1}{n+k}=\frac{k+m-1-t}{2(n+k)} $$
+or
+$$\frac{k+m-2-t}{2} \times \frac{1}{n+k}+\frac{1}{2(n+k)}=\frac{k+m-1-t}{2(n+k)}$$
+In either case the same value is given (note. the initial payoff for being at a $*$ node at time $t$ is not counted here)
+
+The other decision to move to $1$ and then make a decision, means arriving at $1$ at time $t+k+2 \geq 2k+2=2(k+1)$ meaning all attacks have already begun here (and infact it is impossible to decide to move back as return to $*$ at $t+2(k+2) \geq 3k+4 > k+m$). This means that a payoff of
+$$\frac{2k+m-(t+k+2)+1}{2(k+1)} \times \frac{k+1}{n+k}=\frac{k+m-1-t}{2(n+k)}$$.
+Hence it is easy to see that it is not strictly dominating the alternative strategy.
+
+For $t=k$ we can perform the addition strategy of wait one time period to gain $\frac{1}{2(n+k)}$ then we can decide to move to $1$ getting $\frac{k+m-1-(k+1)}{2(n+k)}$ , getting in total $\frac{m-1}{2(n+k)}=\frac{k+m-t-1}{2(n+k)}$, the same as above.
+
+Now for starting at $*$ if it is before $k$ then considering moving to $1$ is dominated by just starting at $1$, so the only option is to wait until $k$ and then move to $1$ (or move around $1$ nodes, but they may not be enough) giving a total payoff of $\frac{m}{2(n+k)}$.
+
+Now consider starting at node $1$, we could consider waiting forever and getting $\frac{k+1}{2(n+k)}$, or we could consider moving to $*$ at some point in time say $q$.
+
+Now doing the later will mean we arrive at $q+k+2 \geq k$ (now assuming $q+k+2 \leq k+m-1$ i.e $q \leq m-3$) then we will catch something as following the strategy for being at $*$ after time $k$.
+Meaning we get
+$$\frac{q+1}{2(k+1)} \times \frac{k+1}{n+k}+\frac{1}{n+k}+\frac{k+m-1-(q+k+2)}{2(n+k)}=\frac{m}{2(n+k)}$$
+(or worse if we don't arrive in time to catch things).
+
+As $m \leq 2(k+1)$ it is clear that the option to wait at $1$ and catch all attacks is better giving us in this case $\frac{k+1}{n+k}$.
+
+Now for the case of $m > 2(k+1)$ , let $m=2(k+1)+r$ (where $r \geq 1$)
+\end{proof}
+
+\begin{lemma}
+The payoff for being at a $*$ node at a time $k \leq t \leq k+m-1$ is
+$$\frac{\pospart{k+m-t-1}}{2(n+k)}$$
+As long as 
+\end{lemma}
+Note. This payoff does not the intial payoff for being at $*$ at $t$, only future decisions
+
+\begin{proof}
+We will first cover $t \geq k+1$ (and later cover $t=k$ as a special case). Now the options are to go to another star arriving at $t+2$ (then remake a decision) or to move to $1$.
+
+Let us first look at moving to $1$, then we arrive at $1$ at time $t+k+2$ (and as $t \geq k$, it means all attacks occurring at $1$ have begun) so we claim a payoff of
+$$\frac{\min\{2(k+1)-x,\pospart{2k+m-(t+k+2)+1-x)}\}}{2(k+1)} \times \frac{k+1}{n+k}=\frac{\min\{2(k+1),\pospart{k+m-t-1-x}\}}{2(n+k)}$$
+Where $x \geq 0$ is the overlap with attacks already caught.
+
+Now choosing to move to $s$ $*$ nodes before moving to $1$ gives a payoff of
+$$s \times \frac{1}{n+k} + \frac{\min \{2(k+1)-\pospart{x},\pospart{k+m-t-2s-1-\pospart{x-2s}} \}}{2(n+k)}$$.
+
+So it is best to move to all the $*$ nodes, which haven't been visited before, before moving to $1$.
+
+In the case of $m \leq 2(k+1)$, it is impossible to get any overlap as the time to leave and return is at least $2(k+2) > m$, so in this case $x=0$. Also $\pospart{k+m-t-1} \leq m-1 < 2(k+1)$, so the payoff from moving to $1$ immediately becomes
+$$\frac{k+m-t-1}{2(n+k)}$$
+Similarly the other case becomes
+$$s \times \frac{1}{n+k} + \frac{k+m-t-1-2s}{2(n+k)}=\frac{k+m-1-t}{2(n+k)}$$
+
+In the case of $m > 2(k+1)$ (let $m=2(k+1)+r$), overlap is definitely possible if $1$ has been visited before. Now the game ends if she is at a $*$ at any time past $k+m = 3k+2+r$ or at $1$ at any time past $2k+m = 4k+2+r$.
+
+If $1$ hasn't been visited before then $x=0$ $\pospart{k+m-t-2s-1-\pospart{x-2s}}=\pospart{k+m-t-2s-1}=\pospart{3k+1+r-t-2s} \leq \pospart{2k+1+r-2s}$,the payoff becomes either
+
+$$s \times \frac{1}{n+k} +\frac{k+1}{n+k}=\frac{k+s+1}{n+k}$$ if $3k+1+r-t-2s > 2k+2$ (i.e $k-1+r-t-2s > 0$, so $2s<k+r-1-t$)
+or
+$$s \times \frac{1}{n+k} +\frac{3k+1+r-t-2s}{2(n+k)}=\frac{k+m-t-1}{2(n+k)}$$ otherwise
+
+Examining the first part gives us
+$$\frac{k+s+1}{n+k}=\frac{2(k+1)+2s}{2(n+k)} < \frac{2(k+1)+k+r-1-t}{2(n+k)}< \frac{k+m-1-t}{2(n+k)}$$.
+We will end at $1$ at time $t+2s+k+2$, meaning we might as well choose $s=0$ and arrive as early as possible getting $\frac{k+m-t-1}{2(n+k)}$
+
+If there is some overlap then we will get the above if $x-2s \leq 0$ (except the first part will be even worse with $-x$ in the numerator).
+
+If $x > 2s$ though then we will get either
+$$s \times \frac{1}{n+k} + \frac{2(k+1)-x}{2(n+k)}=\frac{2(k+1)+2s-x}{n+k}$$ if $3k+1+r-t-2s-(x-2s) > 2k+2$ (i.e $k+1+r-t-x > 0$ ,
+
+$$s \times \frac{1}{n+k} + \frac{3k+1-t-2s-(x-2s)}{2(n+k)}=\frac{3k+1-t-x+2s}{2(n+k)}=\frac{k+m-1-t-x+2s}{2(n+k)} $$
+
+Hence in this case the best we can do is pick the highest $s$ to try not to overlap as much.
+
+In any case the best she can do from this position is $\frac{k+m-t-1}{2(n+k)}$
+\end{proof}
+
+\begin{proof}
+We will first deal with the case that $t \geq k+1$. We will also first assume that there is no initial overlap of attacks at $1$ caught, that is if we arrive at node $1$ at $t+k+2$ we will not be there at a time when attacks we previously caught would still be happening.
+Let the overlap be denoted by $x$, so first look at $x=0$. Now our only choice from node $*$ is to move to $s$ other $*$ nodes that we haven't yet visited and then move to $1$ (in the hope of catching some attacks).
+
+The payoff for doing this gives us
+\begin{align*}
+&s \times \frac{1}{n+k} +\frac{\min \{ 2(k+1), \pospart{2k+m-(t+2s+k+2)+1-x} \}}{2(k+1)} \times \frac{k+1}{n+k} \\
+&=\frac{2s}{(n+k)} +\frac{\min \{ 2(k+1), \pospart{k+m-t-1-2s-x} \}}{2(n+k)} 
+\end{align*}
+and as $x=0$
+\begin{align*}
+\frac{2s}{2(n+k)} +\frac{\min \{ 2(k+1), \pospart{k+m-t-1-2s} \}}{2(n+k)} 
+\end{align*}
+From this it should be clear that the payoff is non-decreasing in $s$ and so choosing $s$ as the maximum would seem to be a logical choice.
+
+Now for a moment we will consider the future when we are at $1$, as we will arrive at time $t+k+2+2s \geq 2k+2+2s \geq 2k+2$ all attacks occuring at $1$ have been and we should no longer consider waiting or returning to this node, also moving away brings us back to $*$ nodes (arriving at time $t+2(k+2)+2s \geq 2k+4+2s$ , when the attacks end at $k+m-1$ or $k+m$) , now as before all attacks have begun but they may not have ended. Hence we could consider moving around these $*$ nodes until the game ends. This means we actually get a payoff of
+
+\begin{align*}
+&\frac{2s}{2(n+k)}+\frac{\min \{ 2(k+1), \pospart{k+m-t-1-2s} \}}{2(n+k)} +\frac{\pospart{\frac{k+m-1-(t+2(k+2)+2s)}{2}}}{n+k} \\
+&=\frac{2s}{2(n+k)}+\frac{\min \{ 2(k+1), \pospart{k+m-t-1-2s} \}}{2(n+k)} +\frac{\pospart{m-k-5-t-2s}}{2(n+k)} 
+\end{align*}
+or
+\begin{align*}
+&\frac{2s}{2(n+k)}+\frac{\min \{ 2(k+1), \pospart{k+m-t-1-2s} \}}{2(n+k)} +\frac{\pospart{\frac{k+m-2-(t+2(k+2)+2s)}{2}}}{n+k}+\frac{1}{2(n+k)} \\
+&=\frac{2s}{2(n+k)}+\frac{\min \{ 2(k+1), \pospart{k+m-t-1-2s} \}}{2(n+k)} +\frac{\pospart{m-k-5-t-2s}}{2(n+k)} 
+\end{align*}
+So we only need to worry about this is $m-k-5-t-2s >0$.
+If $m=2(k+1)+r$ then $m-k-5-t-2s=2(k+1)+r-k-5-t-2s=k+r-3-t-2s$
+So if $k+r-3-t-2s> 0$ then we will worry about this possibility of doing the movement at the ends.
+However if $k+r-3-t-2s >0 \implies 3k+1+r-t-2s>2(k+1) \implies k+m-t-1-2s>2(k+1)$ , meaing that the payoff actually becomes
+\begin{align*}
+\frac{2s}{2(n+k)}+\frac{2(k+1)}{2(n+k)} +\frac{m-k-5-t-2s}{2(n+k)}
+=\frac{k+m-t-3}{2(n+k)}
+\end{align*}
+So in this case the choice of $s$ is irrelevant,
+Hence we might as pick $s$ to be the highest possible, call it $s_{max}=\min \{ n-1-y,\frac{k+m-1-t}{2} \}$ (if odd parity) or $s_{max}=\min \{ n-1-y, \frac{k+m-t}{2} \}$ (if even parity)(Note. In even parity we will get the starting payoff slightly differently).
+Where $y$ is the number of currently visited $*$ nodes at time $t$.
+
+For each type of parity let us cover the two cases
+\begin{itemize}
+\item[Odd Parity:]
+\begin{itemize}
+\item[1.]Let $n-1-y \geq \frac{k+m-1-t}{2}$ then the payoff we get becomes
+\begin{align*}
+&\frac{\frac{k+m-1-t}{2}}{n+k}+\frac{\min \{ 2(k+1),\pospart{k+m-t-2 \times \frac{k+m-1-t}{2}-1} \}}{2(n+k)} \\
+&=\frac{k+m-1-t}{2(n+k)} +\frac{\min \{ 2(k+1),0 \}}{2(n+k)}
+=\frac{k+m-1-t}{2(n+k)}
+\end{align*}
+\item[2.]Let $n-1-y < \frac{k+m-1-t}{2}$ then the payoff we get becomes
+\begin{align*}
+\frac{n-1-y}{n+k}+\frac{\min \{ 2(k+1),\pospart{k+m-t-2(n-1-y)-1} \}}{2(n+k)}
+\end{align*}
+Further split into subcases
+\begin{itemize}
+\item[a)]Let $k+m-t-2(n-1-y)-1<0$ then the payoff becomes
+\begin{align*}
+\frac{n-1-y}{n+k}<\frac{k+m-t-1}{2(n+k)}
+\end{align*}
+\item[b)]Let $0 \leq k+m-t-2(n-1-y)-1 \leq 2(k+1)$ then the payoff becomes
+\begin{align*}
+\frac{n-1-y}{n+k} +\frac{k+m-t-2(n-1-y)-1}{2(n+k)}=\frac{k+m-t-1}{2(n+k)}
+\end{align*}
+\item[c)]Let $k+m-t-2(n-1-y)-1 > 2(k+1)$ then the payoff becomes
+\begin{align*}
+&\frac{n-1-y}{n+k}+\frac{2(k+1)}{2(n+k)}
+&=\frac{n+k-y}{n+k} < \frac{k+m-t-1}{2(n+k)}
+\end{align*}
+As $k+m-t-2(n-1-y)-1 > 2(k+1) \implies k+m-t-1 > 2(n-1-y+k+1)=2(n+k-y)$
+\end{itemize}
+\end{itemize}
+
+\item[Even Parity:]
+\begin{itemize}
+\item[1.]Let $n-1-y \geq \frac{k+m-t}{2}$ then the payoff we get becomes
+\begin{align*}
+&\frac{\frac{k+m-t}{2}-1}{n+k}+ +\frac{1}{2(n+k)}+\frac{\min \{ 2(k+1),\pospart{k+m-t-2 \times \frac{k+m-t}{2} -1} \}}{2(n+k)} \\
+&=\frac{k+m-1-t}{2(n+k)} +\frac{\min \{ 2(k+1),\pospart{-1} \}}{2(n+k)}
+=\frac{k+m-1-t}{2(n+k)}
+\end{align*}
+\item[2.]Let $n-1-y < \frac{k+m-t}{2}$ then the payoff we get becomes
+\begin{align*}
+\frac{n-1-y}{n+k}+\frac{\min \{ 2(k+1),\pospart{k+m-t-2(n-1-y)-1} \}}{2(n+k)}
+\end{align*}
+Note. In this case, the `problem' with having a final time only pick up $\frac{1}{2(n+k)}$ is not possible as we will have left before this time.
+Further split into subcases
+\begin{itemize}
+\item[a)]Let $k+m-t-2(n-1-y)-1<0$ then the payoff becomes
+\begin{align*}
+\frac{n-1-y}{n+k}<\frac{k+m-t-1}{2(n+k)}
+\end{align*}
+\item[b)]Let $0 \leq k+m-t-2(n-1-y)-1 \leq 2(k+1)$ then the payoff becomes
+\begin{align*}
+\frac{n-1-y}{n+k} +\frac{k+m-t-2(n-1-y)-1}{2(n+k)}=\frac{k+m-t-1}{2(n+k)}
+\end{align*}
+\item[c)]Let $k+m-t-2(n-1-y)-1 > 2(k+1)$ then the payoff becomes
+\begin{align*}
+&\frac{n-1-y}{n+k}+\frac{2(k+1)}{2(n+k)}
+&=\frac{n+k-y}{n+k} < \frac{k+m-t-1}{2(n+k)}
+\end{align*}
+As $k+m-t-2(n-1-y)-1 > 2(k+1) \implies k+m-t-1 > 2(n-1-y+k+1)=2(n+k-y)$
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+Now let us consider that there is some initial overlap, being more concretely $x=x(s)=\pospart{x(0)-2s}=\pospart{x_{0}-2s}$. Then if $x-2s\ leq 0$ we get the same as above.
+Otherwise if $x geq 1$ then the payoff is
+\begin{align*}
+&\frac{s}{n+k}+\frac{\min \{ 2(k+1),\pospart{k+m-t-1-2s-(x_{0}-2s)} \}}{2(n+k)}\\
+&=\frac{s}{n+k}+\frac{\min \{ 2(k+1),\pospart{k+m-t-1-x_{0}} \}}{2(n+k)}
+\end{align*}
+And again the payoff is non-decreasing in s, so again $s_{max}$ is the best choice.
+We can follow a similar idea to the above when there was no overlap, though has the chance of being lower. Hence it will only harm the values
+
+The exact algebra follows the same process expect now the second term in the visiting of node $1$ has a subtraction and is therefore less rewarding. 
+
+Hence from this position the best the patroller can do is get a payoff of $\frac{k+m-t-1}{2(n+k)}$ and the best patroller strategy is to travel amongst as many $*$ nodes that have not already been visited and then head off to $1$.
+
+Now consider the special case of being at a $*$ at $t=k$, then the above can be followed to achieve no better than $\frac{m-1}{2(n+k)}$ or we can wait and pick up $\frac{1}{2(n+k)}$ by catching the second attack and then proceed to follow the above at $t=k+1$ getting $\frac{m-2}{2(n+k)}$. Either strategy yeilds the same payoff, so we shall suggest just strictly following the above.
+\end{proof}
+
+\begin{theorem}[Lower Bound]
+$$V \leq \max \left\{ \frac{k+1}{n+k} , \frac{m}{2(n+k)} \right\}$$
+\end{theorem}
+
+\begin{proof}
+Suppose the Patroller starts at a $*$ node at time $t \leq k-1$, then the options are to move to node $1$ which is dominated by just starting at node $1$ and waiting till $t+k+2$ (as no attacks are picked up at $*$ nodes. Or she can wait till time $t$ and follow the above lemma getting a payoff of
+$$\frac{1}{2(n+k)}+\frac{m-1}{2(n+k)}=\frac{m}{2(n+k)}$$. So starting at $*$ provides a payoff of at most $\frac{m}{2(n+k)}$
+Now consider starting at node $1$ at time $0$ then if we leave and want to return we can only do so once (as upon the first return the time will be at least $2(k+2)$ so all attacks will have begun).
+
+Now split the solution into two regions for $m=2(k+1)+r$, for $-2(k+1)+1 \leq r \leq 0$ and $r \geq 1$.
+Consider waiting until time $q$ and then leaving, as you will hit a $*$ node at time $q+k+2$ meaning we can use the lemma to generate the max payoff here. For a total payoff of
+\begin{itemize}
+\item[1.] If $q+k+2 > k+m=3k+2+r$
+\begin{align*}
+&\frac{q+1}{2(k+1)} \times \frac{k+1}{n+k} + \frac{\pospart{k+m-(q+k+2)-1}}{2(n+k)} \\
+&= \frac{q+1}{2(n+k)}  
+\end{align*}
+\item[2.] If $q+k+2=k+m=3k+2+r$
+\begin{align*}
+&\frac{q+1}{2(k+1)} \times \frac{k+1}{n+k}+\frac{1}{2(n+k)}
++\frac{\pospart{k+m-(q+k+2)-1}}{2(n+k)}\\
+&= \frac{q+2}{2(n+k)}  
+\end{align*}
+\item[3.] If $q+k+2 \leq k+m=3k+2+r$
+\begin{align*}
+&\frac{q+1}{2(k+1)} \times \frac{k+1}{n+k}+\frac{1}{n+k}+\frac{\pospart{k+m-(q+k+2)-1}}{2(n+k)} \\
+&= \frac{m}{2(n+k)}  
+\end{align*}
+\end{itemize}
+So as these are non-decreasing in $q$ we pick $q=2k+1$.
+Then we get 
+\begin{itemize}
+\item[1.] If $3k+3 > 3k+2+r$ i.e $r \leq 0$
+\begin{align*}
+\frac{2k+1+1}{2(n+k)}=\frac{k+1}{n+k}  
+\end{align*}
+\item[2.] If $3k+3=3k+2+r$ i.e $r=1$
+\begin{align*}
+\frac{2k+1+2}{2(n+k)}=\frac{2(k+1)+1}{2(n+k)}=\frac{m}{2(n+k)}  
+\end{align*}
+\item[3.] If $q+k+2 \leq k+m=3k+2+r$ i.e $r \geq 2$
+\begin{align*}
+\frac{m}{2(n+k)}  
+\end{align*}
+\end{itemize}
+
+Hence if $m \leq 2(k+1)$ (i.e $r \leq 0$) then we get $\frac{k+1}{n+k}$ and if $m > 2(k+1)$ (i.e $r \geq 1 $) we get $\frac{m}{2(n+k)}$ and hence the result.
+\end{proof}
+
+\subsection{Type-delayed attack proof}
+\label{Type-deayed attack proof}
+We begin with a lemma used in the proof
+\begin{lemma}
+When $k_{max}-i \leq t \leq k_{max}+i$ we get that
+$$\frac{\pospart{k_{max}+1+i-t}}{2 \left( \denominator \right)} + \frac{\pospart{m-2(i+1)}}{2 \left( \denominator \right)} \geq \frac{\pospart{k_{max}-i+m-t-1}}{2 \left( \denominator \right)} $$
+\end{lemma}
+
+\begin{proof}
+If $m \geq 2(i+1)$, then we get
+$$\frac{k_{max}+1+i-t+m-2(i-1)}{2 \left( \denominator \right)}=\frac{k_{max}-i+m-t-1}{2 \left( \denominator \right)} \geq \frac{\pospart{k_{max}-i+m-t-1}}{2 \left( \denominator \right)}$$
+
+If $m \leq 2(i+1)$, then we get
+$$\frac{k_{max}+1+i-t}{2 \left( \denominator \right)} \geq \frac{\pospart{k_{max}+1+i-t+m-2(i+1)}}{2 \left( \denominator \right)} =\frac{\pospart{k_{max}-i+m-t-1}}{2 \left( \denominator \right)}$$
+\end{proof}
+
+The main proof of the attack lemma's future payof
+
+Note. The difference in future payoff depends on whether the patroller has the option to wait (till the last attack at the type $i$ node) or whether they have no option but to move.
+
+Remark. It is worth noting that the game essentially ends at time $t=2k_{max}+m$, so this is really the last time we could possibly care about. Further as a type $i$ node attacks finish at $t=k_{max}+i+m$, and so a movement to a type $j$ node means arriving at $t=k_{max}+2i+2+j+m \geq k_{max}+j+m$ $\forall \, j$, meaning that no future attacks can be caught if at a type $i$ node at $t=k_{max}+i+m$, and this means this is the artificial end for the game at a type $i$ node.
+
+\begin{lemma}
+When the Type-delayed attack is possible, then the future payoff for being at a type $i$ node at time $t$ is given by:
+\begin{align*}
+&\frac{\pospart{k_{max}+1+i-t}}{2 \left( \denominator \right)} + \frac{\pospart{m-2(i+1)}}{2 \left( \denominator \right)} \text{  if } k_{max}-i \leq t \leq k_{max}+i \\
+&\frac{\pospart{k_{max}-i+m-t-1}}{2 \left( \denominator \right)} \text{  if } t \geq k_{max}+i+1
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+We will first prove the statement for when $t \geq k_{max}+i+1$, by the use of strong backwards induction.
+
+\textbf{Base Case:}
+\\
+For $t=k_{max}+i+m$, as above it is known that no future attacks can be caught (and the game is over) as arriving at a type $j$ means arriving at $k_{max}+2i+j+2+m \geq k_{max}+j+m$ meaning all attacks are over ($\forall \, j$). Hence the future payoff is $0$.
+Now the formula gives $$\frac{\pospart{k_{max}-i+m-(k_{max}+i+m)-1}}{2 \left( \denominator \right)}=\frac{\pospart{-2i-1}}{2 \left( \denominator \right)}=0$$
+Hence it is true for $t=k_{max}+i+m$.
+
+\textbf{Induction hypothesis:}
+\\
+For some $t_{1} \geq k_{max}+i+1$ assume that the formula for $t \geq k_{max}+i+1$ is true for all $t \geq t_{1} +1$.
+
+\textbf{Induction step:}
+\\
+At a type $i$ node at time $t_{1} \geq k_{max}+i+1$, all attacks have begun at this node so waiting is not really an option (i.e it is clearly dominated by moving immediately). So moving to a type $j$ means arriving at $t_{1}+i+2+j$ giving an immediate payoff and meaning (under the Induction hypothesis) a future payoff is received. Giving at best a total payoff of
+\begin{align*}
+&\underbrace{\frac{\min (2(j+1), \pospart{k_{max}+j+m-(t_{1}+i+2+j)+1})}{2(j+1)} \times \frac{j+1}{\denominator}}_{\text{Immediate reward at type } j} \\
+&+\underbrace{\frac{\pospart{k_{max}-j+m-(t_{1}+i+2+j)-1}}{2 \left( \denominator \right)}}_{\text{Future reward from type } j} \\
+&=\frac{\min (2(j+1), \pospart{k_{max}+m-t_{1}-i-1})}{2 \left( \denominator \right)}
++\frac{\pospart{k_{max}-i+m-t_{1}-2j-3}}{2 \left( \denominator \right)}
+\end{align*}
+Now we will split it into the subcase of $2(j+1) \geq k_{max}+m-t_{1}-i-1$. This means $k_{max}+m-t_{1}-3-2j \leq 0$, then the payoff becomes
+\begin{align*}
+\frac{\pospart{k_{max}+m-t_{1}-i-1})}{2 \left( \denominator \right)}
+\end{align*}
+Otherwise if $2(j+1) < k_{max}+m-t_{1}-i-1$. This means $k_{max}+m-t_{1}-i-3-2j > 0$, then the payoff becomes
+\begin{align*}
+&\frac{2(j+1)+k_{max}-i+m-t_{1}-2j-3}{2 \left( \denominator \right)}=\frac{k_{max}-i+m-t_{1}-1}{2 \left( \denominator \right)} \\
+&=\frac{\pospart{k_{max}-i+m-t_{1}-1}}{2 \left( \denominator \right)}
+\end{align*}
+
+Hence by mathetmatical induction it is true for $t \geq k_{max}+i+1$ and the form is correct.
+
+Next we seek to prove the formula for the values of $t \leq k_{max}+i$, again using strong backwards induction.
+
+\textbf{Base case:}
+\\
+For $t=k_{max}+i$, we have the option to wait for one unit of time (to catch the final attack at this node) and then claim the reward for this and the future rewards, or can move immediately to some type $j$ node (arriving at $k_{max}+2i+2+j$ and claim the reward and future rewards.
+
+Waiting gives
+\begin{align*}
+&\frac{1}{2(i+1)} \times \frac{i+1}{\denominator} +\frac{\pospart{k_{max}-i+m-(k_{max}+i+1)-1}}{2 \left( \denominator \right)} \\
+&=\frac{1}{2 \left( \denominator \right)}+\frac{\pospart{m-2(i+1)}}{2 \left( \denominator \right)}
+\end{align*}
+Moving gives
+\begin{align*}
+&\frac{\min (2(j+1), \pospart{k_{max}+j+m-(k_{max}+2i+2+j)+1})}{2 \left( \denominator \right)} \\
+&+\frac{\pospart{k_{max}-j+m-(k_{max}+2i+2+j)-1}}{2 \left( \denominator \right)} \\
+&=\frac{\min (2(j+1),\pospart{m-2i-1})+\pospart{m-2i-2j-3}}{2 \left( \denominator \right)}
+\end{align*}
+When moving it will depend on if $2(j+1) \geq m-2i-1$, which means $m-2i-2j-3 \leq 0$
+giving $\frac{\pospart{m-2i-1}}{2 \left( \denominator \right)}$
+
+Or if $2(j+1) < m-2i-1$, meaning $m-2i-2j-3 >0$ gives $\frac{2(j+1)+m-2i-2j-3}{2 \left( \denominator \right)}=\frac{m-2i-1}{2 \left( \denominator \right)}=\frac{1}{2 \left( \denominator \right)}+\frac{\pospart{m-2(i+1)}}{2 \left( \denominator \right)}$ (Note. Here $m-2(i+1) > 1$)
+
+Hence with either option the best that the patroller can do is
+$\frac{1}{2 \left( \denominator \right)}+\frac{\pospart{m-2(i+1)}}{2 \left( \denominator \right)}$, which is the correct form of the formula.
+
+\textbf{Induction hypothesis:}
+\\
+Assume that the formula for $k_{max}-i \leq t \leq k_{max}+i$ is true for all $t \geq t_{1}+1$.
+
+\textbf{Induction step:}
+\\
+At a type $i$ node at time $k_{max}-i \leq t_{1} \leq k_{max}+i-1$, the options is to wait for some period of time, say $q$ periods, and then move to a type $j$ node and claim future rewards (which will depends on which case the arrival time falls into), this decision means we will arrive at the type $j$ node at $t_{1}+q+i+2+j \geq k_{max}+q+2+j$ meaning we will always fall into the second category for future rewards.
+
+This means the future payoff for such a decision will be
+\begin{align*}
+&\frac{q}{2(i+1)} \times \frac{i+1}{\denominator} +\frac{\min(m,2(j+1),\pospart{k_{max}+j+m-(t_{1}+q+i+2+j)+1})}{2(j+1)} \times \frac{j+1}{\denominator} \\
+&+ \frac{\pospart{k_{max}-i+m-(t_{1}+i+2+j)-1}}{2 \left( \denominator \right)} \\
+&=\frac{q+\min (2(j+1),\pospart{k_{max}-i+m-t_{1}-1-q})+\pospart{k_{max}-j+m-(t_{1}+q+i+2+j)-1}}{2 \left( \denominator \right)} \\
+&=\frac{q+\min (m,2(j+1), \pospart{k_{max}-i+m-t_{1}-1-q}) +\pospart{k_{max}-i-2j+m-t_{1}-3-q}}{2 \left( \denominator \right)} \\
+&=\frac{q+\min(m,2(j+1), \pospart{k_{max}-i+m-t_{1}-1-q})+\pospart{k_{max}-i+m-t_{1}-1-q-2(j+1)}}{2 \left( \denominator \right)}
+\end{align*}
+Now if $m \geq 2(j+1) \geq k_{max}-i+m-t_{1}-1-q \geq 0$ then we get
+$$\frac{q+k_{max}-i+m-t_{1}-1-q}{2 \left( \denominator \right)}=\frac{k_{max}-i+m-t_{1}-1}{2 \left( \denominator \right)}$$
+
+If $m \geq 2(j+1) \geq k_{max}-i+m-t_{1}-1-q$ and $k_{max}-i+m-t_{1}-1-q \leq 0$ then we get
+$\frac{q}{2 \left( \denominator \right)}$
+
+If $m \geq k_{max}-i+m-t_{1}-1-q \geq 2(j+1)$ then we get
+$\frac{q+2(j+1)+k_{max}-i+m-t_{1}-1-q-2(j+1)}{2 \left( \denominator \right)}=\frac{k_{max}-i+m-t_{1}-1}{2 \left( \denominator \right)}$
+
+If $k_{max}-i+m-t_{1}-1-q \geq m \geq 2(j+1)$ then we get
+$\frac{q+2(j+1)+k_{max}-i+m-t_{1}-1-q-2(j+1)}{2 \left( \denominator \right)}=\frac{k_{max}-i+m-t_{1}-1}{2 \left( \denominator \right)}$
+
+If $k_{max}-i+m-t_{1}-1-q \geq 2(j+1) \geq m$ then we get
+$\frac{q+m+k_{max}-i+m-t_{1}-1-q-2(j+1)}{2 \left( \denominator \right)}= \leq \frac{q+2(j+1)+k_{max}-i+m-t_{1}-1-q-2(j+1)}{2 \left( \denominator \right)} = \frac{k_{max}-i+m-t_{1}-1}{2 \left( \denominator \right)}$
+
+
+In every case we know that the value is less than $\frac{\pospart{k_{max}+1+i-t}}{2 \left( \denominator \right)} + \frac{\pospart{m-2(i+1)}}{2 \left( \denominator \right)}$.
+
+Hence by mathetmatical induction it is true for $k_{max}-i \leq t \leq k_{max}+i$ and the form is correct.
+
+\end{proof}
+
+The theorem's proof is now easy to follow
+
+\begin{proof}
+Starting at a type $i$ node means waiting till time $t=k_{max}-i$ and then recieving a payoff from the previous lemma. This should be clear as for any time, $s < k_{max}-i$, the decision is to wait or move to another type node and as no attacks can be claimed by waiting if moving was better then the patroller might as well start there.
+Hence starting at type $i$ provides a payoff of
+$$\frac{1}{2(i+1)} \times \frac{i+1}{\denominator} + \frac{2i+1}{2 \left( \denominator \right)} +\frac{\pospart{m-2(i+1)}}{2 \left( \denominator \right)}=\frac{i+1}{\denominator} +\frac{\pospart{m-2(i+1)}}{2 \left( \denominator \right)}$$
+
+So if $m \geq 2(i+1)$ then we get $\frac{m}{2 \left( \denominator \right)}$ and if $m < 2(i+1)$ then we get $\frac{i+1}{\denominator}$. 
+Hence if $m \geq 2(k_{max}+1)$ then we get $\frac{m}{2 \left( \denominator \right)}$ and if $m < 2(k_{max})$ we get $\frac{k+1}{\denominator}$.
+\end{proof}
 
 
 \end{document}

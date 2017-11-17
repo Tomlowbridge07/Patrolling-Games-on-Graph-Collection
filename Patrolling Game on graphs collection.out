@@ -22,12 +22,23 @@
 \BOOKMARK [2][-]{subsection.6.3}{Extension of Hamiltonian patrols}{section.6}% 22
 \BOOKMARK [1][-]{section.7}{Elongated star graph}{}% 23
 \BOOKMARK [2][-]{subsection.7.1}{Introduction}{section.7}% 24
-\BOOKMARK [2][-]{subsection.7.2}{Solution for m 2\(k+1\)}{section.7}% 25
-\BOOKMARK [1][-]{section.8}{General star graph}{}% 26
-\BOOKMARK [1][-]{section.9}{Dual star graphs}{}% 27
-\BOOKMARK [1][-]{section.10}{Linked Star graphs}{}% 28
-\BOOKMARK [1][-]{section*.8}{Appendices}{}% 29
-\BOOKMARK [1][-]{appendix.A}{Graph Definitions}{}% 30
-\BOOKMARK [1][-]{appendix.B}{Old Statements about Old diametric}{}% 31
-\BOOKMARK [1][-]{appendix.C}{Proof's}{}% 32
-\BOOKMARK [2][-]{subsection.C.1}{Alternating Random Hamiltonian proof}{appendix.C}% 33
+\BOOKMARK [2][-]{subsection.7.2}{Basic Analysis}{section.7}% 25
+\BOOKMARK [2][-]{subsection.7.3}{Solution for m 2\(k+1\)}{section.7}% 26
+\BOOKMARK [2][-]{subsection.7.4}{Solutions below Hamiltonian boundary}{section.7}% 27
+\BOOKMARK [2][-]{subsection.7.5}{Solution for m=2k+1 and m=2k}{section.7}% 28
+\BOOKMARK [1][-]{section.8}{General star graph}{}% 29
+\BOOKMARK [2][-]{subsection.8.1}{Introduction}{section.8}% 30
+\BOOKMARK [2][-]{subsection.8.2}{Basic Analysis}{section.8}% 31
+\BOOKMARK [2][-]{subsection.8.3}{solution for m 2\(kmax+1\)}{section.8}% 32
+\BOOKMARK [1][-]{section.9}{Dual star graphs}{}% 33
+\BOOKMARK [1][-]{section.10}{Linked Star graphs}{}% 34
+\BOOKMARK [1][-]{section*.17}{Appendices}{}% 35
+\BOOKMARK [1][-]{appendix.A}{Graph Definitions}{}% 36
+\BOOKMARK [1][-]{appendix.B}{Old Statements about Old diametric}{}% 37
+\BOOKMARK [1][-]{appendix.C}{Proof's}{}% 38
+\BOOKMARK [2][-]{subsection.C.1}{Alternating Random Hamiltonian proof}{appendix.C}% 39
+\BOOKMARK [2][-]{subsection.C.2}{Condition on T for old diametric proof}{appendix.C}% 40
+\BOOKMARK [2][-]{subsection.C.3}{Time-limited diametric attack proof}{appendix.C}% 41
+\BOOKMARK [2][-]{subsection.C.4}{Polygonal attack proof}{appendix.C}% 42
+\BOOKMARK [2][-]{subsection.C.5}{Time-delayed attack proof}{appendix.C}% 43
+\BOOKMARK [2][-]{subsection.C.6}{Type-delayed attack proof}{appendix.C}% 44

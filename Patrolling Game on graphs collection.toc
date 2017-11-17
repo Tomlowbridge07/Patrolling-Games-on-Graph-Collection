@@ -18,16 +18,27 @@
 \contentsline {section}{\numberline {5}Line graph}{9}{section.5}
 \contentsline {section}{\numberline {6}New Bounds}{9}{section.6}
 \contentsline {subsection}{\numberline {6.1}Problem and Correction of diametric attack}{9}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Extension of diametric attack}{13}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}Extension of Hamiltonian patrols}{13}{subsection.6.3}
-\contentsline {section}{\numberline {7}Elongated star graph}{14}{section.7}
-\contentsline {subsection}{\numberline {7.1}Introduction}{14}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Solution for $m \geq 2(k+1)$}{14}{subsection.7.2}
-\contentsline {section}{\numberline {8}General star graph}{14}{section.8}
-\contentsline {section}{\numberline {9}Dual star graphs}{14}{section.9}
-\contentsline {section}{\numberline {10}Linked Star graphs}{14}{section.10}
-\contentsline {section}{Appendices}{i}{section*.8}
+\contentsline {subsection}{\numberline {6.2}Extension of diametric attack}{11}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Extension of Hamiltonian patrols}{11}{subsection.6.3}
+\contentsline {section}{\numberline {7}Elongated star graph}{12}{section.7}
+\contentsline {subsection}{\numberline {7.1}Introduction}{12}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Basic Analysis}{13}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Solution for $m \geq 2(k+1)$}{14}{subsection.7.3}
+\contentsline {subsection}{\numberline {7.4}Solutions below Hamiltonian boundary}{16}{subsection.7.4}
+\contentsline {subsection}{\numberline {7.5}Solution for $m=2k+1$ and $m=2k$}{16}{subsection.7.5}
+\contentsline {section}{\numberline {8}General star graph}{17}{section.8}
+\contentsline {subsection}{\numberline {8.1}Introduction}{17}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Basic Analysis}{18}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}solution for $m \geq 2(k_{max}+1)$}{18}{subsection.8.3}
+\contentsline {section}{\numberline {9}Dual star graphs}{21}{section.9}
+\contentsline {section}{\numberline {10}Linked Star graphs}{21}{section.10}
+\contentsline {section}{Appendices}{i}{section*.17}
 \contentsline {section}{\numberline {A}Graph Definitions}{i}{appendix.A}
 \contentsline {section}{\numberline {B}Old Statements about Old diametric}{iii}{appendix.B}
 \contentsline {section}{\numberline {C}Proof's}{iv}{appendix.C}
 \contentsline {subsection}{\numberline {C.1}Alternating Random Hamiltonian proof}{iv}{subsection.C.1}
+\contentsline {subsection}{\numberline {C.2}Condition on T for old diametric proof}{v}{subsection.C.2}
+\contentsline {subsection}{\numberline {C.3}Time-limited diametric attack proof}{vi}{subsection.C.3}
+\contentsline {subsection}{\numberline {C.4}Polygonal attack proof}{vii}{subsection.C.4}
+\contentsline {subsection}{\numberline {C.5}Time-delayed attack proof}{viii}{subsection.C.5}
+\contentsline {subsection}{\numberline {C.6}Type-delayed attack proof}{xx}{subsection.C.6}
