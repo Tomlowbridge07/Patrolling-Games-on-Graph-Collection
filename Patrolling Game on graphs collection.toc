@@ -25,13 +25,16 @@
 \contentsline {subsection}{\numberline {7.2}Basic Analysis}{13}{subsection.7.2}
 \contentsline {subsection}{\numberline {7.3}Solution for $m \geq 2(k+1)$}{14}{subsection.7.3}
 \contentsline {subsection}{\numberline {7.4}Solutions below Hamiltonian boundary}{16}{subsection.7.4}
-\contentsline {subsection}{\numberline {7.5}Solution for $m=2k+1$ and $m=2k$}{16}{subsection.7.5}
-\contentsline {section}{\numberline {8}General star graph}{17}{section.8}
-\contentsline {subsection}{\numberline {8.1}Introduction}{17}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Basic Analysis}{18}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}solution for $m \geq 2(k_{max}+1)$}{18}{subsection.8.3}
-\contentsline {section}{\numberline {9}Dual star graphs}{21}{section.9}
-\contentsline {section}{\numberline {10}Linked Star graphs}{21}{section.10}
+\contentsline {subsection}{\numberline {7.5}Improving the Hamiltonian bound}{16}{subsection.7.5}
+\contentsline {subsection}{\numberline {7.6}Solution for $m=2k+1$ and $m=2k$}{16}{subsection.7.6}
+\contentsline {subsection}{\numberline {7.7}Solution for $m=2k-1$ and $m=2k-2$}{17}{subsection.7.7}
+\contentsline {subsection}{\numberline {7.8}Solution for certain $m$ step-points}{18}{subsection.7.8}
+\contentsline {section}{\numberline {8}General star graph}{19}{section.8}
+\contentsline {subsection}{\numberline {8.1}Introduction}{19}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Basic Analysis}{19}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}solution for $m \geq 2(k_{max}+1)$}{20}{subsection.8.3}
+\contentsline {section}{\numberline {9}Dual star graphs}{22}{section.9}
+\contentsline {section}{\numberline {10}Linked Star graphs}{22}{section.10}
 \contentsline {section}{Appendices}{i}{section*.17}
 \contentsline {section}{\numberline {A}Graph Definitions}{i}{appendix.A}
 \contentsline {section}{\numberline {B}Old Statements about Old diametric}{iii}{appendix.B}

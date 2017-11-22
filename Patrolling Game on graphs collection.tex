@@ -936,6 +936,8 @@ We now seek solutions below the Hamiltonian bound of value $ \frac{m}{2(n+k)}$. 
 
 Guess: Some concave type region will exist below.
 
+\subsection{Improving the Hamiltonian bound}
+
 
 \subsection{Solution for $m=2k+1$ and $m=2k$}
 
@@ -971,6 +973,63 @@ Here we will notice that we can follow the above, the patroller has both the dec
 
 The patroller as above can use an `augmented' version of the time-delayed strategy 
 
+\subsection{Solution for $m=2k-1$ and $m=2k-2$}
+First we will note that $M \neq \emptyset$
+
+\textbf{Solution for $m=2k-1$}
+As before it is assumed that it will matter on our comparison of $m$ to $2(n-1)$.
+
+\textbf{when $m \geq 2n-1$}
+If $m \geq 2n-1$ then $R \neq \emptyset$ we can use the combinatorial bound to get $V \geq \frac{m}{n+k+m}=\frac{2k-1}{n+3k-1}$. We note that this improvement is only possible if $m \leq n+k$ i.e $2k-1 \leq n+k$ so $k \leq n+1$. so $m=2k-1 \leq 2n+1$ which means we are only allowed to use this improvement in the region where $2k-1=2n-1, 2n+1$ i.e $k=n,n+1$.
+
+We will then consider both cases
+
+\textbf{for $k=n$}
+If $k=n$ then the bound is $V \geq \frac{2n-1}{4n-1}$, we claim in this case that this is the same as using the decomposition to $L_{k}=L_{n}$ and $S_{n}$ getting us a bound of $V \geq \frac{1}{1+\frac{2n}{2n-1}}=\frac{2n-1}{4n-1}$.
+
+Now the attacker requires an augmentation to there strategy
+
+\textbf{for $k=n+1$}
+If $k=n+1$ then the bound is $V \geq \frac{2n+1}{4n+2}$
+
+The attacker should augment their attacks to simply place only $2(k-1)$ at the elongated node and $2(n-1)$ time centered around the centre node ($2$ for each external node). This will give a bound of $V \leq \frac{2(k-1)}{2(k-1)+2(n-1)}=\frac{2(k-1)}{2(n+k-2)}$.
+
+
+\textbf{When $m \leq 2(n-1)$}
+If we look at $m \leq 2(n-1)$, then we know that $R = \emptyset$. So the combinatorial bound gives us $V \geq \frac{2(2k-1)}{2(n+k)+(2k-1)(1+\frac{n-1}{k-2}}=\frac{4k-2}{2n+2k+2k-1 + \frac{(n-1)(2k-1)}{k-2}}$
+
+
+If $m < 2(n-1)$ then $R = \emptyset$ and we can use the combinatorial bound to get $V \geq \frac{2m}{2(n+k)+m(1+\frac{n-1}{\floor{\frac{m}{2}}}}=\frac{2(2k-1)}{2(n+k)+(2k-1)(1+\frac{n-1}{k-1}}=\frac{4k-2}{2(n+k)+(2k-1 +\frac{(2k-1)(n-1)}{k-1})}$
+
+
+\textbf{Solution for $m=2k-2$} 
+
+If $m \geq 2n-1$ then $R \neq \emptyset$ and we can use the combinatorial bound to get $V \geq \frac{\floor{\frac{m}{2}}}{\frac{m}{2}+n-1}=\frac{2k-2}{2k-2+2(n-1)}=\frac{2k-2}{2(n+k-2)}=\frac{m}{2(n+k-2)}$.
+
+The attacker should augment their attacks to simply place only $2(k-1)$ at the elongated node and $2(n-1)$ time centered around the centre node ($2$ for each external node). This will give a bound of $V \leq \frac{m}{2(k-1)+2(n-1)}=\frac{m}{2(n+k-2)}$.
+
+
+If $m < 2(n-1)$ then $R= \emptyset$ and we can use the combinatorial bound to get $V \geq \frac{2m}{2(n+k)+m(1+\frac{n-1}{\floor{\frac{m}{2}}}}=\frac{4k-4}{2(n+k)+(2k-2)(1+\frac{n-1}{k-1}}=\frac{4k-4}{2(n+k)+(2k-2+2(n-1))}=\frac{2k-2}{n+k+k+n-2}=\frac{m}{2(n+k-1)}$. An alternative here is decomposition into $S_{n-1}$ and $L_{k+1}$ which should give the same bound.
+
+The attacker should augment their attacks to place only $2(k-1)$ at the elongated node and $2n$ time centered around the centre ($n$ nodes, so one is along the elongated branch). This will give a bound of $V \leq \frac{m}{2(k-1)+2n}=\frac{m}{2(n+k-1)}$.
+
+
+\begin{note}
+The dependency on $m$ in relation to how much of the elongated branch it can cover if its got to cover the normal nodes, then if $m$ is high it can stretch along the elongated branch as well. This means when $R \neq \emptyset$ the attacker is at a disadvantage
+\end{note}
+
+\subsection{Solution for certain $m$ step-points}
+For the first step-point the `simplification' $S_{n}^{k}$ to $S_{n+1}^{k-2}$ then the attacker will get a bound of $V \leq \frac{m}{2(n+k-1)}$ for $m \geq 2(k-1)$.
+
+At the first step-point $m=2k-2$
+Then suppose that the combinatorial improvement holds true with $R = \emptyset$ then we can get the bound $V \leq \frac{2m}{2(n+k)+(2k-2)(1+\frac{n-1}{k-1})}=\frac{m}{n+k+k-1+n-1}=\frac{m}{2(n+k-1)}$
+
+Hence at this step point giving a value of $V=\frac{2k-2}{2(n+k-1)}$.
+
+We will have more step points upon different `simplifications' i.e the second step point occurs upon the simplification to $S_{n+1}^{(k-4,k-4}$ and give us a bound of $V \leq \frac{m}{2(n+1+2(k-4))}=\frac{m}{2(n+2k-7)}$ for $m \geq 2(k-3)$.
+
+At the first step point $m=2k-6$
+Then suppose that a version of the combinatorial holds true with $R = \emptyset$ then we get the bound $V\ leq \frac{2m}{2(n+k)+(2k-6)(1+\frac{n-1}{k-3}}=\frac{m}{n+k+k-3+n-1}=\frac{2m}{2(n+k-2)}$
 
 \section{General star graph}
 

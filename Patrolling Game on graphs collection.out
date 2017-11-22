@@ -25,20 +25,23 @@
 \BOOKMARK [2][-]{subsection.7.2}{Basic Analysis}{section.7}% 25
 \BOOKMARK [2][-]{subsection.7.3}{Solution for m 2\(k+1\)}{section.7}% 26
 \BOOKMARK [2][-]{subsection.7.4}{Solutions below Hamiltonian boundary}{section.7}% 27
-\BOOKMARK [2][-]{subsection.7.5}{Solution for m=2k+1 and m=2k}{section.7}% 28
-\BOOKMARK [1][-]{section.8}{General star graph}{}% 29
-\BOOKMARK [2][-]{subsection.8.1}{Introduction}{section.8}% 30
-\BOOKMARK [2][-]{subsection.8.2}{Basic Analysis}{section.8}% 31
-\BOOKMARK [2][-]{subsection.8.3}{solution for m 2\(kmax+1\)}{section.8}% 32
-\BOOKMARK [1][-]{section.9}{Dual star graphs}{}% 33
-\BOOKMARK [1][-]{section.10}{Linked Star graphs}{}% 34
-\BOOKMARK [1][-]{section*.17}{Appendices}{}% 35
-\BOOKMARK [1][-]{appendix.A}{Graph Definitions}{}% 36
-\BOOKMARK [1][-]{appendix.B}{Old Statements about Old diametric}{}% 37
-\BOOKMARK [1][-]{appendix.C}{Proof's}{}% 38
-\BOOKMARK [2][-]{subsection.C.1}{Alternating Random Hamiltonian proof}{appendix.C}% 39
-\BOOKMARK [2][-]{subsection.C.2}{Condition on T for old diametric proof}{appendix.C}% 40
-\BOOKMARK [2][-]{subsection.C.3}{Time-limited diametric attack proof}{appendix.C}% 41
-\BOOKMARK [2][-]{subsection.C.4}{Polygonal attack proof}{appendix.C}% 42
-\BOOKMARK [2][-]{subsection.C.5}{Time-delayed attack proof}{appendix.C}% 43
-\BOOKMARK [2][-]{subsection.C.6}{Type-delayed attack proof}{appendix.C}% 44
+\BOOKMARK [2][-]{subsection.7.5}{Improving the Hamiltonian bound}{section.7}% 28
+\BOOKMARK [2][-]{subsection.7.6}{Solution for m=2k+1 and m=2k}{section.7}% 29
+\BOOKMARK [2][-]{subsection.7.7}{Solution for m=2k-1 and m=2k-2}{section.7}% 30
+\BOOKMARK [2][-]{subsection.7.8}{Solution for certain m step-points}{section.7}% 31
+\BOOKMARK [1][-]{section.8}{General star graph}{}% 32
+\BOOKMARK [2][-]{subsection.8.1}{Introduction}{section.8}% 33
+\BOOKMARK [2][-]{subsection.8.2}{Basic Analysis}{section.8}% 34
+\BOOKMARK [2][-]{subsection.8.3}{solution for m 2\(kmax+1\)}{section.8}% 35
+\BOOKMARK [1][-]{section.9}{Dual star graphs}{}% 36
+\BOOKMARK [1][-]{section.10}{Linked Star graphs}{}% 37
+\BOOKMARK [1][-]{section*.17}{Appendices}{}% 38
+\BOOKMARK [1][-]{appendix.A}{Graph Definitions}{}% 39
+\BOOKMARK [1][-]{appendix.B}{Old Statements about Old diametric}{}% 40
+\BOOKMARK [1][-]{appendix.C}{Proof's}{}% 41
+\BOOKMARK [2][-]{subsection.C.1}{Alternating Random Hamiltonian proof}{appendix.C}% 42
+\BOOKMARK [2][-]{subsection.C.2}{Condition on T for old diametric proof}{appendix.C}% 43
+\BOOKMARK [2][-]{subsection.C.3}{Time-limited diametric attack proof}{appendix.C}% 44
+\BOOKMARK [2][-]{subsection.C.4}{Polygonal attack proof}{appendix.C}% 45
+\BOOKMARK [2][-]{subsection.C.5}{Time-delayed attack proof}{appendix.C}% 46
+\BOOKMARK [2][-]{subsection.C.6}{Type-delayed attack proof}{appendix.C}% 47
