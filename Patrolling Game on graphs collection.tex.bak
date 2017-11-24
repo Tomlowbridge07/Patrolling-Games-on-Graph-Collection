@@ -672,7 +672,34 @@ Proof: \ref{Alternating Random Hamiltonian proof}
 
 If $m$ is odd, say $m=2m'+1$ then in the above we get two possibilities for each node depending on the interval choice either $p+\frac{m-1}{n}$ or $\frac{m+1}{n}-p$. So choosing anything other than $p=\frac{1}{n}$ (which is the Random Hamiltonian Patrol strategy) gives a worse result for the patroller.
 
-While not getting a better lower bound, the ARHP does give some control on how to perform optimally in a Hamiltonian graph. The idea of distributing the probability $\frac{2}{n}$ between two types of nodes can be extended to the idea of distributing the probability $\frac{k}{n}$ between $k$ types of nodes (as seen in appendix \ref{appendix:Hamiltonian Graph}).
+While not getting a better lower bound, the ARHP does give some control on how to perform optimally in a Hamiltonian graph. The idea of distributing the probability $\frac{2}{n}$ between two types of nodes can be extended to the idea of distributing the probability $\frac{k}{n}$ between $k$ types of nodes.
+
+As an extension to the Alternating Random Hamiltonian Patrol(ARHP) is the Block Random Hamiltonian Patrol(BRHP).
+
+\begin{definition}[Block Random Hamiltonian Patrol(BRHP)]
+A $k$ type \textit{Block Random Hamiltonian Patrol} (\textit{BRHP}) is a mixed strategy following the Hamiltonian Patrol but with a probability $p_{i}$ of starting at a ``type $i$'' node for $i=1,..,k$ , where $\sum\limits_{i=1}^{k} p_{i}=\frac{k}{n}$.
+\end{definition}
+
+\begin{lemma}
+When $n$ and $m$ are both multiples of $k$, then following the $k$ type Block Random Hamiltonian Patrol, if feasible, gives the same lower bound as the random Hamiltonian patrol, i.e $V \geq \frac{m}{n}$
+\end{lemma}
+
+\begin{proof}
+During any attack interval $I$ , which is of length $m=km'$, then $W(I)$ contains $m'$ ``type $i$'' nodes for $i=1,...,k$. Therefore by following the $k$ type BRHP, $\bm{\pi}_{BRHP}$, with probability $p_{i}$ at ``type $i$'' for $i=1,...,k$. Then
+
+\begin{align*}
+&P(\bm{\pi}_{BRHP},[i,I]) \geq \underbrace{\overbrace{p_{1}}^{\text{type } 1}+...+
+\overbrace{p_{k}}^{\text{type } k}+p_{1}+...+p_{n}+...+...+p_{1}+...+p_{k}=2m'}_{\text{ m=km'elements}}= \\
+&m' p_{1}+...+m'p_{k}=m' \frac{k}{n}=\frac{m}{n} \quad \forall i \in N \quad \forall I \subseteq \mathcal{T}
+\end{align*}
+Hence as it holds for all pure attacks
+$$P(\bm{\pi}_{BRHP},\pmb{\phi}) \geq \frac{m}{n} \quad \forall \bm{\phi} \in \Phi$$
+Hence $V \geq \frac{m}{n}$ .
+\end{proof}
+
+\begin{note}
+In the one-off game, the BRHP strategy is always feasible. However in the periodic game, the BRHP strategy is only feasible if $T=k'n$ for some $k' \in \mathbb{N}$.
+\end{note}
 
 \section{Elongated star graph}
 \subsection{Introduction}
@@ -937,6 +964,184 @@ We now seek solutions below the Hamiltonian bound of value $ \frac{m}{2(n+k)}$. 
 Guess: Some concave type region will exist below.
 
 \subsection{Improving the Hamiltonian bound}
+We could suggest a similar improvement to that done on the line, that is to improve the probability of intercepting an attack when following the random oscillation
+
+\textbf{Probability of interception}
+
+If the patroller is performing a Random Oscillation, then for a pure attack at node $i$ the probability of capture is given by (derivation in appednix \ref{appednixsection: Reason for probability of interception}),
+\begin{equation}
+\label{eq:Prob of Interception}
+w(i)= \left\{\begin{array}{l}
+ \frac{\min(m+2(i-1),2m)}{2(n+k)} \text{  , for } i \leq \frac{n+k}{2} +1, \\
+ \frac{\min(m+2(n+k+1-i),2m)}{2(n+k)} \text{  , for } i > \frac{n+k}{2} +1, \\
+ \frac{\min(m+2(n-1),nm)}{2(n+k)} \text{  , for } i=c, \\
+ \frac{m}{2(n+k)} \text{  , for } i=*. 
+\end{array} \right.
+\end{equation}
+We will call $w(i)$ the probability of \textit{interception} at node $i$.
+
+
+\begin{examplefigure}
+\begin{center}
+\input{Images/BaseInterceptionOnS_4^5(m=4).tex}
+\end{center}
+\caption{Interception probabilities of $S^5_{4}$ when $m=4$.}
+\end{examplefigure}
+
+
+\begin{definition}[End-ensuring cycle]
+Define a cycle of length $m$ (if even) or $m-1$ (if odd) to be \textit{End-ensuring} if one of the points along the cycle is a leaf node. Define the \textit{Half-length} of such cycles to be $\hat{m}=\floor{\frac{m}{2}}$.
+\end{definition}
+
+As End-ensuring cycles return to all the nodes in the cycle every $m$ (if even) or $m-1$ (if odd) it means that any pure attack against a node in the End-ensuring cycle will be guaranteed to be caught by such a patrol.
+
+In \cite{Papadaki2016} the authors improved nodes with poor interception probabilities by introducing two End-ensuring cycles. We shall do the same, though now more consideration needs to be taken on how to place these End-ensuring cycles. 
+
+The minimum probability of interception, $w_{min} \equiv \min\limits_{i=1,..,k+1,c,*} w(i)$, gives the lower bound $V \geq w_{min}$. Hence improving this minimum will improve the lower bound. As it stands $w(1)=w(*)=w_{min}$, so improvement is required about $1$ and $*$.
+
+First consider partitioning the node set, $N$, into $L=\left\{ i \, | \, i \leq \floor{\frac{m}{2}}+1 , i \leq k+1 \right\}$ , $M=\left\{ i \, | \, \floor{\frac{m}{2}}+2 \leq i \leq n+k-\floor{\frac{m}{2}} , i \leq k+1 \right\}$ , $R=\left\{ i \, | \, i \geq n+k+1-\floor{\frac{m}{2}} , i \leq k+1 \right\}$ , $S=\{ c,* \}$. Then $w_{min} \equiv w_{\min}^{N}=\min \{ w_{min}^{L},w_{min}^{M},w_{min}^{R},w_{min}^{S} \}$ , where $w_{min}^{X}=\min\limits_{i \in X} w(i)$.
+
+Note. The set $R$ is empty if $\floor{\frac{m}{2}} \leq n-1$. The set $M$ is empty if $\floor{\frac{m}{2}} \geq k-1$ or $\floor{\frac{m}{2}} \geq n+k-2$.
+
+Now from equation \ref{eq:Prob of Interception}
+\begin{itemize}
+\item $w_{min}^{L}=w(1)$, as for $i \in L$ we have that $w(i)$ is increasing in $i$.
+\item $w_{min}^{M}=w(\floor{\frac{m}{2}}+2)=\frac{2m}{2(n+k)}$ , as for $i \in M $ we have that $w(i)=\frac{2m}{2(n+k)}$ $\forall i \in M$.
+\item $w_{min}^{R}=w(k+1)$, as for $i \in R$ we have that $w(i)$ is decreasing in $i$.
+\item $w_{min}^{S}=w(*)$, as $w(c) > w(*)$.
+\end{itemize}
+
+So as long as the improvement made on $L$ and $M$ is non-decreasing then only the nodes $1$ and $\floor{\frac{m}{2}}+2$ need be considered. Similarly if in $R$, the improvement is non-increasing then we only need to consider the node $k+1$.Finally if in $S$, the improvement improves node $c$ as good as $*$ then we only need to consider $*$. Therefore we shall only consider such improvement strategies.
+
+Similarly let $C_{\min}^{X} (\bm{\pi}) = \min\limits_{i \in X} P(\bm{\pi},i)$, where $P(\bm{\pi},i)=\max\limits_{ I \subset \mathcal{T}} P(\bm{\pi},[i,I])$, be the probability of capture under $\bm{\pi}$ and $C_{\min} (\bm{\pi}) \equiv C_{\min}^{N} = \min \{ C_{\min}^{L},  C_{\min}^{M},  C_{\min}^{R},  C_{\min}^{S} \}$. Then we seek to select $\bm{\pi}$ to get $C_{\min} (\bm{\pi}) > W_{\min} \equiv C_{\min}(\bm{\pi}_{0})$ , where $\bm{\pi}_{0}$ is the Random Oscillation strategy.
+
+We will use $P$ to be the probability the Random Oscillation is played and $Q=1-P$. Let $Q=Q_{L}+Q_{M}+Q_{R}+Q_{S}$, where $Q_{X}$ is the amount of probability used to improve the probability of intersection for the set $X$. We use $q_{X}$ to be probability that the minimum of the set is improved by, so $C_{\min}^{X}=PW_{\min}^{X}+q_{X}$.
+
+
+\textbf{A Naive Improvement}
+Let $\bm{\pi}=\alpha(Q_{L},Q_{S})$ denote the Naive Improvement Policy.
+We will play the end-ensuring cycle, $\{1,...,\floor{\frac{m}{2}}+1,...,1\}$, with probability $Q_{L}$ (a non-decreasing improvement), giving $q_{L}=Q_{L}$. We will play,  with probability $Q_{S}$, an end-ensuring cycle for each $*$ node, $\{*,c,....,k+3-\floor{\frac{m}{2}},....,c,* \}$,(a non-decreasing improvement), giving $q_{S}=\frac{Q_{S}}{n-1}$.
+ 
+Now we may also have improved some of the nodes in $R$, possibly up to node $k+3-\floor{\frac{m}{2}} \leq n+k+1-\floor{\frac{m}{2}}$ (as $n \geq 3$), meaning that all nodes in $R$ are in the end-ensuring cycle $\{*,c,...,k+3-\floor{\frac{m}{2}} \}$, so $q_{R}=q_{S}$. If $M \neq \emptyset$ nodes in $M$ may be improved, but the node $\halflength +2$ will not be improved as  $\halflength +2 > \halflength +1$ and $\halflength +2 < k+3- \halflength$ (as $\halflength < k-1$ when $M \neq \emptyset$), so $q_{M}=0$.
+
+
+\begin{examplefigure}
+\begin{center}
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[-,auto,node distance=1.5cm,
+                    thick,main node/.style={circle,fill=white,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {$1$};
+  \node[main node] (2) [right of=1] {$2$};
+  \node[main node] (3) [right of=2] {$3$};
+  \node[main node] (4) [right of=3] {$4$};
+  \node[main node] (5) [right of=4] {$5$};
+  \node[main node] (6) [right of=5]  {$6$};
+  \node[main node] (7) [right of=6] {$7$};
+  \node[main node] (8) [right of=7] {$8$};
+  \node[main node] (9) [right of=8] {$9$};
+  \node[main node] (10) [right of=9]  {$10$};
+  \node[main node] (11) [right of=10]  {$c$};
+  \node[main node] (12) [right of=11]  {$*$};
+  \node[main node] (13) [above of=11]  {$*$};
+  \node[main node] (14) [below of=11]  {$*$};
+  
+
+  \path[every node/.style={font=\sffamily}]
+    (1) edge  (2)
+    (2) edge (3)
+    (3) edge (4)
+    (4) edge (5)
+    (5) edge (6)
+    (6) edge (7)
+    (7) edge (8)
+    (8) edge (9)
+    (9) edge (10)
+    (10) edge (11)
+    (11) edge (12)
+    edge (13)
+    edge (14);
+      
+     
+   \draw[line width=1mm,color=red] (1) to (2) to (3) to (4) to (5);
+   
+   \draw [line width=1mm,color=blue] (11) to (12);
+   \draw [line width=1mm,color=green] (11) to (13);
+   \draw [line width=1mm,color=yellow] (11) to (14);
+   \draw [line width=1mm,color=blue] (8) to (9) to (10) to (11);
+   
+   \node (LBox) [draw,rounded corners, fit= (1) (2) (3) (4) (5)] {};
+   \node (MBox) [draw,rounded corners, fit= (6) (7) (8) (9)] {};
+   \node (RBox) [draw,rounded corners, fit= (10)] {};
+   \node (SBox) [draw,rounded corners, fit= (11) (12) (13) (14)] {};
+   
+   \node [above=0.5cm,text width=0.5cm] at (LBox) {$L$};
+   \node [above=0.5cm,text width=0.5cm] at (MBox) {$M$};
+   \node [above=0.5cm,text width=0.5cm] at (RBox) {$R$};
+   \node [,above=2cm,text width=0.5cm] at (SBox) {$S$}; 
+   
+\begin{scope}[on background layer]
+   \node[style={circle,,font=\sffamily\Large\bfseries}] (8H) at ($ (8) + (0,0.1) $) { };
+   \node[style={circle,,font=\sffamily\Large\bfseries}] (9H) at ($ (9) + (0,0.1) $) { };   
+   \node[style={circle,,font=\sffamily\Large\bfseries}] (10H) at ($ (10) + (0,0.1) $) { };
+   \node[style={circle,,font=\sffamily\Large\bfseries}] (11H) at ($ (11) + (0,0.1) $) { };
+   \draw [line width=1mm,color=green] (8H) to (9H) to (10H) to (11H);
+   \node[style={circle,,font=\sffamily\Large\bfseries}] (8L) at ($ (8) + (0,-0.1) $) { };
+   \node[style={circle,,font=\sffamily\Large\bfseries}] (9L) at ($ (9) + (0,-0.1) $) { };
+   \node[style={circle,,font=\sffamily\Large\bfseries}] (10L) at ($ (10) + (0,-0.1) $) { };
+   \node[style={circle,,font=\sffamily\Large\bfseries}] (11L) at ($ (11) + (0,-0.1) $) { };
+   \draw [line width=1mm,color=yellow] (8L) to (9L) to (10L) to (11L);
+\end{scope}
+    
+   
+\end{tikzpicture}
+}
+\end{center}
+\caption{The Naive Improvement on $S_{4}^{9}$ for $m=9$. The \textcolor{red}{red lines indicating the end-ensuring cycle $\{1,2,3,4,5,4,3,2,1 \}$} and the other coloured lines indicating the end-ensuring cycles, for each $*$, $\{*,c,10,9,8,9,10,c,* \}$ (as $\halflength=4$).}
+\end{examplefigure}
+
+
+Using the Naive Improvement Policy we can achieve an improvement over the Random Oscillation if $2(n+k) -nm \geq 0$ and get a bound of $V \geq \frac{2m}{2(n+k)+nm}$ (or $V \geq \frac{1}{n}$ if $M=\emptyset,R=\emptyset$), by choosing optimal $Q_{L}$ and $Q_{S}$ (See  appendix \ref{appendix:Naiveanalysis}).
+
+
+\begin{myfigure}
+\begin{center}
+\input{Images/NavieInterceptionOnS_4^5(m=4).tex}
+\end{center}
+\caption{Interception probabilities of $S^5_{4}$ when $m=4$, with the \textcolor{red}{red Probabilities showing the Naive Improvement Policy $\alpha \left(\frac{2}{17},\frac{6}{17} \right)$}.}
+\end{myfigure}
+
+
+
+\textbf{A Combinatorial Improvement}
+Let $\bm{\pi}=\beta(Q_{L},Q_{S})$ denote the Combinatorial Improvement Policy.
+As before the end-ensuring cycle, $\{ 1,...,\floor{\frac{m}{2}}+1,...,1 \}$ is played with probability $Q_{L}$, so $q_{L}=Q_{L}$. Also;
+
+\begin{enumerate}
+\item[Case i)] If $R \neq \emptyset$ then $\floor{\frac{m}{2}}=n+r$, for some excess $r$. Then form an end-ensuring cycle on the nodes $\{ n+k+1-\floor{\frac{m}{2}},...,k+1,c,*,c,*,...,c,*,c,k+1,...,n+k+1-\floor{\frac{m}{2}} \}$, this is of length $2(n-\floor{\frac{m}{2}}+1)+2(n-1)=4n-2 \frac{m}{2}=4n-2(n+r)=2n+2r=2 \floor{\frac{m}{2}} \leq m$ (so are end-ensuring). This cycle will be played with probability $Q_{S}$ and improves all the nodes in $R$ (non-increasing) and $S$($c$ is better than $*$) so $q_{R}=Q_{R}$ and $q_{S}=Q_{S}$.
+
+\item[Case ii)] If $R = \emptyset$ then an end-ensuring cycle is formed by choosing $\halflength$ $*$ nodes each equally likely. This construction is performed with probability $Q_{S}$ and nodes in $S$ ($c$ is better than $*$). The actually improvement made is $$q_{S}=Q_{S} \times \mathbb{P}(\text{A particular } * \text{ node is picked})=Q_{S} \times \frac{\floor{\frac{m}{2}}}{n-1} $$
+\end{enumerate}
+To distinguish between the cases we shall label case i) $\beta_{1}$ and case ii) $\beta_{2}$.
+
+Using the Choosing Improvement Policy we can achieve an improvement over the Random Oscillation in both cases (under some conditions) and get a lower bound. (See  appendix \ref{appendix:Choosinganalysis})
+
+
+\begin{myfigure}
+\begin{center}
+\input{Images/CombinatorialInterceptionOnS_4^5(m=8).tex}
+\end{center}
+\caption{Interception probabilities of $S^5_{4}$ when $m=8$, with the \textcolor{blue}{blue Probabilities showing the Choosing Improvement Policy $\beta_{1} \left(\frac{2}{13},\frac{2}{13} \right)$}.}
+\end{myfigure}
+
+
+
+\begin{myfigure}
+\begin{center}
+\input{Images/CombinatorialInterceptionOnS_4^5(m=4).tex}
+\end{center}
+\caption{Interception probabilities of $S^5_{4}$ when $m=4$, with the \textcolor{red}{red Probabilities showing the Naive Improvement Policy $\alpha \left(\frac{2}{17},\frac{6}{17} \right)$} and the \textcolor{blue}{blue Probabilities showing the Choosing Improvement Policy $\beta_{2} \left(\frac{1}{7},\frac{3}{14} \right)$}.}
+\end{myfigure}
 
 
 \subsection{Solution for $m=2k+1$ and $m=2k$}
@@ -1019,6 +1224,8 @@ The dependency on $m$ in relation to how much of the elongated branch it can cov
 \end{note}
 
 \subsection{Solution for certain $m$ step-points}
+
+\textbf{Stage-1-step-points}
 For the first step-point the `simplification' $S_{n}^{k}$ to $S_{n+1}^{k-2}$ then the attacker will get a bound of $V \leq \frac{m}{2(n+k-1)}$ for $m \geq 2(k-1)$.
 
 At the first step-point $m=2k-2$
@@ -1026,10 +1233,47 @@ Then suppose that the combinatorial improvement holds true with $R = \emptyset$ 
 
 Hence at this step point giving a value of $V=\frac{2k-2}{2(n+k-1)}$.
 
-We will have more step points upon different `simplifications' i.e the second step point occurs upon the simplification to $S_{n+1}^{(k-4,k-4}$ and give us a bound of $V \leq \frac{m}{2(n+1+2(k-4))}=\frac{m}{2(n+2k-7)}$ for $m \geq 2(k-3)$.
+We will have more step points upon different `simplifications' i.e the second step point occurs upon the simplification to $S_{n+1}^{(k-4,1}$ and give us a bound of $V \leq \frac{m}{2(n+1+k-3)}=\frac{m}{2(n+k-2)}$ for $m \geq 2(k-3)$.
 
-At the first step point $$
-Then suppose that a version of the combinatorial holds true with $R = \emptyset$ then we get the bound $V\ leq \frac{m}{•}$
+At the second step point $m=2k-6$
+Then supposing the combinatorial improvement holds then we can get assuming $R = \emptyset$ we can get $V \leq \frac{2(2k-6)}{2(n+k) + (2k-6)(1+\frac{n-1}{k-3}}=\frac{4k-12}{2n+2k+2k-6+2(n-1)}=\frac{2k-6}{2n+2k-4}=\frac{m}{2(n+k-4)}$. Giving the value.
+
+This will happen in general, so let us set up the formal method
+
+\begin{definition}[Stage-1-Step-Points]
+When $m=2k+2-4i \leq 2(n-1)$ for some $i=1,...,\floor{\frac{k+1}{3}}$ , we call this the stage1-$i$\textsuperscript{th} step-point.
+\end{definition}
+
+\begin{note}
+We require $m \leq 2(n-1)$ so that $R = \emptyset$ and the `correct' combinatorial improvement works
+\end{note}
+
+\begin{lemma}[Stage1-Step-point Values]
+When $m$ is the $i$\textsuperscript{th} step-point then
+$$V=\frac{m}{2(n+k-i)}$$
+\end{lemma}
+
+Proof: \ref{Stage-1-Step-point lemma proof}
+
+We could think that we can extend this idea further, however the limit on $i_{\max}=\floor{\frac{k+1}{3}}$ is placed such that we are guaranteed to get improvement.
+
+\textbf{Various stage step points}
+
+We could consider a different amount of stages i.e $S_{7}^{5}$ could be simplified to $S_{9}$ when $m=2$, however it seems like the combinatorial improvement does not help us out. It still feels like this is the best the attacker can do though.
+
+\begin{note}
+It is worth noting that in this case the simplification is also like looking for the largest independent set (which here is $9$ nodes big).
+\end{note}
+
+We could also consider $S_{10}^{9}$ simplified to $S_{12}^{1,1}$ when $m=4$ however this would give us a bound of $V \leq \frac{4}{28}$. Now in this case we can note that $4(1+\frac{9}{2})=22 \leq 2(n+k)=38$ so we could use the combinatorial improvement to get $V \geq \frac{4}{19+11}=\frac{4}{30}$. So we do not arrive at a tight bound.  
+
+\begin{note}
+The graph $S_{10,9}$ is biparite with $|B|=9+5=14$ , so we get $V \leq \frac{4}{28}$ this way as well.
+\end{note}
+
+The question is can the attacker or patroller do better ?
+I think that the patroller can do better. The question is how ? A possible
+
 
 \section{General star graph}
 
@@ -1647,6 +1891,78 @@ Hence in the region of $m \geq 4$ we get that $V=\frac{m}{16}$
 \caption{Graph $S$ used in example}
 \label{fig: S}
 \end{myfigure}
+
+
+\section{Improvemening Hamiltonian bound}
+
+\subsection{Reason For Probability of Interception formula}
+\label{appednixsection: Reason for probability of interception}
+To argue why this is consider looking at just the integer points on the graph first,
+then by looking whether it is best to return via the ``left return'' or a ``right return'', that is the shortest time to the next return along the oscillation. The time/distance to return via the left motion, i.e through $1$, is $2(i-1)$ and the time/distance to return via the right motion, i.e through $c$ and the set of $*$'s, is $2(n+k-(i-1))=2(n+k+1-i)$. So the categories fall when $2(i-1) < 2(n+k+i-1) , 2(i-1)=2(n+k+1-i) , \text{ and } 2(i-1) > 2(n+k+1-i)$. These decide the boundaries and they return with these distances.
+
+Therefore the patroller catches the $m$ initially and then either another $t$ or $m$ attacks on the return, where $t$ is the time to next return (either $2(i-1)$ or $2(n+k+1-i)$). This means that the patroller catches $\min(m+t,2m)$ attacks and hence the probability of interception is $\frac{\min(m+t,2m)}{2(n+k)}$ as they cycle is of length $2(n+k)$ and the number lies in $\min(m+t,2m)$ of these.
+
+For $c$ consider that it catches $m$ attacks initially and is returned to $n-1$ times each at a distance/time of $2$ apart, meaning it gains $t=2$ or $m$ attacks $n-1$ attacks. Hence it intercepts $\min(m+2(n-1),nm)$ out the cycle length of $2(n+k)$.
+
+Finally $*$ nodes are easy as they are they are not returned to in a single cycle, hence they intersect $m$ out the possible $2(n+k)$.
+
+\subsection{Naive Improvement Complete analysis}
+\label{appendix:Naiveanalysis}
+\begin{enumerate}
+\item If $M= \emptyset, R= \emptyset$ then $C_{min} (\alpha)=\min \{ C_{min}^{L} , C_{min}^{S} \}=\min \{ Pw(1)+q_{L} , Pw(*)+q_{S} \}=P\frac{m}{2(n+k)} + \min \{ q_{L}, q_{S} \}$. As the Patroller wishes to select $q_{L},q_{S}$ to maximize this probability, the problem becomes 
+$$\begin{array}{cc}
+\text{Maximize} &(1-q_{L}-(n-1)q_{S}) \frac{m}{2(n+k)}+\min \{ q_{L}, q_{S}  \} \\
+\text{Subject to } & q_{L}+(n-1)q_{S} \leq 1 \text{  (Probability sum constraint)} \\
+     & q_{L},q_{S} \geq 0 \\
+\end{array} $$
+Meaning that as due to the symmetry of $q_{L},q_{S}$ we must have that $q_{L}=q_{S}$ which means improvement is only possible if $2(n+k)-nm \geq 0$ , then set $q_{L}=q_{S}=\frac{1}{n}$. Meaning $P=0,Q_{L}=\frac{1}{n},Q_{R}=\frac{n-1}{n}$ and giving a lower bound $V \geq \frac{1}{n}$.
+
+\item If $M \neq \emptyset,R=\emptyset$ then $C_{min} (\alpha)=\min \{ C_{min}^{L} ,C_{min}^{M}, C_{min}^{S} \}=\min \{ Pw(1)+q_{L} ,Pw(\floor{\frac{m}{2}+2}), Pw(*)+q_{S} \}=P\frac{m}{2(n+k)} + \min \{ q_{L}, P \frac{m}{2(n+k)} , q_{S} \}$. As the Patroller wishes to select $q_{L},q_{S}$ to maximize this probability, the problem becomes
+$$\begin{array}{cc}
+\text{Maximize} &(1-q_{L}-q_{S}) \frac{m}{2(n+k)}+\min \{ q_{L},(1-q_{L}-(n-1)q_{S})\frac{m}{2(n+k)}, q_{S}  \} \\
+\text{Subject to } & q_{L}+(n-1)q_{S} \leq 1 \text{  (Probability sum constraint)} \\
+     & q_{L},q_{S} \geq 0 \\
+\end{array} $$ 
+Meaning that as due to the symmetry of $q_{L},q_{S}$ we must have that $q_{L}=q_{S}$, with improvement only possible if $2(n+k)-nm \geq 0$ , which means we seek to maximize $(1-nq_{L}) \frac{m}{2(n+k)}+\min \{ q_{L},(1-nq_{L})\frac{m}{2(n+k)} \}$ giving $q_{L}=\frac{m}{2(n+k)+nm}$ (as one is then decreasing in $q_{L}$ and one is increasing in $q_{L}$). Meaning $P=\frac{2(n+k)}{2(n+k)+mn},Q_{L}=\frac{m}{2(n+k)+mn},Q_{S}=\frac{m(n-1)}{2(n+k)+mn}$ and giving a lower bound $V \geq \frac{2m}{2(n+k)+mn}$
+
+\item If $M \neq \emptyset,R \neq \emptyset$ then $C_{min} (\alpha)=\min \{ C_{min}^{L} ,C_{min}^{M}, C_{min}^{R}, C_{min}^{S} \}=\min \{ Pw(1)+q_{L} ,Pw(\floor{\frac{m}{2}+2}), Pw(k+1)+q_{S}, Pw(*)+q_{S} \}=P\frac{m}{2(n+k)} + \min \{ q_{L}, P \frac{m}{2(n+k)} , q_{S} \}$. Now was $Pw(k+1) +q_{S} \geq PW(*)+q_{S}$, we can ignore this element (meaning here it does not matter if $R$ is empty or not).
+As the Patroller wishes to select $q_{L},q_{S}$ to maximize this probability, the problem becomes
+$$\begin{array}{cc}
+\text{Maximize} &(1-q_{L}-(n-1)q_{S}) \frac{m}{2(n+k)}+\min \{ q_{L},(1-q_{L}-(n-1)q_{S})\frac{m}{2(n+k)}, q_{S}  \} \\
+\text{Subject to } & q_{L}+(n-1)q_{S} \leq 1 \text{  (Probability sum constraint)} \\
+     & q_{L},q_{S} \geq 0 \\
+\end{array} $$
+Meaning that as due to the symmetry of $q_{L},q_{S}$ we must have that $q_{L}=q_{S}$, with improvement only possible if $2(n+k)-nm \geq 0$ , which means we seek to maximize $(1-nq_{L}) \frac{m}{2(n+k)}+\min \{ q_{L},(1-nq_{L})\frac{m}{2(n+k)} \}$ giving $q_{L}=\frac{m}{2(n+k)+nm}$ (as one is then decreasing in $q_{L}$ and one is increasing in $q_{L}$). Meaning $P=\frac{2(n+k)}{2(n+k)+mn},Q_{L}=\frac{m}{2(n+k)+mn},Q_{S}=\frac{m(n-1)}{2(n+k)+mn}$ and giving a lower bound $V \geq \frac{2m}{2(n+k)+mn}$
+
+\end{enumerate}
+
+\subsection{Combinatorial Improvement Complete analysis}
+\label{appendix:Choosinganalysis}
+\begin{enumerate}
+\item If $M= \emptyset , R= \emptyset$ then $C_{min} (\beta_{2})=\min \{ C_{min}^{L} , C_{min}^{S} \}= \min \{ Pw(1)+q_{L} , Pw(*)+q_{S} \}=P\frac{m}{2(n+k)} + \min \{ q_{L} , q_{S} \} $. As the patroller wishes to select $q_{L},q_{S}$ to maximize this probability the problem becomes
+$$\begin{array}{cc}
+\text{Maximize} &(1-q_{L}-\frac{n-1}{\floor{\frac{m}{2}}}q_{S}) \frac{m}{2(n+k)}+\min \{ q_{L}, q_{S}  \} \\
+\text{Subject to } & q_{L}+\frac{n-1}{\floor{\frac{m}{2}}}q_{S} \leq 1 \text{  (Probability sum constraint)} \\
+     & q_{L},q_{S} \geq 0 \\
+\end{array} $$
+Meaning that due to the symmetry of $q_{L},q_{S}$ we must have that $q_{L}=q_{S}$, which means that improvement is only possible if $2(n+k)- m(1+\frac{n-1}{\floor{\frac{m}{2}}}) \geq 0$. Then setting $q_{L}=q_{S}=\frac{\floor{\frac{m}{2}}}{\floor{\frac{m}{2}} +n-1}$. Meaning $P=0, Q_{L}=\frac{\floor{\frac{m}{2}}}{\floor{\frac{m}{2}} +n-1} , Q_{S}=\frac{n-1}{\floor{\frac{m}{2}} +n-1}$ and giving a lower bound of $V \geq \frac{\floor{\frac{m}{2}}}{\floor{\frac{m}{2}} +n-1}$
+
+\item If $M \neq \emptyset , R= \emptyset$ then $C_{min} (\beta_{2})=\min \{ C_{min}^{L} , C_{min}^{M} , C_{min}^{S} \}=\min \{Pw(1)+q_{L}, Pw(\floor{\frac{m}{2}}+2) , Pw(*)+q_{S} \}=P \frac{m}{2(n+k)} + \min \{q_{L}, P \frac{m}{2(n+k) , q_{S}} $. As the patroller wishes to select $q_{L},q_{S}$ to maximize this probability the problem becomes
+$$\begin{array}{cc}
+\text{Maximize} & (1-q_{L}-\frac{n-1}{\floor{\frac{m}{2}}}q_{S}) \frac{m}{2(n+k)} + \min \{q_{L}, (1-q_{L}-\frac{n-1}{\floor{\frac{m}{2}}}q_{S}) \frac{m}{2(n+k)} , q_{S} \}\\
+\text{Subject to } & q_{L}+\frac{n-1}{\floor{\frac{m}{2}}}q_{S} \leq 1 \text{  (Probability sum constraint)} \\
+     & q_{L},q_{S} \geq 0 \\
+\end{array} $$
+Meaning that due to symmetry of $q_{L},q_{S}$ we must have that $q_{L}=q_{S}$, which means that the improvement is only possible if $2(n+k)- m(1+\frac{n-1}{\floor{\frac{m}{2}}}) \geq 0$. Then setting $q_{L}=q_{S}$ means we must maximize $(1-(1+\frac{n-1}{\floor{\frac{m}{2}}}q_{L}) \frac{m}{2(n+k)} + \min \{q_{L}, 1-(1+\frac{n-1}{\floor{\frac{m}{2}}}q_{L}) \frac{m}{2(n+k)}\}$ giving $q_{L}=\frac{m}{2(n+k)+m(1+\frac{n-1}{\floor{\frac{m}{2}}}}$ (as one is increasing in $q_{L}$ and one is decreasing in $q_{L}$). Meaning $P=\frac{2(n+k)}{2(n+k)+m(1+\frac{n-1}{\floor{\frac{m}{2}}})}, Q_{L}=\frac{m}{2(n+k)+m(1+\frac{n-1}{\floor{\frac{m}{2}}})}, Q_{S}=\frac{m(n-1)}{\floor{\frac{m}{2}}(2(n+k)+m(1+\frac{n-1}{\floor{\frac{m}{2}}}))}$ and giving a lower bound of $V \geq \frac{2m}{2(n+k)+m(1+\frac{n-1}{\floor{\frac{m}{2}}})}$
+
+\item If $M \neq \emptyset , R \neq \emptyset$ then $C_{min} (\beta_{1})=\min \{ C_{min}^{L} , C_{min}^{M} , C_{min}^{R}, C_{min}^{S} \}=\min \{ Pw(1)+q_{L}, Pw(\floor{\frac{m}{2}}+2), Pw(k+1)+q_{S}, Pw(*)+q_{S} \}=\min \{ Pw(1)+q_{L}, Pw(\floor{\frac{m}{2}}+2), Pw(*)+q_{S} \}=P \frac{m}{2(n+k)} + \min \{ q_{L}, P \frac{m}{2(n+k)} , q_{S}  \}$ As $Pw(k+1)+q_{S} \geq Pw(1)+q_{S}$, we can ignore the element (meaning here it does not matter if $R$ is empty or not).As the patroller wishes to select $q_{L},q_{S}$ to maximize this probability the problem becomes
+$$\begin{array}{cc}
+\text{Maximize} & (1-q_{L}-q_{S}) \frac{m}{2(n+k)} + \min \{ q_{L}, (1-q_{L}-q_{S}) \frac{m}{2(n+k)} , q_{S} \}\\
+\text{Subject to } & q_{L}+q_{S} \leq 1 \text{  (Probability sum constraint)} \\
+     & q_{L},q_{S} \geq 0 \\
+\end{array} $$
+Meaning that due to symmetry of $q_{L},q_{S}$ we must have that $q_{L}=q_{S}$, which means that the improvement is only possible if $n+k-m \geq 0$. Then setting $q_{L}=q_{S}$ means we must maximize $(1-2q_{L})\frac{m}{2(n+k)} + \min \{ q_{L} , (1-2q_{L}) \frac{m}{2(n+k)} \}$ giving $q_{L}=\frac{m}{2(n+k+m)}$ (as one is increasing in $q_{L}$ and one is decreasing in $q_{S}$). Meaning $P=\frac{2(n+k)}{2(n+k+m)},Q_{L}=\frac{m}{2(n+k+m)},Q_{S}=\frac{m}{2(n+k+m)}$ and giving a lower bound of $V \geq \frac{2m}{2(n+k+m)}$.
+\end{enumerate}
 
 \section{Proof's}
 
@@ -2299,6 +2615,27 @@ $$\frac{1}{2(i+1)} \times \frac{i+1}{\denominator} + \frac{2i+1}{2 \left( \denom
 So if $m \geq 2(i+1)$ then we get $\frac{m}{2 \left( \denominator \right)}$ and if $m < 2(i+1)$ then we get $\frac{i+1}{\denominator}$. 
 Hence if $m \geq 2(k_{max}+1)$ then we get $\frac{m}{2 \left( \denominator \right)}$ and if $m < 2(k_{max})$ we get $\frac{k+1}{\denominator}$.
 \end{proof}
+
+
+\subsection{Stage-1-Step-point lemma proof}
+\label{Stage-1-Step-point lemma proof}
+We will get both bounds, first the patrollers bound is simple by applying the combinatorial startegy
+\begin{proof}
+We will first note that $m=2k+2-4i \leq 2(n-1)$ statisfies the condition for the improvement to be possible. We are in the case with $M \neq \emptyset$ and $R = \emptyset$ and $m=2k+2-4i \implies m(1+\frac{n-1}{\floor{\frac{m}{2}}}) \leq 2(n+k) \iff 2k-4i \leq 2k \iff i \geq 0$.
+
+So we get the bound $V \geq \frac{2(2k+2-4i)}{2(n+k)+(2k+2-4i)(1+\frac{n-1}{k+1-3i})=\frac{2(2k+2-4i)}{2n+2k+2k+2-4i+2(n-1)}}=\frac{m}{2(n+k-i)}$ as required 
+\end{proof}
+
+Now we will propose the `simplification' to $S_{n+1}^{k-2i,i-1}$
+\begin{proof}
+The simplification mapping is:
+
+
+Now we note that at $m=2k+2-4i \geq 2(k_{max}+1)$ as $2(k_{max}+1)$ is either $2(k-2i+1)=2k+2-4i$ or $2(i-1+1)=2i \leq 2k+2-4i$(as $i \leq \floor{\frac{k+1}{3}} \implies 6i \geq 2k+2$). 
+
+This gives a bound $V \leq V(S_{n+1})= \frac{m}{2(n+1+k-2i+i-1)}=\frac{m}{2(n+k-i)}$
+\end{proof}
+
 
 
 \end{document}

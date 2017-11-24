@@ -35,13 +35,18 @@
 \BOOKMARK [2][-]{subsection.8.3}{solution for m 2\(kmax+1\)}{section.8}% 35
 \BOOKMARK [1][-]{section.9}{Dual star graphs}{}% 36
 \BOOKMARK [1][-]{section.10}{Linked Star graphs}{}% 37
-\BOOKMARK [1][-]{section*.17}{Appendices}{}% 38
+\BOOKMARK [1][-]{section*.22}{Appendices}{}% 38
 \BOOKMARK [1][-]{appendix.A}{Graph Definitions}{}% 39
 \BOOKMARK [1][-]{appendix.B}{Old Statements about Old diametric}{}% 40
-\BOOKMARK [1][-]{appendix.C}{Proof's}{}% 41
-\BOOKMARK [2][-]{subsection.C.1}{Alternating Random Hamiltonian proof}{appendix.C}% 42
-\BOOKMARK [2][-]{subsection.C.2}{Condition on T for old diametric proof}{appendix.C}% 43
-\BOOKMARK [2][-]{subsection.C.3}{Time-limited diametric attack proof}{appendix.C}% 44
-\BOOKMARK [2][-]{subsection.C.4}{Polygonal attack proof}{appendix.C}% 45
-\BOOKMARK [2][-]{subsection.C.5}{Time-delayed attack proof}{appendix.C}% 46
-\BOOKMARK [2][-]{subsection.C.6}{Type-delayed attack proof}{appendix.C}% 47
+\BOOKMARK [1][-]{appendix.C}{Improvemening Hamiltonian bound}{}% 41
+\BOOKMARK [2][-]{subsection.C.1}{Reason For Probability of Interception formula}{appendix.C}% 42
+\BOOKMARK [2][-]{subsection.C.2}{Naive Improvement Complete analysis}{appendix.C}% 43
+\BOOKMARK [2][-]{subsection.C.3}{Combinatorial Improvement Complete analysis}{appendix.C}% 44
+\BOOKMARK [1][-]{appendix.D}{Proof's}{}% 45
+\BOOKMARK [2][-]{subsection.D.1}{Alternating Random Hamiltonian proof}{appendix.D}% 46
+\BOOKMARK [2][-]{subsection.D.2}{Condition on T for old diametric proof}{appendix.D}% 47
+\BOOKMARK [2][-]{subsection.D.3}{Time-limited diametric attack proof}{appendix.D}% 48
+\BOOKMARK [2][-]{subsection.D.4}{Polygonal attack proof}{appendix.D}% 49
+\BOOKMARK [2][-]{subsection.D.5}{Time-delayed attack proof}{appendix.D}% 50
+\BOOKMARK [2][-]{subsection.D.6}{Type-delayed attack proof}{appendix.D}% 51
+\BOOKMARK [2][-]{subsection.D.7}{Stage-1-Step-point lemma proof}{appendix.D}% 52
