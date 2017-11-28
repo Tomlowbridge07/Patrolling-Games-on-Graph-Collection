@@ -1216,7 +1216,7 @@ The attacker should augment their attacks to simply place only $2(k-1)$ at the e
 
 If $m < 2(n-1)$ then $R= \emptyset$ and we can use the combinatorial bound to get $V \geq \frac{2m}{2(n+k)+m(1+\frac{n-1}{\floor{\frac{m}{2}}}}=\frac{4k-4}{2(n+k)+(2k-2)(1+\frac{n-1}{k-1}}=\frac{4k-4}{2(n+k)+(2k-2+2(n-1))}=\frac{2k-2}{n+k+k+n-2}=\frac{m}{2(n+k-1)}$. An alternative here is decomposition into $S_{n-1}$ and $L_{k+1}$ which should give the same bound.
 
-The attacker should augment their attacks to place only $2(k-1)$ at the elongated node and $2n$ time centered around the centre ($n$ nodes, so one is along the elongated branch). This will give a bound of $V \leq \frac{m}{2(k-1)+2n}=\frac{m}{2(n+k-1)}$.
+The attacker should augment their attacks to place only $2(k-1)$ at the elongated node and $2n$ time centred around the centre ($n$ nodes, so one is along the elongated branch). This will give a bound of $V \leq \frac{m}{2(k-1)+2n}=\frac{m}{2(n+k-1)}$.
 
 
 \begin{note}
@@ -1272,7 +1272,109 @@ The graph $S_{10,9}$ is biparite with $|B|=9+5=14$ , so we get $V \leq \frac{4}{
 \end{note}
 
 The question is can the attacker or patroller do better ?
-I think that the patroller can do better. The question is how ? A possible
+I think that the patroller can do better. The question is how ?
+
+\begin{note}
+Our current step points limit us to at best $m=\frac{2}{3}(k+1)$
+\end{note}
+
+\subsection{Various Stage-step points}
+As previously discussed we could consider more `centres', we shall construct a variety of points below our current limit of $\frac{2}{3}(k+1)$, we shall work our way up
+
+For $m=2$, we have already used this idea to get the answer.
+
+Now consider $m=4$, what possible constructions are their, well the question is how should the branch be split up, we have $k+1$ to either pick to be centres, points along a branch or an attack point. Now we look from the left construction of placing $4$ attacks, then we have $k-2$ nodes left between two centres, now we need to get the most out of this space using only $2$ and $4$ attacks. However in this case they use the same amount of space.
+
+Infact this is general. Hence we will only every use $2$ type attacks for the rest of the line. Hence we use $2(n-1)+4+2\ceil{\frac{k-2}{2}}$ attacks and guarantee catching at most $m=4$ giving $V \leq \frac{4}{2n+k}$ (if $k$ is even) or $V \leq \frac{4}{2n+k+1}$ (if $k$ is odd)
+
+More generally for $m$ even we get $2(n-1)+m+2\ceil{\frac{k-\frac{m}{2}}{2}}$ and catch at most $m$ giving us a bound of $V \leq \frac{m}{2n-2+m+k-\frac{m}{2}}=\frac{2m}{4n+2k+m-4}$ (if $k-\frac{m}{2}$ is even) or $V \leq \frac{m}{2n-2+m+k-\frac{m}{2}+1}=\frac{2m}{4n+2k+m-2}$ (if $k-\frac{m}{2}$ is odd).
+
+However it may be possible that if $k-\frac{m}{2}$ is even then we can make an additional single attack in the 'remainder', we suggest $V \leq \frac{2m}{4n+2k+m-2}$ for any $m$ even
+
+\begin{note}
+This argument agrees with the Stage1-step-points as we are using a particular step phase for $m$.
+\end{note}
+
+We now look at even $m \leq 2(n+k)$ and the combinatorial improvement (assuming $R \neq \emptyset$ , i.e $m \leq 2(n-1)$)
+then $V \geq \frac{2m}{2(n+k)+m(1+\frac{n-1}{\floor{\frac{m}{2}}})}=\frac{2m}{2(n+k)+m+2(n-1)}=\frac{2m}{4n+2k+m-2}$. This gives a match when $m$ is even and $k-\frac{m}{2}$ is odd.
+
+For $m$ odd we get $2(n-1)+m+2\ceil{\frac{k-\frac{m+1}{2}}{2}}$ and catch at most $m$ giving a bound of $V \leq \frac{m}{2n-2+m+k-\frac{m+1}{2}}=\frac{2m}{4n+2k+m-5}$ (if $k-\frac{m+1}{2}$ is even) and $V \leq \frac{m}{2n-2+m+k-\frac{m+1}{2}+1}=\frac{2m}{4n+2k+m-3}$ (if $k-\frac{m+1}{2}$ is odd).
+
+
+\begin{note}
+For a fixed $k$ as we go through a cycle for $m$.
+\end{note}
+
+\begin{myfigure}
+\begin{center}
+\begin{tikzpicture}[-,auto,node distance=1.5cm,
+                    thick,main node/.style={rounded rectangle,fill=white,draw,font=\sffamily\Large\bfseries}]
+                 
+ \node[main node] (1) at (0,0) {$m$ even, $k-\frac{m}{2}$ even};
+ 
+ \node (value1) at (0,-0.8) {$V \leq \frac{2m}{4n+2k+m-4}$}; 
+ 
+ \node[main node] (2) at (4,-2) {$m-1$ odd, $k-\frac{(m-1)+1}{2}$ even};
+ 
+ \node (value2) at (5.5,-2.8) {$V \leq \frac{2(m-1)}{4n+2k+m-6}$};
+ 
+ \node[main node] (3) at (0,-4) {$m-2$ even, $k-\frac{m-2}{2}$ odd};
+ 
+ \node (value2) at (0,-4.8) {$V \leq \frac{2(m-2)}{4n+2k+m-4}$}; 
+ 
+ \node[main node] (4) at (-4,-2) {$m-3$ odd, $k-\frac{(m-3)+1}{2}$ odd};
+ 
+ \node (value2) at (-5.5,-2.8) {$V \leq \frac{2(m-3)}{4n+2k+m-6}$}; 
+ 
+ 
+ 
+  \path[->,bend left,every node/.style={font=\sffamily}]
+    (1) edge (2)
+    (2) edge (3)
+    (3) edge (4)
+    (4) edge (1);
+                    
+\end{tikzpicture}                    
+\end{center}
+\caption{Cycle of $m$ decreasing}
+\end{myfigure}
+
+The method seems to give us a pattern for the denominator which is $4$ periodic but inside the period alternates between 2 values (and does `better than expected' when $m$ is even).
+
+\begin{myfigure}
+\begin{center}
+\input{Images/UpperBoundPlot(n=6,k=10).tex}
+\end{center}
+\caption{A plot of the UpperBound and the Combinatorial Improvement bound for $S_{6}^{10}$}
+\end{myfigure}
+
+We can notice the other even $m$ seems to be close to the Combinatorial improvement but is slightly too high, this could suggest that we can make a further improvement on the combinatorial (Though logistically this seems hard) or we can perform a better attack (This may require something like on the line). We will go to this type of analysis now
+
+
+\subsection{Lower Line type attacks}
+Looking at $S_{7}^{5}$
+We note that by the above we know the solution for all even $m$ bar $6,10$ in the graph. We present a solution for $m=6$ in the form of a grid
+
+\begin{myfigure}
+\begin{center}
+\begin{tikzpicture}[-,auto,node distance=1.5cm,
+                    thick,main node/.style={circle,fill=white,draw,font=\sffamily\Large\bfseries,minimum size=1cm}]
+ \foreach \x in {0,...,9}
+    \foreach \y in {0,...,8} 
+       {\pgfmathtruncatemacro{\label}{\x - 5 *  \y +21}
+       \node [main node]  (\x\y) at (1.5*\x,1.5*\y) {\x\y};} 
+
+  \foreach \x in {0,...,8}
+   \foreach \y in {0,...,7}
+    \pgfmathtruncatemacro{\za}{\y+1}
+    \pgfmathtruncatemacro{\zb}{\x+1}
+      \draw (\x\y)--(\x\za) (\x\y)--(\zb\y) ;
+                   
+                    
+\end{tikzpicture}
+\end{center}
+\caption{Grid solution of $m=6$ on $S_{7}^{5}$}
+\end{myfigure}
 
 
 \section{General star graph}
