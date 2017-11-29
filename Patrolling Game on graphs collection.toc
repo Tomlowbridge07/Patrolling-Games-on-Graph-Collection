@@ -31,13 +31,14 @@
 \contentsline {subsection}{\numberline {7.8}Solution for certain $m$ step-points}{23}{subsection.7.8}
 \contentsline {subsection}{\numberline {7.9}Various Stage-step points}{24}{subsection.7.9}
 \contentsline {subsection}{\numberline {7.10}Lower Line type attacks}{26}{subsection.7.10}
-\contentsline {section}{\numberline {8}General star graph}{26}{section.8}
-\contentsline {subsection}{\numberline {8.1}Introduction}{26}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Basic Analysis}{28}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}solution for $m \geq 2(k_{max}+1)$}{30}{subsection.8.3}
-\contentsline {section}{\numberline {9}Dual star graphs}{31}{section.9}
-\contentsline {section}{\numberline {10}Linked Star graphs}{31}{section.10}
-\contentsline {section}{Appendices}{i}{section*.25}
+\contentsline {subsection}{\numberline {7.11}Extending even solution}{28}{subsection.7.11}
+\contentsline {section}{\numberline {8}General star graph}{28}{section.8}
+\contentsline {subsection}{\numberline {8.1}Introduction}{28}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Basic Analysis}{31}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}solution for $m \geq 2(k_{max}+1)$}{32}{subsection.8.3}
+\contentsline {section}{\numberline {9}Dual star graphs}{34}{section.9}
+\contentsline {section}{\numberline {10}Linked Star graphs}{34}{section.10}
+\contentsline {section}{Appendices}{i}{section*.28}
 \contentsline {section}{\numberline {A}Graph Definitions}{i}{appendix.A}
 \contentsline {section}{\numberline {B}Old Statements about Old diametric}{iii}{appendix.B}
 \contentsline {section}{\numberline {C}Improvemening Hamiltonian bound}{iv}{appendix.C}

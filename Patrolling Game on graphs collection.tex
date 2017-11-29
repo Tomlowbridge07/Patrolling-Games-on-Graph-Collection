@@ -1357,25 +1357,501 @@ We note that by the above we know the solution for all even $m$ bar $6,10$ in th
 
 \begin{myfigure}
 \begin{center}
-\begin{tikzpicture}[-,auto,node distance=1.5cm,
-                    thick,main node/.style={circle,fill=white,draw,font=\sffamily\Large\bfseries,minimum size=1cm}]
+\begin{tikzpicture}[-,auto,node distance=1cm,
+                    thick,main node/.style={circle,fill=white,draw,font=\sffamily\Large\bfseries,minimum size=0.5cm}]
  \foreach \x in {0,...,9}
-    \foreach \y in {0,...,8} 
+    \foreach \y in {0,...,7} 
        {\pgfmathtruncatemacro{\label}{\x - 5 *  \y +21}
-       \node [main node]  (\x\y) at (1.5*\x,1.5*\y) {\x\y};} 
+       \node [main node]  (\x\y) at (1.5*\x,1.5*\y) {};} 
 
   \foreach \x in {0,...,8}
-   \foreach \y in {0,...,7}
+   \foreach \y in {0,...,6}
     \pgfmathtruncatemacro{\za}{\y+1}
     \pgfmathtruncatemacro{\zb}{\x+1}
       \draw (\x\y)--(\x\za) (\x\y)--(\zb\y) ;
+      
+   \foreach \x in {0,...,8}
+    \pgfmathtruncatemacro{\zb}{\x+1}
+      \draw (\x7) -- (\zb7);
+      
+   \foreach \y in {0,...,6}
+     \pgfmathtruncatemacro{\za}{\y+1} 
+        \draw (9\y) -- (9\za);
+        
+        
+%Labeling to the sides
+  \foreach \y in {2,...,7}
+   \pgfmathtruncatemacro{\label}{8-\y}
+   \node[font=\sffamily\Large\bfseries] (Label\y) [shift={(-1,0)}] at (0\y) {\label};       
+   
+   \node[font=\sffamily\Large\bfseries] (Label) [shift={(-1,0)}] at (01) {c};
+   \node[font=\sffamily\Large\bfseries] (Label) [shift={(-1,0)}] at (00) {*};
+   
+   \node[font=\sffamily\Huge\bfseries] (Axis) [shift={(-2,0)},rotate=90] at (04) {Node};
+
+   \foreach \x in {0,...,9}
+    \node[font=\sffamily\Large\bfseries] (Timelabel\x) [shift={(0,-1)}] at (\x0) {\x};
+    
+   \node[font=\sffamily\Huge\bfseries] (Axis) [shift={(0,-2)}] at (40) {Time};
+    
+    
+%Adding in top attacks        
+   \node[main node,fill=gray!60] (07) at (07) {};    
+   \node[circle,draw,minimum size=0.8cm] (Attack1) at (07) {};
+   
+   \node[main node,fill=gray!60] (27) at (27) {};    
+   \node[circle,draw,minimum size=0.8cm] (Attack2) at (27) {};     
+   
+   \node[main node,fill=gray!60] (47) at (47) {};    
+   \node[circle,draw,minimum size=0.8cm] (Attack3) at (47) {};
+   
+   %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (07) {$2$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (17) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (27) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (37) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (47) {$6$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (57) {$6$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (67) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (77) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (87) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (97) {$2$}; 
+          
+   
+%Adding in middle attacks
+  \node[main node,fill=gray!60] (23) at (23) {};
+  \node[main node,fill=gray!60] (12) at (12) {};
+  \node[main node,fill=gray!60] (32) at (32) {};
+     
+    %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (23) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (33) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (43) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (53) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (63) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (73) {$1$};
+     
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (12) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (22) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (32) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (42) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (52) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (62) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (72) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (82) {$1$};   
+%Adding bottom attacks
+
+ \node[main node,fill=gray!60] (10) at (10) {};
+ \node[main node,fill=gray!60] (30) at (30) {};
+ 
+    %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (10) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (20) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (30) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (40) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (50) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (60) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (70) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (80) {$1$};        
+        
+                 
+%Some example lines drawn
+\begin{scope}[on background layer]
+\node (a)[shift={(-0.5,0.5)}] at (07) {};
+\node (b)[shift={(0.5,-0.5)}] at (70) {};
+\draw[color=red] (a) -- (b);
+
+\node (c)[shift={(-0.5,-0.5)}] at (10) {};
+\node (d)[shift={(0.5,0.5)}] at (94) {};
+\draw[color=blue] (c) -- (21) (21) -- (30) (30)--(41) (41) -- (50) (50)--(d);
+
+\end{scope}
+
                    
-                    
 \end{tikzpicture}
 \end{center}
-\caption{Grid solution of $m=6$ on $S_{7}^{5}$}
+\caption{Grid solution of $m=6$ on $S_{7}^{5}$ with two example paths}
 \end{myfigure}
 
+\begin{note}
+We note that a reflection is possible at the end $*$ and we still gain the number again (unlike usual)
+\end{note}
+
+This allows us to get $V(S_{7}^{5},m=6)=\frac{6}{21}$ (by combinatorial and this attack pattern).
+
+We could try to guess the solution for $m=10$ in $S_{7}^{5}$ using the same idea ? let's investigate, if it holds we wish to get the value of $V(S_{7}^{5},m=10)=\frac{10}{23}$ to match with the combinatorial improvement, however here $m=2k$ ,so the solution is known to give $V(S_{7}^{5},m=10)=\frac{10}{22}$ by decomposition into $S_{6}$ and $L_{6}$ and $10$ attacks at node $1$ and $12$ attacks at $*$ nodes (spaced accordingly).
+
+So perhaps we need to consider a bigger example, let us look at $S_{7}^{9}$ and again we look at $m=6$ first then we would want to get $V=\frac{6}{25}$, this would mean adapting our current attack to place $4$ more attacks, well this is infact due to having an additonal $4$ nodes along the line we guess we shouldn't have too much of an issue.
+
+\begin{myfigure}
+\centering
+\begin{tikzpicture}[-,auto,node distance=1cm,
+                    thick,main node/.style={circle,fill=white,draw,font=\sffamily\Large\bfseries,minimum size=0.5cm}]
+ \foreach \x in {0,...,9}
+    \foreach \y in {0,...,11} 
+       {\pgfmathtruncatemacro{\label}{\x - 5 *  \y +21}
+       \node [main node]  (\x\y) at (1.5*\x,1.5*\y) {};} 
+
+  \foreach \x in {0,...,8}
+   \foreach \y in {0,...,10}
+    \pgfmathtruncatemacro{\za}{\y+1}
+    \pgfmathtruncatemacro{\zb}{\x+1}
+      \draw (\x\y)--(\x\za) (\x\y)--(\zb\y) ;
+      
+   \foreach \x in {0,...,8}
+    \pgfmathtruncatemacro{\zb}{\x+1}
+      \draw (\x11) -- (\zb11);
+      
+   \foreach \y in {0,...,10}
+     \pgfmathtruncatemacro{\za}{\y+1} 
+        \draw (9\y) -- (9\za);
+        
+        
+%Labeling to the sides
+  \foreach \y in {2,...,11}
+   \pgfmathtruncatemacro{\label}{12-\y}
+   \node[font=\sffamily\Large\bfseries] (Label\y) [shift={(-1,0)}] at (0\y) {\label};       
+   
+   \node[font=\sffamily\Large\bfseries] (Label) [shift={(-1,0)}] at (01) {c};
+   \node[font=\sffamily\Large\bfseries] (Label) [shift={(-1,0)}] at (00) {*};
+   
+   \node[font=\sffamily\Huge\bfseries] (Axis) [shift={(-2,0)},rotate=90] at (04) {Node};
+
+   \foreach \x in {0,...,9}
+    \node[font=\sffamily\Large\bfseries] (Timelabel\x) [shift={(0,-1)}] at (\x0) {\x};
+    
+   \node[font=\sffamily\Huge\bfseries] (Axis) [shift={(0,-2)}] at (40) {Time};
+    
+    
+%Adding in top attacks        
+   \node[main node,fill=gray!60] (011) at (011) {};    
+   \node[circle,draw,minimum size=0.8cm] (Attack1) at (011) {};
+   
+   \node[main node,fill=gray!60] (211) at (211) {};    
+   \node[circle,draw,minimum size=0.8cm] (Attack2) at (211) {};     
+   
+   \node[main node,fill=gray!60] (411) at (411) {};    
+   \node[circle,draw,minimum size=0.8cm] (Attack3) at (411) {};
+   
+   %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (011) {$2$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (111) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (211) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (311) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (411) {$6$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (511) {$6$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (611) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (711) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (811) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (911) {$2$}; 
+          
+   
+%Adding in middle attacks
+
+
+
+  \node[main node,fill=gray!60] (27) at (27) {};
+  
+  \node[main node,fill=gray!60] (16) at (16) {};
+  \node[main node,fill=gray!60] (36) at (36) {};
+  
+  \node[main node,fill=gray!60] (14) at (14) {};
+  \node[main node,fill=gray!60] (34) at (34) {};
+  
+  \node[main node,fill=gray!60] (12) at (12) {};
+  \node[main node,fill=gray!60] (32) at (32) {};
+     
+    %Attack numbers
+    
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (27) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (37) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (47) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (57) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (67) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (77) {$1$};
+     
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (12) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (22) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (32) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (42) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (52) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (62) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (72) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (82) {$1$};
+    
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (14) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (24) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (34) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (44) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (54) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (64) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (74) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (84) {$1$};
+    
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (16) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (26) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (36) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (46) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (56) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (66) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (76) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (86) {$1$};
+    
+       
+%Adding bottom attacks
+
+ \node[main node,fill=gray!60] (10) at (10) {};
+ \node[main node,fill=gray!60] (30) at (30) {};
+ 
+    %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (10) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (20) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (30) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (40) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (50) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (60) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (70) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (80) {$1$};        
+        
+                 
+%Some example lines drawn
+\begin{scope}[on background layer]
+\node (a)[shift={(-0.5,0.5)}] at (011) {};
+\node (b)[shift={(0.5,-0.5)}] at (92) {};
+\draw[color=red] (a) -- (b);
+
+\node (c)[shift={(-0.5,-0.5)}] at (10) {};
+\node (d)[shift={(0.5,0.5)}] at (94) {};
+\draw[color=blue] (c) -- (21) (21) -- (30) (30)--(41) (41) -- (50) (50)--(d);
+
+\node (e) [shift={(0.5,0.5)}] at(98) {};
+\draw[color=green] (c) -- (e);
+
+\end{scope}
+
+                   
+\end{tikzpicture}
+\caption{Grid solution of $m=6$ on $S_{7}^{9}$ with three example paths}
+\end{myfigure}
+
+We have the solution $V(S_{7}^{9},m=6)=\frac{6}{25}$. Now we want to see if this logic applies to $m=10$, by the combinatorial bound we expect that $V=\frac{10}{27}$ that is to place $2$ more attacks.
+
+\begin{myfigure}
+\resizebox{1\linewidth}{!}{
+\begin{tikzpicture}[-,auto,node distance=1cm,
+                    thick,main node/.style={circle,fill=white,draw,font=\sffamily\Large\bfseries,minimum size=0.7cm}]
+ \foreach \x in {0,...,17}
+    \foreach \y in {0,...,11} 
+       {\pgfmathtruncatemacro{\label}{\x - 5 *  \y +21}
+       \node [main node]  (\x0\y) at (1.5*\x,1.5*\y) {};} 
+
+  \foreach \x in {0,...,16}
+   \foreach \y in {0,...,10}
+    \pgfmathtruncatemacro{\za}{\y+1}
+    \pgfmathtruncatemacro{\zb}{\x+1}
+      \draw (\x0\y)--(\x0\za) (\x0\y)--(\zb0\y) ;
+      
+   \foreach \x in {0,...,16}
+    \pgfmathtruncatemacro{\zb}{\x+1}
+      \draw (\x011) -- (\zb011);
+      
+   \foreach \y in {0,...,10}
+     \pgfmathtruncatemacro{\za}{\y+1} 
+        \draw (170\y) -- (170\za);
+        
+        
+%Labeling to the sides
+  \foreach \y in {2,...,11}
+   \pgfmathtruncatemacro{\label}{12-\y}
+   \node[font=\sffamily\Large\bfseries] (Label\y) [shift={(-1,0)}] at (00\y) {\label};       
+   
+   \node[font=\sffamily\Large\bfseries] (Label) [shift={(-1,0)}] at (001) {c};
+   \node[font=\sffamily\Large\bfseries] (Label) [shift={(-1,0)}] at (000) {*};
+   
+   \node[font=\sffamily\Huge\bfseries] (Axis) [shift={(-2,0)},rotate=90] at (004) {Node};
+
+   \foreach \x in {0,...,17}
+    \node[font=\sffamily\Large\bfseries] (Timelabel\x) [shift={(0,-1)}] at (\x00) {\x};
+    
+   \node[font=\sffamily\Huge\bfseries] (Axis) [shift={(0,-2)}] at (400) {Time};
+    
+    
+%Adding in top attacks        
+   \node[main node,fill=gray!60] (0011) at (0011) {};    
+   \node[circle,draw,minimum size=1cm] (Attack1) at (0011) {};
+   
+   \node[main node,fill=gray!60] (2011) at (2011) {};    
+   \node[circle,draw,minimum size=1cm] (Attack2) at (2011) {};     
+   
+   \node[main node,fill=gray!60] (4011) at (4011) {};    
+   \node[circle,draw,minimum size=1cm] (Attack3) at (4011) {};
+
+   \node[main node,fill=gray!60] (6011) at (6011) {};    
+   \node[circle,draw,minimum size=1cm] (Attack3) at (6011) {};
+
+   \node[main node,fill=gray!60] (8011) at (8011) {};    
+   \node[circle,draw,minimum size=1cm] (Attack3) at (8011) {};      
+   
+   %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (0011) {$2$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1011) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (2011) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (3011) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (4011) {$6$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (5011) {$6$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (6011) {$8$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (7011) {$8$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (8011) {$10$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (9011) {$10$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (10011) {$8$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (11011) {$8$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (12011) {$6$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (13011) {$6$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (14011) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (15011) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (16011) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (17011) {$2$};     
+          
+   
+%Adding in middle attacks
+
+
+
+  \node[main node,fill=gray!60] (405) at (405) {};
+
+  \node[main node,fill=gray!60] (304) at (304) {};
+  \node[main node,fill=gray!60] (504) at (504) {};
+  
+  \node[main node,fill=gray!60] (302) at (302) {};
+  \node[main node,fill=gray!60] (502) at (502) {};
+     
+    %Attack numbers
+    
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (405) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (505) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (605) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (705) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (805) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (905) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1005) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1105) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1205) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1305) {$1$};        
+
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (304) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (404) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (504) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (604) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (704) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (804) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (904) {$2$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1004) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1104) {$2$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1204) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1304) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1404) {$1$};
+    
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (302) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (402) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (502) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (602) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (702) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (802) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (902) {$2$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1002) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1102) {$2$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1202) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1302) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1402) {$1$};    
+    
+       
+%Adding bottom attacks
+
+ \node[main node,fill=gray!60] (300) at (300) {};
+ \node[main node,fill=gray!60] (500) at (500) {};
+ 
+    %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (300) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (400) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (500) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (600) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (700) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (800) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (900) {$2$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1000) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1100) {$2$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1200) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1300) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (1400) {$1$};      
+        
+                 
+%Some example lines drawn
+\begin{scope}[on background layer]
+\node (a)[shift={(-0.5,0.5)}] at (0011) {};
+\node (b)[shift={(0.5,-0.5)}] at (1300) {};
+\draw[color=red] (a) -- (1100) (1100)--(1201) (1201)--(b) ;
+
+\node (c)[shift={(-0.5,-0.5)}] at (300) {};
+\node (d)[shift={(0.5,0.5)}] at (16011) {};
+\draw[color=blue] (c)--(401) (401)--(500) (500)--(d);
+
+\node (e) [shift={(0.5,0.5)}] at(14011) {};
+\draw[color=green] (c) -- (e);
+
+\end{scope}
+
+                   
+\end{tikzpicture}
+}
+\caption{Grid solution of $m=10$ on $S_{7}^{9}$ with three example paths}
+\end{myfigure}
+
+As expected.
+
+Hence we need to perform a generalisation to give us the answer when $m \leq 2(n-1)$ for all even $m$ (expect when $m=2k$). 
+We generalise this attack,when $m$ is in the other version of the even cycle (i.e with $k-\frac{m}{2}$ even), by making $m+1+2a$ where $a=n-1+\ceil{\frac{k+1-(\frac{m}{2}+1)-1}{2}}=n-1+\frac{k-\frac{m}{2}}{2}$ as $k-\frac{m}{2}-1$ is odd so  $a=\frac{2n-2+k-\frac{m}{2}}{2}$ so we make in total $m+1+2n-2+k-\frac{m}{2}=2n+k+\frac{m}{2}-1$. So we get $V \leq \frac{m}{2n+k+\frac{m}{2}+1}=\frac{2m}{2(n+k)+m+2(n-1)}=\frac{2m}{2(n+k)+m(1+\frac{n-1}{\frac{m}{2}})}$, hence matching with the combinatorial bound.
+
+Hence a solution to all even $m \leq 2(n-1)$ can be found. Hence our cycle look like this
+
+\begin{myfigure}
+\begin{center}
+\begin{tikzpicture}[-,auto,node distance=1.5cm,
+                    thick,main node/.style={rounded rectangle,fill=white,draw,font=\sffamily\Large\bfseries}]
+                 
+ \node[main node,fill=blue!50] (1) at (0,0) {$m$ even, $k-\frac{m}{2}$ even};
+ 
+ \node (value1) at (0,-0.8) {$V = \frac{2m}{4n+2k+m-4}$}; 
+ 
+ \node[main node,fill=red!50] (2) at (4,-2) {$m-1$ odd, $k-\frac{(m-1)+1}{2}$ even};
+ 
+ \node (value2) at (5.5,-2.8) {$V \leq \frac{2(m-1)}{4n+2k+m-6}$};
+ 
+ \node[main node,fill=blue!50] (3) at (0,-4) {$m-2$ even, $k-\frac{m-2}{2}$ odd};
+ 
+ \node (value2) at (0,-4.8) {$V = \frac{2(m-2)}{4n+2k+m-4}$}; 
+ 
+ \node[main node,fill=red!50] (4) at (-4,-2) {$m-3$ odd, $k-\frac{(m-3)+1}{2}$ odd};
+ 
+ \node (value2) at (-5.5,-2.8) {$V \leq \frac{2(m-3)}{4n+2k+m-6}$}; 
+ 
+ 
+ 
+  \path[->,bend left,every node/.style={font=\sffamily}]
+    (1) edge (2)
+    (2) edge (3)
+    (3) edge (4)
+    (4) edge (1);
+                    
+\end{tikzpicture}                    
+\end{center}
+\caption{Cycle of $m$ decreasing}
+\end{myfigure}
+
+
+\subsection{Extending even solution}
+The question is now is it possible to extend the even solution as described above when $m \leq 2(n-1)$ is odd. We note that in the cycle we can see the just look at making $1$ less attacks to give an attackers bound. Let $m=m'-1$ then we assume we can just simply take one attack away from node $1$ attacks and we are away.
+
+Let us consider such a strategy, then 
 
 \section{General star graph}
 

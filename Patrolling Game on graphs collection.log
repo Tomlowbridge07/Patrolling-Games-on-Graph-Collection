@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.6.5)  28 NOV 2017 19:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.6.5)  29 NOV 2017 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1453,15 +1453,24 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (./Patrolling Game on graphs collection.toc [1
 
 {/maths/linuxlocal/AMD64/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.
-map}])
+map}]
+Overfull \hbox (0.61113pt too wide) detected at line 54
+ []\OT1/cmr/m/n/10 xxii
+ []
+
+
+Overfull \hbox (5.88893pt too wide) detected at line 55
+ []\OT1/cmr/m/n/10 xxvii
+ []
+
+)
 \tf@toc=\write8
 \openout8 = `"Patrolling Game on graphs collection.toc"'.
 
  [2]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 111.
 
-
-(/maths/linuxlocal/AMD64/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
+ (/maths/linuxlocal/AMD64/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
@@ -1526,33 +1535,15 @@ Overfull \hbox (31.98245pt too wide) in paragraph at lines 564--564
 [] 
  []
 
-
-LaTeX Warning: Reference `Condition on T for old diametric proof' on page 10 un
-defined on input line 572.
-
 (./Images/DiametricAttack(m_45,d_30).tex) [10]
-
-LaTeX Warning: Reference `Time-limited diametric attack proof' on page 11 undef
-ined on input line 597.
-
-
 Overfull \hbox (2.5844pt too wide) in paragraph at lines 606--607
 \OT1/cmr/m/n/10 use of a di-a-met-ric pair. How-ever con-sider a set of points 
 $\OML/cmm/m/it/10 D \OT1/cmr/m/n/10 = []$
  []
 
-
-LaTeX Warning: Reference `Polygonal attack proof' on page 11 undefined on input
- line 622.
-
 Package hyperref Info: bookmark level for unknown examplefigure defaults to 0 o
 n input line 664.
 [11]
-
-LaTeX Warning: Reference `Alternating Random Hamiltonian proof' on page 12 unde
-fined on input line 671.
-
-
 Overfull \hbox (22.67021pt too wide) in paragraph at lines 694--694
 [] 
  []
@@ -1596,12 +1587,8 @@ sy/m/n/10 ^^T []f[]\OML/cmm/m/it/10 ; []\OMS/cmsy/m/n/10 g$
 LaTeX Warning: Reference `T-delayed attack proof' on page 15 undefined on input
  line 944.
 
-[15] (./Images/ElongatedStarRegions(S_10_5).tex)
-
-LaTeX Warning: Reference `appednixsection: Reason for probability of intercepti
-on' on page 16 undefined on input line 971.
-
-[16] (./Images/BaseInterceptionOnS_4^5(m=4).tex)
+[15] (./Images/ElongatedStarRegions(S_10_5).tex) [16]
+(./Images/BaseInterceptionOnS_4^5(m=4).tex)
 Overfull \hbox (16.35pt too wide) in paragraph at lines 175--987
  [] 
  []
@@ -1625,21 +1612,12 @@ msy/m/n/10 f\OML/cmm/m/it/10 C[]; C[]; C[]; C[]\OMS/cmsy/m/n/10 g$\OT1/cmr/m/n/
 10 .
  []
 
-
-LaTeX Warning: Reference `appendix:Naiveanalysis' on page 18 undefined on input
- line 1104.
-
 (./Images/NavieInterceptionOnS_4^5(m=4).tex)
 Overfull \hbox (16.35pt too wide) in paragraph at lines 213--1110
  [] 
  []
 
-[18] [19]
-
-LaTeX Warning: Reference `appendix:Choosinganalysis' on page 20 undefined on in
-put line 1127.
-
-(./Images/CombinatorialInterceptionOnS_4^5(m=8).tex)
+[18] [19] (./Images/CombinatorialInterceptionOnS_4^5(m=8).tex)
 Overfull \hbox (16.35pt too wide) in paragraph at lines 221--1133
  [] 
  []
@@ -1711,12 +1689,7 @@ cmr/m/n/10 = \OMS/cmsy/m/n/10 ;$ \OT1/cmr/m/n/10 we can get $\OML/cmm/m/it/10 V
  \OMS/cmsy/m/n/10 ^^T [] \OT1/cmr/m/n/10 =
  []
 
-[23]
-
-LaTeX Warning: Reference `Stage-1-Step-point lemma proof' on page 24 undefined 
-on input line 1256.
-
-[24]
+[23] [24]
 Overfull \hbox (77.69696pt too wide) in paragraph at lines 1337--1338
  [] 
  []
@@ -1727,85 +1700,62 @@ Overfull \hbox (16.35pt too wide) in paragraph at lines 240--1347
  []
 
 [25]
-Overfull \hbox (68.36475pt too wide) in paragraph at lines 1374--1375
+Overfull \hbox (125.54872pt too wide) in paragraph at lines 1471--1472
  [] 
  []
 
+
+Overfull \hbox (125.54872pt too wide) in paragraph at lines 1633--1634
+ [][] 
+ []
+
 [26] [27]
+Overfull \hbox (77.69696pt too wide) in paragraph at lines 1845--1846
+ [] 
+ []
 
-LaTeX Warning: Reference `myfigure: Example of simplification to general star g
-raph' on page 28 undefined on input line 1431.
-
-
-Overfull \hbox (7.15182pt too wide) in paragraph at lines 1439--1440
+[28] [29] [30]
+Overfull \hbox (7.15182pt too wide) in paragraph at lines 1915--1916
 []\OT1/cmr/m/n/10 The $\OML/cmm/m/it/10 j$$[]$ \OT1/cmr/m/n/10 branch is iden-t
 i-fied from nodes be-tween $2([](\OML/cmm/m/it/10 k[] \OT1/cmr/m/n/10 + 1)))$ a
 nd $2([](\OML/cmm/m/it/10 k[] \OT1/cmr/m/n/10 +
  []
 
+[31]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1525.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\geq' on input line 1525.
+(hyperref)                removing `math shift' on input line 2001.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 1525.
+(hyperref)                removing `\geq' on input line 2001.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1525.
+(hyperref)                removing `subscript' on input line 2001.
 
-[28] [29]
-Overfull \hbox (128.79584pt too wide) in paragraph at lines 1593--1594
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 2001.
+
+
+Overfull \hbox (128.79584pt too wide) in paragraph at lines 2069--2070
  [] 
  []
 
-
-LaTeX Warning: Reference `Type-deayed attack proof' on page 30 undefined on inp
-ut line 1602.
-
 No file "Patrolling Game on graphs collection".bbl.
-[30] [31]
-
-LaTeX Warning: Reference `figure: walks on graph Q' on page i undefined on inpu
-t line 1769.
-
-[1]
-
-LaTeX Warning: Reference `subfigure: bipartite Q' on page ii undefined on input
- line 1891.
-
-
-LaTeX Warning: Reference `subfigure: complete bipartite' on page ii undefined o
-n input line 1891.
-
-
-LaTeX Warning: Reference `subfigure: bipartite Q' on page ii undefined on input
- line 1891.
-
-
-LaTeX Warning: Reference `subfigure: complete bipartite' on page ii undefined o
-n input line 1891.
-
-[2]
+[32] [33] [34] [1] [2]
 
 Package natbib Warning: Citation `Alpern2011' on page iii undefined on input li
-ne 1937.
-
-
-LaTeX Warning: Reference `fig: S' on page iii undefined on input line 1959.
+ne 2413.
 
 [3] [4]
-Overfull \hbox (20.23497pt too wide) detected at line 2027
+Overfull \hbox (20.23497pt too wide) detected at line 2503
 []
  []
 
 
-Overfull \hbox (23.26817pt too wide) in paragraph at lines 2030--2032
+Overfull \hbox (23.26817pt too wide) in paragraph at lines 2506--2508
 []\OT1/cmr/m/n/10 If $\OML/cmm/m/it/10 M \OMS/cmsy/m/n/10 6\OT1/cmr/m/n/10 = \O
 MS/cmsy/m/n/10 ;\OML/cmm/m/it/10 ; R \OMS/cmsy/m/n/10 6\OT1/cmr/m/n/10 = \OMS/c
 msy/m/n/10 ;$ \OT1/cmr/m/n/10 then $\OML/cmm/m/it/10 C[]\OT1/cmr/m/n/10 (\OML/c
@@ -1815,7 +1765,7 @@ C[]; C[]\OMS/cmsy/m/n/10 g \OT1/cmr/m/n/10 = []\OMS/cmsy/m/n/10 f\OML/cmm/m/it/
  []
 
 
-Overfull \hbox (25.40729pt too wide) in paragraph at lines 2030--2032
+Overfull \hbox (25.40729pt too wide) in paragraph at lines 2506--2508
 \OML/cmm/m/it/10 q[]; Pw\OT1/cmr/m/n/10 ([])\OML/cmm/m/it/10 ; Pw\OT1/cmr/m/n/1
 0 (\OML/cmm/m/it/10 k \OT1/cmr/m/n/10 + 1) + \OML/cmm/m/it/10 q[]; Pw\OT1/cmr/m
 /n/10 (\OMS/cmsy/m/n/10 ^^C\OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 q[]\OMS/cmsy/m/
@@ -1824,102 +1774,102 @@ n/10 g \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 P[] \OT1/cmr/m/n/10 + []\OMS/cmsy/m/n
  []
 
 
-Overfull \hbox (51.23727pt too wide) detected at line 2036
+Overfull \hbox (51.23727pt too wide) detected at line 2512
 []
  []
 
 [5]
-Overfull \hbox (28.89069pt too wide) detected at line 2057
+Overfull \hbox (28.89069pt too wide) detected at line 2533
 []
  []
 
 
-Overfull \hbox (31.41985pt too wide) in paragraph at lines 2057--2059
+Overfull \hbox (31.41985pt too wide) in paragraph at lines 2533--2535
 \OT1/cmr/m/n/10 creas-ing in $\OML/cmm/m/it/10 q[]$ \OT1/cmr/m/n/10 and one is 
 de-creas-ing in $\OML/cmm/m/it/10 q[]$\OT1/cmr/m/n/10 ). Mean-ing $\OML/cmm/m/i
 t/10 P \OT1/cmr/m/n/10 = []\OML/cmm/m/it/10 ; Q[] \OT1/cmr/m/n/10 =
  []
 
 [6]
-Overfull \hbox (63.55418pt too wide) in paragraph at lines 2095--2096
+Overfull \hbox (63.55418pt too wide) in paragraph at lines 2571--2572
 []$\OML/cmm/m/it/10 m \OMS/cmsy/m/n/10 ^^@ [] \OT1/cmr/m/n/10 + [][] + [][] + [
 ][]$ 
  []
 
 [7]
-Overfull \hbox (48.18863pt too wide) in paragraph at lines 2109--2112
+Overfull \hbox (48.18863pt too wide) in paragraph at lines 2585--2588
 []\OT1/cmr/m/n/10 so for-mula be-comes $[][] + [][] + [][]$.
  []
 
 
-Overfull \hbox (8.2731pt too wide) in paragraph at lines 2141--2146
+Overfull \hbox (8.2731pt too wide) in paragraph at lines 2617--2622
 \OML/cmm/m/it/10 t[] \OT1/cmr/m/n/10 = [] []$, then we can form the pa-trol, $\
 OML/cmm/m/it/10 U\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) = []$
  []
 
 [8] [9]
-Overfull \hbox (631.22052pt too wide) in paragraph at lines 2190--2190
+Overfull \hbox (631.22052pt too wide) in paragraph at lines 2666--2666
 [] 
  []
 
 
-Overfull \hbox (499.85355pt too wide) in paragraph at lines 2207--2207
+Overfull \hbox (499.85355pt too wide) in paragraph at lines 2683--2683
 [] 
  []
 
 [10]
-Overfull \hbox (64.22472pt too wide) detected at line 2237
+Overfull \hbox (64.22472pt too wide) detected at line 2713
 [] \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 = []
  []
 
 [11]
-Overfull \hbox (83.77396pt too wide) detected at line 2255
+Overfull \hbox (83.77396pt too wide) detected at line 2731
 [] \OT1/cmr/m/n/10 + [] + [] = [] + [] + [] = []
  []
 
 
-Overfull \hbox (27.25238pt too wide) detected at line 2269
+Overfull \hbox (27.25238pt too wide) detected at line 2745
 [] \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 = []
  []
 
 [12] [13]
-Overfull \hbox (49.25417pt too wide) detected at line 2311
+Overfull \hbox (49.25417pt too wide) detected at line 2787
 [] \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 + [] + [] \OMS/cmsy/m/n/10 ^^B [] \O
 T1/cmr/m/n/10 + [] = []
  []
 
 [14] [15]
-Overfull \hbox (93.75484pt too wide) detected at line 2377
+Overfull \hbox (93.75484pt too wide) detected at line 2853
 [] \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 = []
  []
 
 [16] [17]
-Overfull \hbox (31.21454pt too wide) detected at line 2407
+Overfull \hbox (31.21454pt too wide) detected at line 2883
 \OML/cmm/m/it/10 s \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 + [] = [] = []
  []
 
 
-Overfull \hbox (46.0648pt too wide) in paragraph at lines 2439--2439
+Overfull \hbox (46.0648pt too wide) in paragraph at lines 2915--2915
 [] 
  []
 
 [18] [19] [20] [21]
-Overfull \hbox (23.1488pt too wide) detected at line 2593
+Overfull \hbox (23.1488pt too wide) detected at line 3069
 [] \OT1/cmr/m/n/10 = [] \OMS/cmsy/m/n/10 ^^U []
  []
 
 
-Overfull \hbox (16.56325pt too wide) detected at line 2596
+Overfull \hbox (16.56325pt too wide) detected at line 3072
 [] \OMS/cmsy/m/n/10 ^^U [] \OT1/cmr/m/n/10 = []
  []
 
 [22] [23] [24] [25]
-Overfull \hbox (83.98665pt too wide) in paragraph at lines 2687--2687
+Overfull \hbox (83.98665pt too wide) in paragraph at lines 3163--3163
 [] 
  []
 
 
-Overfull \hbox (31.50774pt too wide) in paragraph at lines 2694--2696
+Overfull \hbox (31.50774pt too wide) in paragraph at lines 3170--3172
 []\OT1/cmr/m/n/10 If $\OML/cmm/m/it/10 m \OMS/cmsy/m/n/10 ^^U \OML/cmm/m/it/10 
 k[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 i \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 
 m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 t[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/1
@@ -1928,7 +1878,7 @@ m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 t[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/1
  []
 
 
-Overfull \hbox (31.50774pt too wide) in paragraph at lines 2697--2699
+Overfull \hbox (31.50774pt too wide) in paragraph at lines 3173--3175
 []\OT1/cmr/m/n/10 If $\OML/cmm/m/it/10 k[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/1
 0 i \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 
 t[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/1
@@ -1937,7 +1887,7 @@ t[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/1
  []
 
 
-Overfull \hbox (22.30688pt too wide) in paragraph at lines 2700--2702
+Overfull \hbox (22.30688pt too wide) in paragraph at lines 3176--3178
 []\OT1/cmr/m/n/10 If $\OML/cmm/m/it/10 k[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/1
 0 i \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 
 t[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/1
@@ -1947,7 +1897,7 @@ OMS/cmsy/m/n/10 ^^T
  []
 
 [26]
-Overfull \hbox (36.96565pt too wide) detected at line 2715
+Overfull \hbox (36.96565pt too wide) detected at line 3191
 [] \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 + [] + [] = [] + []
  []
 
@@ -1956,37 +1906,30 @@ Overfull \hbox (36.96565pt too wide) detected at line 2715
 Package natbib Warning: There were undefined citations.
 
 [28]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2743.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2743.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3219.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3219.
  (./Patrolling Game on graphs collection.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2743.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2743.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3219.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3219.
 
+Package rerunfilecheck Info: File `"Patrolling Game on graphs collection".out' 
+has not changed.
+(rerunfilecheck)             Checksum: 4F0302581100B992E7BAA109C70763CC;3871.
 
-
-Package rerunfilecheck Warning: File `"Patrolling Game on graphs collection".ou
-t' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `"Patrolling Game on graphs collecti
-on".out':
-(rerunfilecheck)             Before: 5C59FBB10811F4AF2F2FB9A915494DB7;2230
-(rerunfilecheck)             After:  99FB09307ACBCFAECCFD1CD5E73954DC;3797.
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2743.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3219.
  ) 
 Here is how much of TeX's memory you used:
- 31538 strings out of 492995
- 617522 string characters out of 6132690
- 835976 words of memory out of 5000000
- 34394 multiletter control sequences out of 15000+600000
- 23590 words of font info for 86 fonts, out of 8000000 for 9000
+ 33285 strings out of 492995
+ 642384 string characters out of 6132690
+ 977056 words of memory out of 5000000
+ 36133 multiletter control sequences out of 15000+600000
+ 24190 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,22n,103p,10508b,1046s stack positions out of 5000i,500n,10000p,200000b,80000s
 </maths/linuxlocal/AMD64/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/
@@ -2022,11 +1965,11 @@ MD64/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></maths/
 linuxlocal/AMD64/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.p
 fb></maths/linuxlocal/AMD64/texlive/2017/texmf-dist/fonts/type1/public/amsfonts
 /symbols/msbm10.pfb>
-Output written on "Patrolling Game on graphs collection.pdf" (61 pages, 599052 
+Output written on "Patrolling Game on graphs collection.pdf" (64 pages, 643643 
 bytes).
 PDF statistics:
- 727 PDF objects out of 1000 (max. 8388607)
- 629 compressed objects within 7 object streams
- 220 named destinations out of 1000 (max. 500000)
- 269 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 853 PDF objects out of 1000 (max. 8388607)
+ 749 compressed objects within 8 object streams
+ 227 named destinations out of 1000 (max. 500000)
+ 453 words of extra memory for PDF output out of 10000 (max. 10000000)
 
