@@ -1851,8 +1851,384 @@ Hence a solution to all even $m \leq 2(n-1)$ can be found. Hence our cycle look 
 \subsection{Extending even solution}
 The question is now is it possible to extend the even solution as described above when $m \leq 2(n-1)$ is odd. We note that in the cycle we can see the just look at making $1$ less attacks to give an attackers bound. Let $m=m'-1$ then we assume we can just simply take one attack away from node $1$ attacks and we are away.
 
-Let us consider such a strategy, then 
+We can notice that the combinatorial improvement does much worse due to the $\floor{\frac{m}{2}}$ part, we may decide a different improvement, following similiar principles is needed.
 
+\subsection{Combinatorial loop improvement}
+We alter the idea of using end-ensuring cycles on the set of $S$ (please note we will deal with only the case of $R \neq \emptyset$ (as that is what we need this for odd m). We will now improve the $n-1$ nodes by using a cycle of length $m+1$ (note we will be covering the case where $m$ is odd), then when played this cycle has a probability of catching the attacker of $\frac{m}{m+1} \equiv \frac{m}{m'}$.
+
+Now just like before we will need to play a collection of all combinations of such cycles, each cycle has a choice of $\frac{m'}{2}$ end points to visit. So we have a total of $\left( \begin{array}{c}
+n-1 \\
+\frac{m'}{2} \\
+\end{array} \right)
+$
+and  $\left( \begin{array}{c}
+n-2 \\
+\frac{m'}{2}-1 \\
+\end{array} \right)
+$
+contain any given end point. Hence we have $\frac{\left( \begin{array}{c}
+n-1 \\
+\frac{m'}{2} \\
+\end{array} \right)}{\left( \begin{array}{c}
+n-2 \\
+\frac{m'}{2}-1 \\
+\end{array} \right)}=
+\frac{m'}{2(n-1)}
+$
+Hence when we play this strategy with probability $q$, we improve each end with a probability of $q \times \frac{m'}{2(n-1)}$.
+
+We will give the details and the bounds in the appendix \ref{appendix: Combinatorial loop improvement analysis}
+
+But here we note that getting such a bound analgous to before is possible.
+
+\subsection{Odd solution}
+By using the combinatorial loop improvement when $m$ is odd, then we can get a bound of $V \geq \frac{m}{2(n+k)+m+2(n-1)}$. We claim we can also get $V \leq \frac{2m}{2(n+k)+m+2(n-1)}$, now we know the solution for $m'=m+1$ which is $V \leq \frac{2m'}{2(n+k)+m'+2(n-1)}=\frac{2m+2}{2(n+k)+m+1+2(n-1)}$ , we now want to suggest moving $1$ attack from the system
+
+Let us say that $m=5$ in $S_{7}^{9}$ then we have by placing attacks that $V \leq \frac{2m}{2(n+k)+m+2(n-1)-1}$ (if $k-\frac{m+1}{2}$ is odd) or $V \leq \frac{2m}{2(n+k)+m+2(n-1)-3}$ (if $k-\frac{m+1}{2}$ is even) 
+
+i.e as $9-3=6$ even we get $V \leq \frac{10}{32+5+10-3}=\frac{10}{48}=\frac{5}{24}$ , now the combinatorial improvement gives me $V \geq \frac{10}{32+5+10}=\frac{5}{24.5}$. So from our $m=6$ solution which would have even $k-\frac{6}{2}$, in which we got $V=\frac{6}{16+3+6}=\frac{6}{25}$, so from here it should be a case of removing an attack
+
+
+A solution to get the combinatorial loop bound can be made by making a particular type of attack. Looking at a particular example on $S_{7}^{5}$.
+
+
+\begin{myfigure}
+\begin{center}
+\resizebox{1\linewidth}{!}{
+\begin{tikzpicture}[-,auto,node distance=1cm,
+                    thick,main node/.style={circle,fill=white,draw,font=\sffamily\Large\bfseries,minimum size=0.7cm}]
+ \foreach \x in {0,...,14}
+    \foreach \y in {0,...,7} 
+       {\pgfmathtruncatemacro{\label}{\x - 5 *  \y +21}
+       \node [main node]  (\x\y) at (1.5*\x,1.5*\y) {};} 
+
+  \foreach \x in {0,...,13}
+   \foreach \y in {0,...,6}
+    \pgfmathtruncatemacro{\za}{\y+1}
+    \pgfmathtruncatemacro{\zb}{\x+1}
+      \draw (\x\y)--(\x\za) (\x\y)--(\zb\y) ;
+      
+   \foreach \x in {0,...,13}
+    \pgfmathtruncatemacro{\zb}{\x+1}
+      \draw (\x7) -- (\zb7);
+      
+   \foreach \y in {0,...,6}
+     \pgfmathtruncatemacro{\za}{\y+1} 
+        \draw (14\y) -- (14\za);
+        
+        
+%Labeling to the sides
+  \foreach \y in {2,...,7}
+   \pgfmathtruncatemacro{\label}{8-\y}
+   \node[font=\sffamily\Large\bfseries] (Label\y) [shift={(-1,0)}] at (0\y) {\label};       
+   
+   \node[font=\sffamily\Large\bfseries] (Label) [shift={(-1,0)}] at (01) {c};
+   \node[font=\sffamily\Large\bfseries] (Label) [shift={(-1,0)}] at (00) {*};
+   
+   \node[font=\sffamily\Huge\bfseries] (Axis) [shift={(-2,0)},rotate=90] at (04) {Node};
+
+   \foreach \x in {0,...,14}
+    \node[font=\sffamily\Large\bfseries] (Timelabel\x) [shift={(0,-1)}] at (\x0) {\x};
+    
+   \node[font=\sffamily\Huge\bfseries] (Axis) [shift={(0,-2)}] at (40) {Time};
+    
+    
+%Adding in top attacks        
+   \node[main node,fill=gray!60] (07) at (07) {};    
+   
+   \foreach \x in {1,...,6}
+   \node[main node,fill=gray!60] (\x7) at (\x7) {};
+   
+   \foreach \x in {1,...,6}    
+   \node[circle,draw,minimum size=1cm] (Attack\x) at (\x7) {};
+   
+   \node[main node,fill=gray!60] (77) at (77) {};    
+   
+
+   
+   %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (07) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (17) {$3$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (27) {$5$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (37) {$7$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (47) {$9$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (57) {$11$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (67) {$13$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (77) {$13$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (87) {$11$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (97) {$9$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (107) {$7$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (117) {$5$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (127) {$3$};    
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (137) {$1$};          
+   
+%Adding in middle attacks
+  \node[main node,fill=gray!60] (33) at (33) {};
+  
+  \node[main node,fill=gray!60] (32) at (32) {};
+  \node[circle,draw,minimum size=1cm] (Attack0) at (32) {};
+  
+  \node[main node,fill=gray!60] (42) at (42) {};
+  \node[circle,draw,minimum size=1cm] (Attack0) at (42) {};
+     
+    %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (33) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (43) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (53) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (63) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (73) {$1$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (83) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (93) {$1$};
+     
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (32) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (42) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (52) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (62) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (72) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (82) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (92) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (102) {$2$};
+    
+%Adding bottom attacks
+
+  \node[main node,fill=gray!60] (30) at (30) {};
+  \node[circle,draw,minimum size=1cm] (Attack0) at (30) {};
+  
+  \node[main node,fill=gray!60] (40) at (40) {};
+  \node[circle,draw,minimum size=1cm] (Attack0) at (40) {};
+ 
+    %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (30) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (40) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (50) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (60) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (70) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (80) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (90) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (100) {$2$};       
+        
+                 
+%Some example lines drawn
+\begin{scope}[on background layer]
+\node (a)[shift={(-0.5,0.5)}] at (07) {};
+\node (b)[shift={(0.5,-0.5)}] at (90) {};
+\draw[color=red] (a) -- (70) (70)--(81) (81)--(b);
+
+\node (c)[shift={(-0.5,-0.5)}] at (30) {};
+\node (d)[shift={(0.5,0.5)}] at (94) {};
+\draw[color=blue] (c) -- (41) (41)--(50) (50)--(61) (61)--(70) (70)--(81) (81)--(b);
+
+\node (d) [shift={(0.5,0.5)}] at (107) {};
+\draw[color=green] (c) -- (d);
+
+\end{scope}
+
+                   
+\end{tikzpicture}
+}
+\end{center}
+\caption{Grid solution of $m=7$ on $S_{7}^{5}$ with two example paths}
+\end{myfigure}
+
+\begin{note}
+In the picture we are using a double type attack as we need whole number to get our bound of $V \leq \frac{14}{43}$
+\end{note}
+
+\textbf{Solution just after $m$ even $k-\frac{m}{2}$ odd}
+In this $m$ is odd and $k-\frac{m+1}{2}$ is still odd
+In general this type of attack will make $2m$ attacks at node $1$ and $4(n-1)$ (in total) attacks at the $*$ nodes, it will also make $4*\ceil{\frac{k+1-\frac{m+1}{2}-1}{2}}+1=4*\ceil{\frac{k-\frac{m+1}{2}}{2}}+1=4*(\frac{k-\frac{m+1}{2}+1}{2})+1=2k-m-1+2+1=2k-m+2$ attacks in the middle. So in total $2m+4(n-1)+2k-m+2=2(n+k)+m+2(n-1)$. Hence the bound of $V \leq \frac{2m}{2(n+k)+m+2(n-1)}$ is achieved and this part of the cycle is solved
+
+\begin{myfigure}
+\begin{center}
+\begin{tikzpicture}[-,auto,node distance=1.5cm,
+                    thick,main node/.style={rounded rectangle,fill=white,draw,font=\sffamily\Large\bfseries}]
+                 
+ \node[main node,fill=blue!50] (1) at (0,0) {$m$ even, $k-\frac{m}{2}$ even};
+ 
+ \node (value1) at (0,-0.8) {$V = \frac{2m}{4n+2k+m-4}$}; 
+ 
+ \node[main node,fill=red!50] (2) at (4,-2) {$m-1$ odd, $k-\frac{(m-1)+1}{2}$ even};
+ 
+ \node (value2) at (5.5,-2.8) {$V \leq \frac{2(m-1)}{4n+2k+m-6}$};
+ 
+ \node[main node,fill=blue!50] (3) at (0,-4) {$m-2$ even, $k-\frac{m-2}{2}$ odd};
+ 
+ \node (value2) at (0,-4.8) {$V = \frac{2(m-2)}{4n+2k+m-4}$}; 
+ 
+ \node[main node,fill=blue!50] (4) at (-4,-2) {$m-3$ odd, $k-\frac{(m-3)+1}{2}$ odd};
+ 
+ \node (value2) at (-5.5,-2.8) {$V = \frac{2(m-3)}{4n+2k+m-6}$}; 
+ 
+ 
+ 
+  \path[->,bend left,every node/.style={font=\sffamily}]
+    (1) edge (2)
+    (2) edge (3)
+    (3) edge (4)
+    (4) edge (1);
+                    
+\end{tikzpicture}                    
+\end{center}
+\caption{Cycle of $m$ decreasing}
+\end{myfigure}
+
+\textbf{Solution just after $m$ even $k-\frac{m}{2}$ even}
+So here $m$ is odd and $k-\frac{m+1}{2}$ is even. We again need to look at augementing the strategy 
+
+Again we present a strategy on $S_{7}^{5}$ as an insight
+
+\begin{myfigure}
+\begin{center}
+\resizebox{1\linewidth}{!}{
+\begin{tikzpicture}[-,auto,node distance=1cm,
+                    thick,main node/.style={circle,fill=white,draw,font=\sffamily\Large\bfseries,minimum size=0.7cm}]
+ \foreach \x in {0,...,9}
+    \foreach \y in {0,...,7} 
+       {\pgfmathtruncatemacro{\label}{\x - 5 *  \y +21}
+       \node [main node]  (\x\y) at (1.5*\x,1.5*\y) {};} 
+
+  \foreach \x in {0,...,8}
+   \foreach \y in {0,...,6}
+    \pgfmathtruncatemacro{\za}{\y+1}
+    \pgfmathtruncatemacro{\zb}{\x+1}
+      \draw (\x\y)--(\x\za) (\x\y)--(\zb\y) ;
+      
+   \foreach \x in {0,...,8}
+    \pgfmathtruncatemacro{\zb}{\x+1}
+      \draw (\x7) -- (\zb7);
+      
+   \foreach \y in {0,...,6}
+     \pgfmathtruncatemacro{\za}{\y+1} 
+        \draw (9\y) -- (9\za);
+        
+        
+%Labeling to the sides
+  \foreach \y in {2,...,7}
+   \pgfmathtruncatemacro{\label}{8-\y}
+   \node[font=\sffamily\Large\bfseries] (Label\y) [shift={(-1,0)}] at (0\y) {\label};       
+   
+   \node[font=\sffamily\Large\bfseries] (Label) [shift={(-1,0)}] at (01) {c};
+   \node[font=\sffamily\Large\bfseries] (Label) [shift={(-1,0)}] at (00) {*};
+   
+   \node[font=\sffamily\Huge\bfseries] (Axis) [shift={(-2,0)},rotate=90] at (04) {Node};
+
+   \foreach \x in {0,...,9}
+    \node[font=\sffamily\Large\bfseries] (Timelabel\x) [shift={(0,-1)}] at (\x0) {\x};
+    
+   \node[font=\sffamily\Huge\bfseries] (Axis) [shift={(0,-2)}] at (40) {Time};
+    
+    
+%Adding in top attacks        
+   \node[main node,fill=gray!60] (07) at (07) {};    
+   
+   \foreach \x in {1,...,4}
+   \node[main node,fill=gray!60] (\x7) at (\x7) {};
+   
+   \foreach \x in {1,...,4}    
+   \node[circle,draw,minimum size=1cm] (Attack\x) at (\x7) {};
+   
+   \node[main node,fill=gray!60] (57) at (57) {};    
+   
+
+   
+   %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (07) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (17) {$3$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (27) {$5$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (37) {$7$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (47) {$9$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (57) {$9$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (67) {$7$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (77) {$5$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (87) {$3$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (97) {$1$};  
+         
+   
+%Adding in middle attacks
+  \node[main node,fill=gray!60] (24) at (24) {};
+  
+  \node[main node,fill=gray!60] (22) at (22) {};
+  \node[circle,draw,minimum size=1cm] (Attack0) at (22) {};
+  
+  \node[main node,fill=gray!60] (32) at (32) {};
+  \node[circle,draw,minimum size=1cm] (Attack0) at (32) {};
+     
+    %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (24) {$1$};
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (34) {$3$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (44) {$3$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (54) {$3$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (64) {$3$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (74) {$1$};
+     
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (22) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (32) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (42) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (52) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (62) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (72) {$2$}; 
+
+    
+%Adding bottom attacks
+
+  \node[main node,fill=gray!60] (20) at (20) {};
+  \node[circle,draw,minimum size=1cm] (Attack0) at (20) {};
+  
+  \node[main node,fill=gray!60] (30) at (30) {};
+  \node[circle,draw,minimum size=1cm] (Attack0) at (30) {};
+ 
+    %Attack numbers
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (20) {$2$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (30) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (40) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (50) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (60) {$4$}; 
+    \node[font=\sffamily\Large\bfseries] (AttackNumber1)  at (70) {$2$}; 
+     
+        
+                 
+%Some example lines drawn
+\begin{scope}[on background layer]
+\node (a)[shift={(-0.5,0.5)}] at (07) {};
+\node (b)[shift={(0.5,-0.5)}] at (70) {};
+\draw[color=red] (a) -- (b);
+
+\node (c)[shift={(-0.5,-0.5)}] at (20) {};
+\node (d)[shift={(0.5,0.5)}] at (93) {};
+\draw[color=blue] (c) -- (31) (31)--(40) (40)--(51) (51)--(60) (60)--(d);
+
+\node (e) [shift={(0.5,0.5)}] at (97) {};
+\draw[color=green] (c) -- (e);
+
+\end{scope}
+
+                   
+\end{tikzpicture}
+}
+\end{center}
+\caption{Grid solution of $m=5$ on $S_{7}^{5}$ with two example paths}
+\end{myfigure}
+
+Again we now reason that we make $2m$ attacks at node $1$ and $4(n-1)$ (in total) attacks at $*$ nodes and in the middle we have $4*\ceil{\frac{k+1-\frac{m+1}{2}-2}{2}}+3=4*\ceil{\frac{k-\frac{m+1}{2}-1}{2}}+3=4*(\frac{k-\frac{m+1}{2}-1+1}{2})+3=2k-m-1+3=2k-m+2$ , for a total of $2m+4(n-1)+2k-m+2=2(n+k)+m+2(n-1)$ attacks.
+Giving again the bound of $V \leq \frac{2m}{2(n+k)+m+2(n-1)}$ matching with the combinatorial loop bound.
+
+\subsection{Solution for $m \leq 2(n-1)$}
+Know we align ourselves with the solution for $m=2k-1$ and $m=2k-2$ by using these type ideas. However $m=2k+1$ and $m=2k$ need to still be kept separate. But below this and before $m=2$ or $m=1$ we now know the answer, that it follows the combinatorial improvment (for $V=\frac{2m}{2(n+k)+m+2(n-1)}$
+
+\begin{myfigure}
+\input{Images/LargenElongatedStarRegions(S_7_5).tex}
+\caption{A graph of Values of $S_{7}^{5}$ for various m}
+\end{myfigure}
+
+Hence we have a complete solution if $2k \leq 2(n-1) \iff k \leq n-1$. Otherwise we will have a gap in our current solution till it $m \leq 2(n-1)$. 
+
+
+\subsection{Solution when $m > 2(n-1)$}
+We suggest that we may seek answers along the line of the combinatorial improvement $V \geq \frac{2m}{2n+2k+2m}$ . We will first note that $2n+2k+2m > 2n+m+2(n-1)+2k=2(n+k)+m+2(n-1)$ (so we note that we will be doing worse here than in the region $m \leq 2(n-1)$). This may hint that this strategy is not too good.
+
+
+We believe that due to the nature of the combinatorial bound giving $V \geq \frac{m}{m+n+k}=\frac{m}{m+n'-1}$ , where $n'=n+k+1$ that they exist a line type solution using $L_{n'}$ as attacks on this give the bound $V \leq \frac{m}{m+n'-1}=\frac{m}{m+n+k}$. However the issue with how to `split' one of the ends to the star end is one that needs solving and it is not immediately, or even whether this will work, it just seems logical.
+ 
 \section{General star graph}
 
 \subsection{Introduction}
@@ -2541,6 +2917,27 @@ $$\begin{array}{cc}
 \end{array} $$
 Meaning that due to symmetry of $q_{L},q_{S}$ we must have that $q_{L}=q_{S}$, which means that the improvement is only possible if $n+k-m \geq 0$. Then setting $q_{L}=q_{S}$ means we must maximize $(1-2q_{L})\frac{m}{2(n+k)} + \min \{ q_{L} , (1-2q_{L}) \frac{m}{2(n+k)} \}$ giving $q_{L}=\frac{m}{2(n+k+m)}$ (as one is increasing in $q_{L}$ and one is decreasing in $q_{S}$). Meaning $P=\frac{2(n+k)}{2(n+k+m)},Q_{L}=\frac{m}{2(n+k+m)},Q_{S}=\frac{m}{2(n+k+m)}$ and giving a lower bound of $V \geq \frac{2m}{2(n+k+m)}$.
 \end{enumerate}
+
+\subsection{Combinatorial loop improvement analysis}
+\label{appendix: Combinatorial loop improvement analysis}
+We are only dealing with $m$ odd so $m'=m+1$ even and $M \neq \emptyset$ $R = \emptyset$. We will play the hamiltonian bound with probability $P$, the left end-ensuring improvement with probability $q_{L}$ and the a particular right loop with probability $q_{S}$ (so $Q_{S}=\frac{n-1}{\frac{m'}{2}}q_{S}$.
+
+$C_{min}(C_{min}^{L},C_{min}^M,C_{min}^S)=\min\{Pw(1)+q_{L},Pw(\floor{\frac{m}{2}}+2) Pw(*)+\frac{m}{m'}q_{s}\}=P\frac{m}{2(n+k)}+\min\{q_{L},P\frac{m}{2(n+k)},\frac{m}{m'}q_{S} \}$ As the patroller wishes to select $q_{L},q_{S}$ to maximise the probability the problem becomes
+
+$$\begin{array}{cc}
+\text{Maximize} & (1-q_{L}-\frac{n-1}{ \frac{m'}{2}}q_{S}) \frac{m}{2(n+k)} + \min \{ q_{L}, (1-q_{L}-\frac{n-1}{\frac{m'}{2}}q_{S}) \frac{m}{2(n+k)} , \frac{m}{m'}q_{S} \}\\
+\text{Subject to } & q_{L}+\frac{n-1}{\frac{m'}{2}}q_{S} \leq 1 \text{  (Probability sum constraint)} \\
+     & q_{L},q_{S} \geq 0 \\
+\end{array} $$
+
+Meaning that we must have $q_{L}=\frac{m}{m'}q_{S}$ which means the improvement is only possible if $m+2(n-1) \leq 2(n+k)$ (for similarity to even normal combinatorial improvement $\iff m(1+\frac{n-1}{\frac{m}{2}}) \leq 2(n+k)$). 
+
+Then setting $q_{L}=\frac{m}{m'}q_{S}$ means we must maximize $(1-\frac{m+2(n-1)}{m}q_{L})\frac{m}{2(n+k)}+\min\{ q_{L}, (1-\frac{m+2(n-1)q_{L}}{m})\frac{m}{2(n+k)} \}$ giving $q_{L}=\frac{m}{2(n+k)+m+2(n-1)}$. Meaning $P=\frac{2(n+k)}{2(n+k)+m+2(n-1)}$ , $Q_{L}=q_{L}=\frac{m}{2(n+k)+m+2(n-1)}$ and $Q_{S}=\frac{n-1}{\frac{m'}{2}}q_{S}=\frac{2(n-1)}{m}q_{L}=\frac{2(n-1)}{2(n+k)+m+2(n-1)}$. Giving a lower bound of $V \geq \frac{2m}{2(n+k)+m+2(n-1)}$
+
+\begin{note}
+It is worth noting that this is analogous to the result found by the usual combinatorial improvement when $m$ is even.
+\end{note}
+
 
 \section{Proof's}
 

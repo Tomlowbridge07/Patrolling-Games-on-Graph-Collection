@@ -32,24 +32,29 @@
 \contentsline {subsection}{\numberline {7.9}Various Stage-step points}{24}{subsection.7.9}
 \contentsline {subsection}{\numberline {7.10}Lower Line type attacks}{26}{subsection.7.10}
 \contentsline {subsection}{\numberline {7.11}Extending even solution}{28}{subsection.7.11}
-\contentsline {section}{\numberline {8}General star graph}{28}{section.8}
-\contentsline {subsection}{\numberline {8.1}Introduction}{28}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Basic Analysis}{31}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}solution for $m \geq 2(k_{max}+1)$}{32}{subsection.8.3}
-\contentsline {section}{\numberline {9}Dual star graphs}{34}{section.9}
-\contentsline {section}{\numberline {10}Linked Star graphs}{34}{section.10}
-\contentsline {section}{Appendices}{i}{section*.28}
+\contentsline {subsection}{\numberline {7.12}Combinatorial loop improvement}{28}{subsection.7.12}
+\contentsline {subsection}{\numberline {7.13}Odd solution}{31}{subsection.7.13}
+\contentsline {subsection}{\numberline {7.14}Solution for $m \leq 2(n-1)$}{34}{subsection.7.14}
+\contentsline {subsection}{\numberline {7.15}Solution when $m > 2(n-1)$}{34}{subsection.7.15}
+\contentsline {section}{\numberline {8}General star graph}{35}{section.8}
+\contentsline {subsection}{\numberline {8.1}Introduction}{35}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Basic Analysis}{35}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}solution for $m \geq 2(k_{max}+1)$}{36}{subsection.8.3}
+\contentsline {section}{\numberline {9}Dual star graphs}{38}{section.9}
+\contentsline {section}{\numberline {10}Linked Star graphs}{38}{section.10}
+\contentsline {section}{Appendices}{i}{section*.32}
 \contentsline {section}{\numberline {A}Graph Definitions}{i}{appendix.A}
 \contentsline {section}{\numberline {B}Old Statements about Old diametric}{iii}{appendix.B}
 \contentsline {section}{\numberline {C}Improvemening Hamiltonian bound}{iv}{appendix.C}
 \contentsline {subsection}{\numberline {C.1}Reason For Probability of Interception formula}{iv}{subsection.C.1}
 \contentsline {subsection}{\numberline {C.2}Naive Improvement Complete analysis}{v}{subsection.C.2}
 \contentsline {subsection}{\numberline {C.3}Combinatorial Improvement Complete analysis}{vi}{subsection.C.3}
+\contentsline {subsection}{\numberline {C.4}Combinatorial loop improvement analysis}{vii}{subsection.C.4}
 \contentsline {section}{\numberline {D}Proof's}{vii}{appendix.D}
 \contentsline {subsection}{\numberline {D.1}Alternating Random Hamiltonian proof}{vii}{subsection.D.1}
-\contentsline {subsection}{\numberline {D.2}Condition on T for old diametric proof}{vii}{subsection.D.2}
-\contentsline {subsection}{\numberline {D.3}Time-limited diametric attack proof}{viii}{subsection.D.3}
-\contentsline {subsection}{\numberline {D.4}Polygonal attack proof}{ix}{subsection.D.4}
+\contentsline {subsection}{\numberline {D.2}Condition on T for old diametric proof}{viii}{subsection.D.2}
+\contentsline {subsection}{\numberline {D.3}Time-limited diametric attack proof}{ix}{subsection.D.3}
+\contentsline {subsection}{\numberline {D.4}Polygonal attack proof}{x}{subsection.D.4}
 \contentsline {subsection}{\numberline {D.5}Time-delayed attack proof}{xi}{subsection.D.5}
-\contentsline {subsection}{\numberline {D.6}Type-delayed attack proof}{xxii}{subsection.D.6}
-\contentsline {subsection}{\numberline {D.7}Stage-1-Step-point lemma proof}{xxvii}{subsection.D.7}
+\contentsline {subsection}{\numberline {D.6}Type-delayed attack proof}{xxiii}{subsection.D.6}
+\contentsline {subsection}{\numberline {D.7}Stage-1-Step-point lemma proof}{xxviii}{subsection.D.7}
