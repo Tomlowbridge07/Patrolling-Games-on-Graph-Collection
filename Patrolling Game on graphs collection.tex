@@ -2461,6 +2461,105 @@ and when $m > 2(n+|k|)$ then $V=1$.
 \end{corollary}
 
 \section{Dual star graphs}
+This section involves linking two star graphs $S_{n}$ and $S_{n'}$ by making the centres adjacent
+
+\begin{definition}
+We define the \textit{dual star graph}, $(S_{n},S_{n'}) \equiv S_{n,n'}$ to be the two graphs, $S_{n},S_{n'}$, which are initially disconnected with the centres made adjacent by the introduction of one edge.
+\end{definition}
+
+\begin{myfigure}
+\begin{tikzpicture}[-,auto,node distance=1.5cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {$*_{1}$};
+  \node[main node] (2) [below of=1] {$C_{1}$};
+  \node[main node] (3) [left of=2] {$*_{1}$};
+  \node[main node] (4) [below of=2] {$*_{1}$};
+  \node[main node] (5) [shift={(1.5,0)}] at (2) {$C_{2}$};
+  \node[main node] (6) [above right of=5] {$*_{2}$};
+  \node[main node] (7) [below right of=5] {$*_{2}$};
+  
+  \path
+  (1) edge (2)
+  (2) edge (3)
+  (2) edge (4)
+  (2) edge (5)
+  (5) edge (6)
+  (5) edge (7);
+  
+\end{tikzpicture}
+\caption{Example of labelling on $(S_{3},S_{2}) \equiv S_{3,2}$}
+\label{myfigure: Example of labeling on dual star graph}
+\end{myfigure}
+
+Now at first glance we can use simplification to get that $V(S_{n,n'}) \leq V(S_{n+n'})$. We can also use decomposition to get that $V(S_{n,n'}) \geq  \frac{1}{\frac{1}{V(S_{n})}+\frac{1}{V(S_{n'})}}$.
+
+Now when are within $2 \leq m \leq 2\min\{n,n' \}$ then we will get that
+
+\begin{align*}
+&V(S_{n,n'}) \leq \frac{m}{2(n+n')} \text{ and } V(S_{n,n'}) \geq \frac{1}{\frac{2n}{m}+\frac{2n'}{m}}=\frac{m}{2(n+n')} \\
+&\text{So } V(S_{n,n'})=\frac{m}{2(n+n')} \text{ for } m \leq 2 \min\{n,n'\}
+\end{align*}
+
+We also note that we have the solution (as it is with all graphs) for $m=1$. So we now seek the answer when $m > 2\min\{ n,n' \}$ , as decomposition falls apart and does not provide us with equality.
+
+\subsection{Symmetric dual stars}
+We will now limit our selves to \textit{symmetric dual stars}, when $n'=n$. We are just dealing with the region that $m > 2n$. That is both of the separate stars are winnable.
+
+As it is clear in the symmetric case that all external nodes, $*_{1}$'s and $*_{2}$'s are equivalent, we must attack them with the same class of attack.
+
+\begin{definition}[Symmetric dual star attack]
+The \textit{symmetric dual star attack} is one that attacks at each external node, $*$ with equal probability starting its attack at times $\tau=0,1,...,2n$ 
+\end{definition}
+
+\begin{lemma}
+When $T \geq m+2n+1$, then the symmetric dual star bound is $V \leq \frac{m}{4n+2}$
+\end{lemma}
+
+Proof: To be completed
+
+\begin{lemma}[Solution for $m > 2n$]
+By the attacker using the symmetric dual star attack and the patroller using an random oscillation patrol (in the usual fashion), we acheive the value when $m >2n$ of
+$$ V=\frac{m}{4n+2} $$
+\end{lemma}
+
+\section{Distant dual stars}
+We will now extend the idea of the dual star graph to have the connection between the centres now have an additional $l$ nodes between the two centres.
+
+\begin{definition}
+We define the \textit{l-dual star}, $(S_{n},l,S_{n'}) \equiv S_{n,l,n'}$ to be the two star graphs, $S_{n},S_{n'}$, initially with disconnected centres which are now connected with $l$ nodes in a line between the centres.
+\end{definition} 
+
+So a dual star is a 0-dual star.
+
+\subsection{Symmetric l-dual stars}
+We will now limit ourselves to symmetric dual stars when $n=n'$. Again we will seek an attack that aligns itself with the random oscillation type attack (embedded Hamiltonian patrol), that is we will seek a bound of $\frac{m}{4n+2(l+1)}$.
+
+We will first look at a decomposition along the line, i.e decomposing into $S_{n} \cup S_{n+1}^{l}$ or $S_{n+1} \cup S_{n+1}^{l-1}$ or.... or $S_{n+1}^{\frac{l}{2}} \cup S_{n+1}^{\frac{l}{2}}$ (if even). Only up till $S_{n+1}^{\frac{l-1}{2}} \cup S_{n+1}^{\frac{l+1}{2}}$ (if odd).
+
+\textbf{Case 1: Even $l$}
+Then the decomposition is into $S_{n} \cup S_{n+1}^{l}$ or into $S_{n+1}^{i} \cup S_{n+1}^{l-i}$ for $i=0,1,...,\frac{l}{2}$.
+
+This gives a decomposition bound of $V \geq \frac{1}{\frac{1}{V(S_{n})}+\frac{1}{V(S_{n+1}^{l})}}$ or $V \geq \frac{1}{\frac{1}{V(S_{n+1}^{i})}+\frac{1}{V(S_{n}^{l-i})}}$. However to evaluate these bounds exactly we need the full solution to the elongated star graph.
+
+The other type of decomposition that makes sense is into elongated stars and line sections.
+
+I propose that the following solution, works when the game value is above a half or above, that is that $m > 2n+l$.
+
+\begin{definition}[Symmetric l-dual star attack]
+The \textit{symmetric l-dual star attack} is one that attacks at each external node, $*$ , with equal probability starting at attack times $\tau=0,1,...,2n+l$
+\end{definition}
+
+\begin{lemma}
+When $T \geq m+2n+l+1$ and $m$ then the symmetric l-dual star bound is $V \leq \frac{m}{4n+2(l+1)}$. 
+\end{lemma}
+
+Proof: To be Completed
+
+\begin{lemma}[Solution for $m  $]
+By the attacker using the symmetric l-dual star attack and the patroller using a random oscillation patrol (in the usual fashion), we achieve a value for when $m >$
+\end{lemma}
+
 
 \section{Linked Star graphs}
 
