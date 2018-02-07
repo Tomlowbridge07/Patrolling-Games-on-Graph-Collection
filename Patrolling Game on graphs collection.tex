@@ -74,7 +74,8 @@ cross/.default={1pt}}
     listname={List of myFigures},
     name=Figure,
     placement=tbhp,
-    within=section,]{myfigure}    
+    within=section,]{myfigure}
+          
     
 \counterwithin{figure}{section}
 
@@ -2451,7 +2452,7 @@ When $T \geq m+2k_{max}$, the analogous `diametric' bound is given by
 $$V(S_{n}^{\bm{k}}) \leq \max \left\{ \frac{k_{max}+1}{\denominator} , \frac{m}{2 \left( \denominator \right)} \right\}$$
 \end{theorem}
 
-Proof: \ref{Type-deayed attack proof}
+Proof: \ref{Type-delayed attack proof}
 
 
 \begin{corollary}[Solution in $m \geq 2(k_{max}+1)$]
@@ -2461,10 +2462,10 @@ and when $m > 2(n+|k|)$ then $V=1$.
 \end{corollary}
 
 \section{Dual star graphs}
-This section involves linking two star graphs $S_{n}$ and $S_{n'}$ by making the centres adjacent
+This section involves linking two star graphs $S_{n_{1}}$ and $S_{n_{1}}$ by making the centres adjacent
 
 \begin{definition}
-We define the \textit{dual star graph}, $(S_{n},S_{n'}) \equiv S_{n,n'}$ to be the two graphs, $S_{n},S_{n'}$, which are initially disconnected with the centres made adjacent by the introduction of one edge.
+We define the \textit{dual star graph}, $(S_{n_{1}},S_{n_{2}}) \equiv S_{n_{1},n_{2}}$ to be the two graphs, $S_{n_{1}},S_{n_{2}}$, which are initially disconnected with the centres made adjacent by the introduction of one edge.
 \end{definition}
 
 \begin{myfigure}
@@ -2492,19 +2493,19 @@ We define the \textit{dual star graph}, $(S_{n},S_{n'}) \equiv S_{n,n'}$ to be t
 \label{myfigure: Example of labeling on dual star graph}
 \end{myfigure}
 
-Now at first glance we can use simplification to get that $V(S_{n,n'}) \leq V(S_{n+n'})$. We can also use decomposition to get that $V(S_{n,n'}) \geq  \frac{1}{\frac{1}{V(S_{n})}+\frac{1}{V(S_{n'})}}$.
+Now at first glance we can use simplification to get that $V(S_{n_{1},n_{2}}) \leq V(S_{n_{1}+n_{2}})$. We can also use decomposition to get that $V(S_{n_{1},n_{2}}) \geq  \frac{1}{\frac{1}{V(S_{n_{1}})}+\frac{1}{V(S_{n_{2}})}}$.
 
-Now when are within $2 \leq m \leq 2\min\{n,n' \}$ then we will get that
+Now when are within $2 \leq m \leq 2\min\{n_{1},n_{2} \}$ then we will get that
 
 \begin{align*}
-&V(S_{n,n'}) \leq \frac{m}{2(n+n')} \text{ and } V(S_{n,n'}) \geq \frac{1}{\frac{2n}{m}+\frac{2n'}{m}}=\frac{m}{2(n+n')} \\
-&\text{So } V(S_{n,n'})=\frac{m}{2(n+n')} \text{ for } m \leq 2 \min\{n,n'\}
+&V(S_{n_{1},n_{2}}) \leq \frac{m}{2(n_{1}+n_{2})} \text{ and } V(S_{n_{1},n_{2}}) \geq \frac{1}{\frac{2n_{1}}{m}+\frac{2n_{2}}{m}}=\frac{m}{2(n_{1}+n_{2})} \\
+&\text{So } V(S_{n_{1},n_{2}})=\frac{m}{2(n_{1}+n_{2})} \text{ for } m \leq 2 \min\{n,n'\}
 \end{align*}
 
-We also note that we have the solution (as it is with all graphs) for $m=1$. So we now seek the answer when $m > 2\min\{ n,n' \}$ , as decomposition falls apart and does not provide us with equality.
+We also note that we have the solution (as it is with all graphs) for $m=1$. So we now seek the answer when $m > 2\min\{ n_{1},n_{2} \}$ , as decomposition falls apart and does not provide us with equality.
 
 \subsection{Symmetric dual stars}
-We will now limit our selves to \textit{symmetric dual stars}, when $n'=n$. We are just dealing with the region that $m > 2n$. That is both of the separate stars are winnable.
+We will now limit our selves to \textit{symmetric dual stars}, when $n \equiv n_{1}=n_{2}$. We are just dealing with the region that $m > 2n$ i.e $m \geq 2n+1$. That is both of the separate stars are winnable.
 
 As it is clear in the symmetric case that all external nodes, $*_{1}$'s and $*_{2}$'s are equivalent, we must attack them with the same class of attack.
 
@@ -2513,14 +2514,36 @@ The \textit{symmetric dual star attack} is one that attacks at each external nod
 \end{definition}
 
 \begin{lemma}
-When $T \geq m+2n+1$, then the symmetric dual star bound is $V \leq \frac{m}{4n+2}$
+When $T \geq m+2n$, then the symmetric dual star bound is $V \leq \frac{m}{4n+2}$
 \end{lemma}
 
 Proof: To be completed
 
-\begin{lemma}[Solution for $m > 2n$]
-By the attacker using the symmetric dual star attack and the patroller using an random oscillation patrol (in the usual fashion), we acheive the value when $m >2n$ of
+\begin{lemma}[Solution for $m \geq 2n+1$]
+By the attacker using the symmetric dual star attack and the patroller using an random oscillation patrol (in the usual fashion), we acheive the value when $m \geq 2n+1$ of
 $$ V=\frac{m}{4n+2} $$
+\end{lemma}
+
+\subsection{Uneven dual stars}
+We will now go back to \textit{uneven dual stars}, when $n_{1} \neq n_{2}$ and we will assume WLOG $n_{1} > n_{2}$.
+
+The natural decomposition of $(S_{n_{1}},S_{n_{2}})$ into $S_{n_{1}}$ and $S_{n_{2}}$ gives us the lower bound $V \geq \frac{1}{\max\{1, \frac{2n_{1}}{m} \} + \max \{1, \frac{2n_{2}}{m} \}}$ , so it is clear that this bound is better than the random oscillation if $m \leq 2n_{2}$, further more for $m=2n_{2}+1$ the bound becomes $V \geq \frac{m}{2n_{1}+2n_{2}+1}$ still better than random oscillation. For $m=2n_{2}+2$ we get that $V \geq \frac{m}{2n_{1}+2n_{2}+2}$ which is equivalent to the random oscillation. Hence we seek solutions in the range of $m \geq 2(n_{2}+1)$.
+
+The simplification of $(S_{n_{1}},S_{n_{2}})$ into $S_{n_{1}+n_{2}}$ gives us a upper bound of $V \leq \frac{m}{2(n_{1}+n_{2}}$ and hence we have an answer when $m \leq 2n_{2}$ we get $V=\frac{m}{2(n_{1}+n_{2})}$. This was seen in the general case.
+
+\begin{definition}[Uneven dual star attack]
+The \textit{uneven dual star attack} with $n_{1} > n_{2}$ is one that attacks the $*_{1}$'s at starting times $\tau_{1}=1,...,2n_{2}$ and at the $*_{2}$'s at starting times $\tau_{2}=0,1,...,2n_{2},2n_{2}+1$ choosing one of the $*$ type nodes equiprobably. 
+\end{definition}
+
+\begin{lemma}
+When $T \geq m+2n_{2}+1$ then the uneven dual star bound is $V \leq \frac{m}{2(n_{1}+n_{2}+1)}$
+\end{lemma}
+
+Proof: To be completed
+
+\begin{lemma}[Solution for $m \geq 2(n_{2}+1)$]
+By the attacker using the uneven dual star attack and the patroller using a random oscillation patrol (in the usual fashion), we achieve the value when $m \geq 2(n_{2}+1)$ of
+$$V=\frac{m}{2(n_{1}+n_{2}+1)}$$
 \end{lemma}
 
 \section{Distant dual stars}
@@ -2532,19 +2555,86 @@ We define the \textit{l-dual star}, $(S_{n},l,S_{n'}) \equiv S_{n,l,n'}$ to be t
 
 So a dual star is a 0-dual star.
 
+\begin{myfigure}
+\begin{tikzpicture}[-,auto,node distance=1.5cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {$*_{1}$};
+  \node[main node] (2) [below of=1] {$C_{1}$};
+  \node[main node] (3) [left of=2] {$*_{1}$};
+  \node[main node] (4) [below of=2] {$*_{1}$};
+  \node[main node] (5) [right of=2] {$l_{1}$};
+  \node[main node] (6) [right of=5] {$l_{2}$};
+  \node[main node] (7) [right of=6] {$l_{3}$};
+  \node[main node] (8) [shift={(1.5,0)}] at (7) {$C_{2}$};
+  \node[main node] (9) [above right of=8] {$*_{2}$};
+  \node[main node] (10) [below right of=8] {$*_{2}$};
+  
+  \path
+  (1) edge (2)
+  (2) edge (3)
+  (2) edge (4)
+  (2) edge (5)
+  (5) edge (6)
+  (6) edge (7)
+  (7) edge (8)
+  (8) edge (9)
+  (8) edge (10);
+  
+\end{tikzpicture}
+\caption{Example of labelling on $(S_{3},3,S_{2}) \equiv S_{3,3,2}$}
+\label{myfigure: Example of labeling on dual star graph}
+\end{myfigure}
+
+
 \subsection{Symmetric l-dual stars}
 We will now limit ourselves to symmetric dual stars when $n=n'$. Again we will seek an attack that aligns itself with the random oscillation type attack (embedded Hamiltonian patrol), that is we will seek a bound of $\frac{m}{4n+2(l+1)}$.
 
-We will first look at a decomposition along the line, i.e decomposing into $S_{n} \cup S_{n+1}^{l}$ or $S_{n+1} \cup S_{n+1}^{l-1}$ or.... or $S_{n+1}^{\frac{l}{2}} \cup S_{n+1}^{\frac{l}{2}}$ (if even). Only up till $S_{n+1}^{\frac{l-1}{2}} \cup S_{n+1}^{\frac{l+1}{2}}$ (if odd).
+We will first look at a decomposition along the line, i.e decomposing into $S_{n} \cup S_{n+1}^{l-1}$ or $S_{n+1} \cup S_{n+1}^{l-2}$ or.... or $S_{n+1}^{\frac{l}{2}-1} \cup S_{n+1}^{\frac{l}{2}-1}$ (if even). Only up till $S_{n+1}^{\frac{l-3}{2}} \cup S_{n+1}^{\frac{l-1}{2}}$ (if odd).
 
 \textbf{Case 1: Even $l$}
-Then the decomposition is into $S_{n} \cup S_{n+1}^{l}$ or into $S_{n+1}^{i} \cup S_{n+1}^{l-i}$ for $i=0,1,...,\frac{l}{2}$.
+Then the decomposition is into $S_{n} \cup S_{n+1}^{l-1}$ or into $S_{n+1}^{i} \cup S_{n+1}^{l-2-i}$ for $i=0,1,...,\frac{l}{2}-1$.
 
-This gives a decomposition bound of $V \geq \frac{1}{\frac{1}{V(S_{n})}+\frac{1}{V(S_{n+1}^{l})}}$ or $V \geq \frac{1}{\frac{1}{V(S_{n+1}^{i})}+\frac{1}{V(S_{n}^{l-i})}}$. However to evaluate these bounds exactly we need the full solution to the elongated star graph.
+We could use the decomposition lemma to achieve a lower bound on our value, using the exact value of the elongated star (which at the moment is not currently none), however what we do know is that the value in each of these decompositions is at least as good as their Hamiltonian bound.
 
-The other type of decomposition that makes sense is into elongated stars and line sections.
+So we can use the fact that
+$$ V \geq h \iff \frac{1}{V} \leq \frac{1}{h} \implies \frac{1}{a+\frac{1}{V}} \geq \frac{1}{a+\frac{1}{h}}$$
+Allowing us to just use the Hamiltonian bound in the decomposition (note. this may not give us the best lower bound)
 
-I propose that the following solution, works when the game value is above a half or above, that is that $m > 2n+l$.
+So we will get, when we have appropriate values of $m$
+\begin{itemize}
+\item $V \geq \frac{1}{\frac{2n}{m} + \frac{2(n+1)+2(l-1)}{m}}=\frac{m}{4n+2l}$
+when $m \leq 2n$.
+\item $V \geq \frac{1}{\frac{2(n+1)+2i}{m} + \frac{2(n+1)+2(l-2-i)}{m}}=\frac{m}{4n+2l}$ when $m \leq 2(n+1)+2i$ 
+\end{itemize}
+As this hold for all $i=0,1,..,\frac{l}{2}-1$ to get the highest range of $m$, we will always choose the largest (symmetric) decomposition to get $V \geq \frac{m}{4n+2l}$ for $m \leq 2n+l$.
+
+\begin{note}
+This is not the greatest lower bound (or the minimum), as we have used an inequality on the actual value.
+\end{note}
+
+\textbf{Case 2: Odd $l$}
+
+Then the decomposition into $S_{n} \cup S_{n+1}^{l-1}$ or $S_{n+1}^{i} \cup S_{n+1}^{l-2-i}$ for $i=0,1,...,\frac{l-3}{2}$
+
+Again we will use the hamiltonian bound on the value of these decomposed parts to get, for appropriate values of $m$
+
+\begin{itemize}
+\item $V \geq \frac{1}{\frac{2n}{m} + \frac{2(n+1)+2(l-1)}{m}}=\frac{m}{4n+2l}$ when $m \leq 2n$
+\item $V \geq \frac{1}{\frac{2(n+1)+2i}{m} + \frac{2(n+1)+2(l-2-i)}{m}}=\frac{m}{4n+2l}$ when $m \leq 2(n+1)+2i$ 
+\end{itemize}
+As this hold for all $i=0,1,..,\frac{l-3}{2}$ to get the highest range of $m$, we will always choose the largest decomposition to get $V \geq \frac{m}{4n+2l}$ for $m \leq 2n+l-1$.
+
+Though in this case we could allow the first decomposed part, $S_{n+1}^{\frac{l-3}{2}}$. to have a value of $1$, giving a value of $V \geq \frac{m}{4n+2l+1}$ when $m=2n+l$.
+
+\textbf{Conclusion on decomposition}
+For $m \leq 2n+l$ we have a better than the random Oscillation (embedded Hamiltonian), so we will only look to use this (and find an attack matching it) when $m > 2n+l$ i.e $m \geq 2n+l+1$.
+
+\begin{remark}
+It is also possible to decompose the symmetric l-dual star into stars and lines. For an exploration of this see Appendix \ref{Appendix: further decomposition of symmetric l-dual star graphs}
+\end{remark}
+
+I propose that the following solution, works when the game value is above a half or above, that is that $m \geq 2n+l+1$, that is when the chance of capture under the Hamiltonian is guaranteed to be above a $\frac{1}{2}$.
 
 \begin{definition}[Symmetric l-dual star attack]
 The \textit{symmetric l-dual star attack} is one that attacks at each external node, $*$ , with equal probability starting at attack times $\tau=0,1,...,2n+l$
@@ -2556,13 +2646,130 @@ When $T \geq m+2n+l+1$ and $m$ then the symmetric l-dual star bound is $V \leq \
 
 Proof: To be Completed
 
-\begin{lemma}[Solution for $m  $]
-By the attacker using the symmetric l-dual star attack and the patroller using a random oscillation patrol (in the usual fashion), we achieve a value for when $m >$
+\begin{lemma}[Solution for $m \geq 2n+l+1$]
+By the attacker using the symmetric l-dual star attack and the patroller using a random oscillation patrol (in the usual fashion), we achieve a value for when $m \geq 2n+l+1$ of
+$$V = \frac{m}{4n+2l+2}$$
 \end{lemma}
 
 
-\section{Linked Star graphs}
+\section{Mutli Star graphs}
+In this section we now consider the generalised version of a dual star , for more than 2 connected stars
 
+\begin{definition}
+We define the \textit{multi k-star graph}, $(S_{n_{1}},...,S_{n_{k}}) \equiv \bigodot\limits_{i=1}^{k} S_{n_{i}} $, to be the $k$ star graphs $S_{n_{i}}$ for $i=1,...,k$ initially with disconnected centres which are now made adjacent by the introduction of connection between each combination (i.e the complete graph of centres)
+\end{definition}
+
+\begin{myfigure}
+\begin{center}
+\begin{tikzpicture}[-,auto,node distance=1.5cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+ \node[main node] (c1) {$C_{1}$};
+ \node[main node] (1) [above of=c1] {$*_{1}$};
+ \node[main node] (2) [above left of=c1] {$*_{1}$};
+ \node[main node] (3) [left of=c1] {$*_{1}$};
+ 
+ \path
+ (c1) edge (1)
+      edge (2)
+      edge (3);
+ 
+ \node[main node] (c2) [right of=c1] {$C_{2}$};
+ \node[main node] (4) [above of=c2] {$*_{2}$};
+ \node[main node] (5) [right of=c2] {$*_{2}$};
+ 
+  \path
+ (c2) edge (4)
+      edge (5);
+      
+ \node[main node] (c3) [below of=c1] {$C_{3}$};
+ \node[main node] (6) [below of=c3] {$*_{3}$};
+ \node[main node] (7) [left of=c3] {$*_{3}$};
+ 
+  \path
+ (c3) edge (6)
+      edge (7);
+      
+ \node[main node] (c4) [below of=c2] {$C_{4}$};
+ \node[main node] (8) [below right of=c4] {$*_{4}$};
+ 
+  \path
+ (c4) edge (8);            
+  
+ \path
+ (c1) edge (c2)
+      edge (c3)
+      edge (c4)
+ (c2) edge (c3)
+      edge (c4)
+ (c3) edge (c4);       
+  
+\end{tikzpicture}
+\end{center}
+\caption{Example of labelling on $(S_{3},S_{2},S_{2},S_{1})$}
+\label{myfigure: Example of labeling on dual star graph}
+\end{myfigure}
+
+\subsection{Symmetric multi stars} 
+We now aim to look when a \textit{symmetric} $k$-star graph has $n \equiv n_{1}=....=n_{k}$, then it is clear we just have a class of centres, $C$ and a class of external points, $*$ and we must decide how to attack, clearly we only attack the $*$ class (as the $C$ class contains only penultimate nodes) and therefore we must attack all of these the same.
+
+First we will look at decomposition, by decomposing into seperate stars $S_{n}$ we get the bound, when $m \leq 2n$ of $V \geq \frac{1}{k \times \frac{2n}{m}}=\frac{m}{2nk}$. 
+
+Now by simplification of $\bigodot\limits_{i=1}^{k} S_{n}$ to $S_{nk}$ by the simplification of centres, we get the bound that $V \leq \frac{m}{2nk}$. Hence for $m \leq 2n$ we get that $V=\frac{m}{2nk}$.
+
+For $m \geq 2n+1$, which means that each of the individual stars is winnable, we seek a different type of answer.
+
+We can get the Hamiltonian bound in our symmetric graph as $V \geq \frac{m}{k(2n+1)}$ and note that we do not need the complete graph connecting the centres but just a cycle.
+
+\begin{definition}[Symmetric k-mutli star attack]
+The \textit{symmetric k-multi star attack} is one that attacks at each external node, $*$, at starting times $\tau=0,1,...,2n$ all with equal probability.
+\end{definition}
+
+\begin{lemma}
+When $T \geq m+2n$, then the symmetric k-multi star bound is $V \leq \frac{m}{k(2n+1)}$
+\end{lemma}
+
+Proof: To be completed
+
+Idea to proof
+\begin{itemize}
+\item[1.] Show you must start at an external node (and can only wait here one time period max)
+\item[2.] When choosing to move we always choose to move to a node in the current star if it is unvisited
+\item[3.] Once all nodes have been visited on the current star, we will move to other stars (unless there is time later then we need to catch some attacks)
+
+\item Must arrive at the last star visited's first node to catch the most attack (i.e all possible) by arriving by time $m-1$. 
+\end{itemize}
+
+\subsection{Uneven multi stars}
+We now look at the general idea and assume WLOG $n_{1} \geq n_{2} \geq ... \geq n_{k}$. We can still attempt to use decomposition and simplification to get the answer.
+
+If $2 \leq m \leq 2n_{k}$ then
+$$ V \geq \frac{1}{\sum\limits_{i=1}^{k} \frac{2n_{i}}{m}}=\frac{m}{\sum\limits_{i=1}^{k} n_{i}}$$
+
+Under simplification to $S_{\sum\limits_{i=1}^{k} n_{i}}$ we get the bound 
+$$ V \leq \frac{m}{\sum\limits_{i=1}^{k} n_{i}}$$
+
+Hence for $m \leq 2n_{k}$ we have $V=\frac{m}{\sum\limits_{i=1}^{k} n_{i}}$.
+
+So we now seek a solution for $m > 2n_{k}$, that is at least the $k$\textsuperscript{th} star is winnable. One question could be, does it matter which of the stars are winnable or not ?
+
+The first instinct would suggest so, let us present an example on 3-multi star graph (tri star) $S_{6} \bigodot S_{4} \bigodot S_{2}$, then we already have the solution for $m \leq 4$ so now lets look for the solution at $m=5$, we will first note that individual star decomposition gives $V \geq \frac{1}{1+\frac{8}{5}+\frac{12}{5}}=\frac{5}{25}$ which is better than the Hamiltonian bound $V \geq \frac{5}{2(2+4+6)+3}=\frac{5}{27}$.
+
+No idea how the attacker should attack (This is analogous to the case of $m=2n_{2}+1$ in the uneven dual star).
+
+Lets say we go for $m=6$ then again this decomposition gives $V \geq \frac{6}{26}$ and hamiltonian is $V \geq \frac{6}{27}$. But if we decompose into $S_{6}$ and $S_{4} \bigodot S_{2}$ we get $V \geq \frac{1}{\frac{12}{6}+\frac{14}{6}}=\frac{6}{26}$ the same bound.
+
+Let us suggest an attack analogous to the uneven dual star type attack
+
+\begin{definition}[Uneven multi star attack]
+The first \textit{uneven k-multi star attack} with $n_{1} \geq ... \geq n_{k}$ and $n_{k} < m \leq n_{j}$ for all $j$ s.t $n_{j} \neq n_{k}$. This attacks the $*_{k}$ equivalence class (that is any $*_{i}$ with $n_{i}=n_{k}$) at starting times $\tau_{k}=0,1,...,2n_{k}+1$ and all other external nodes at starting times $\tau_{1}=1,...,2n_{k}$ choosing the node with equal probability.
+\end{definition}
+
+This \textit{first} type of analogous result seems to give a good bound
+
+In our example we can get the bound $V \leq \frac{6}{26}$. Whether this is true in general is unknown. So we can get the answer $V=\frac{6}{26}$, we also suggest that both these bounds hold true for $m=7$ and we get $V=\frac{7}{26}$. Furthermore these bounds also hold at $m=8$ giving a value of $V=\frac{8}{26}$. We further claim that this will hold up until the decomposition bound breaks, that is at $m=12$.
+
+So we do not have a solution for $m=5$ (analogous to the uneven dual star) and for $m \geq 13$. When $m \geq 13$ it means we can win in the dual graph $S_{2} \bigodot S_{4}$ and maybe the Hamiltonian bound now turns on.
 
 %%%%%%%%%%%%%%%%%%%%%
 %End of main part of document
@@ -3036,6 +3243,54 @@ Then setting $q_{L}=\frac{m}{m'}q_{S}$ means we must maximize $(1-\frac{m+2(n-1)
 \begin{note}
 It is worth noting that this is analogous to the result found by the usual combinatorial improvement when $m$ is even.
 \end{note}
+
+\section{Dual star graphs}
+
+\subsection{Decomposition of symmetric l-dual star into two stars and a line}
+\label{Appendix: further decomposition of symmetric l-dual star graphs}
+
+We now look at decomposing $(S_{n},l,S_{n})$ into either $S_{n} \cup L_{l} \cup S_{n}$ or $S_{n+1} \cup L_{l-1} \cup S_{n}$ or $S_{n+1} \cup L_{l-2} \cup S_{n+1}$ or $S_{n+1}^{1} \cup L_{l-2} \cup S_{n} $  .... Until we have line and only have $S_{n+1}^{\frac{l}{2}-1} \cup S_{n+1}^{\frac{l}{2}-1}$ (if $l$ even) or $S_{n+1}^{\frac{l-3}{2}} \cup S_{n+1}^{\frac{l-1}{2}}$ (if $l$ odd).
+
+In general for a choice of the line length in the middle, we can then split the excess between the two (elongated) stars. As we have seen , when one (elongated) star is worse than the other we just suffer in the range of $m$ we are allowed. So we will always pick these to be symmetric hence we are looking at a decomposition of the type.
+
+$S_{n} \cup L_{l} \cup S_{n}$ or $S_{n+1}^{i} \cup L_{l-2-2i} \cup S_{n+1}^{i}$ for $i=0,1,...,\frac{l}{2}-1$ (if $l$ even) or $i=0,1,...,\frac{l-3}{2}$ if even
+
+We are under the impression that there will be a balance to pay for increasing $i$ as the line's length is decreasing.
+
+Again to get the decomposition bound we will just using the fact the values are better than the decomposed parts Hamiltonian bounds.
+
+The bounds given are, for appropriate values of $m$
+\begin{itemize}
+\item $V \geq \frac{1}{\frac{2n}{m}+\frac{2(l-1)}{m}+\frac{2n}{m}}=\frac{m}{4n+2l-2}$ for $m \leq 2n$ and $m \leq 2(l-1)$
+\item $V \geq \frac{1}{\frac{2(n+1)+2i}{m}+\frac{2(l-3-2i)}{m}+\frac{2(n+1)+2i}{m}}=\frac{m}{4n+2l-2}$ for $m \leq 2(n+i)$ and $m \leq 2(l-3-2i)$
+\end{itemize}
+Now we see we get the same bound of $V \geq \frac{m}{4n+2l-2}$, so we just want to pick the correct choice to get the highest value of $m$. To achieve the highest value of $m$ we want to maximize the minimum of $2(n+i),2(l-3-2i)$.
+
+For example say $n=5,l=10$ then we would want to max min $10+2i,14-4i$. As this requires a symmetrical choice we solve the equation by $10+2i=14-4i \implies i=\frac{4}{6}=\frac{2}{3}$ leading us to choose either $i=0$ for range $m \leq 10$ (by the first restriction $10+2i$) or $i=1$ for a range of $m \leq 10$ (by second restriction $14-4i$)
+
+Hence we will solve in general to get $i=\frac{l-n}{3}-1$, which we will round up or down if needed.To see which way round up we only need consider the difference between the distant, $l$ and the number of external nodes on each star, $n$. The problem only occurs when $l-n=1 \text{ or } 2 \mod 3$. i.e $l-n=3p+1 \text{ or } 3p+2$
+
+\textbf{Case 1: $l-n=1 \mod 3 $}
+
+Are choice is round down to $i=\frac{l-n-1}{3}-1$ to get restrictions $m \leq 2(n+\frac{l-n-1}{3}-1)=2(n+p-1)$ and $m \leq 2(l-3-2\frac{l-n-1}{3}+2)=2(l-2p-1)=2(n+3p+1-2p-1)=2(n+p)$ so we would get the first restriction kicking in. Giving $m \leq 2(n+p-1)$.
+
+If we round up to $i=\frac{l-n+2}{3}-1$ we get restrictions $m \leq 2(n+\frac{l-n+2}{3}-1)=2(n+p+1-1)=2(n+p)$ and $m \leq 2(l-3-2\frac{l-n+2}{3}-2)=2(l-3-2p-2+2)=2(l-2p-3)=2(n+3p+1-2p-3)=2(n+p-2)$ so we would get the second restriction kicking in. Giving $m \leq 2(n+p-2)$.
+
+So in this case we always round down.
+
+\textbf{Case 2: $l-n=2 \mod 3$}
+
+If we round down to $i=\frac{l-n-2}{3}-1$ we get restrictions $m \leq 2(n+\frac{l-n-2}{3}-1)=2(n+p-1)$ and $m \leq 2(l-3-2\frac{l-n-2}{3}+2)=2(l-2p-1)=2(n+3p+2-2p-1)=2(n+p+1)$, so we get the first restriction kicking in. Giving $m \leq 2(n+p-1)$.
+
+If we round up to $i=\frac{l-n+1}{3}-1$ we get restrictions $m \leq 2(n+\frac{l-n+1}{3}-1)=2(n+p+1-1)=2(n+p)$ and $m \leq 2(l-3-2\frac{l-n+1}{3}+2)=2(l-2p-2-1)=2(l-2p-3)=2(n+3p+2-2p-3)=2(n+p-1)$.
+
+So in this case we can round either way. 
+
+
+\textbf{conclusion}
+As one case cares about rounding down and the other does not, we shall round down in all cases for ease.
+
+Hence we will be using $i=\floor{\frac{l-n}{3}-1}$ to achieve the best range on $m$ for the decomposition.
 
 
 \section{Proof's}
@@ -3553,7 +3808,7 @@ Hence if $m \leq 2(k+1)$ (i.e $r \leq 0$) then we get $\frac{k+1}{n+k}$ and if $
 \end{proof}
 
 \subsection{Type-delayed attack proof}
-\label{Type-deayed attack proof}
+\label{Type-delayed attack proof}
 We begin with a lemma used in the proof
 \begin{lemma}
 When $k_{max}-i \leq t \leq k_{max}+i$ we get that

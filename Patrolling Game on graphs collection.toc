@@ -42,10 +42,13 @@
 \contentsline {subsection}{\numberline {8.3}solution for $m \geq 2(k_{max}+1)$}{36}{subsection.8.3}
 \contentsline {section}{\numberline {9}Dual star graphs}{38}{section.9}
 \contentsline {subsection}{\numberline {9.1}Symmetric dual stars}{39}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Uneven dual stars}{40}{subsection.9.2}
 \contentsline {section}{\numberline {10}Distant dual stars}{40}{section.10}
-\contentsline {subsection}{\numberline {10.1}Symmetric l-dual stars}{40}{subsection.10.1}
-\contentsline {section}{\numberline {11}Linked Star graphs}{41}{section.11}
-\contentsline {section}{Appendices}{i}{section*.33}
+\contentsline {subsection}{\numberline {10.1}Symmetric l-dual stars}{41}{subsection.10.1}
+\contentsline {section}{\numberline {11}Mutli Star graphs}{43}{section.11}
+\contentsline {subsection}{\numberline {11.1}Symmetric multi stars}{43}{subsection.11.1}
+\contentsline {subsection}{\numberline {11.2}Uneven multi stars}{44}{subsection.11.2}
+\contentsline {section}{Appendices}{i}{section*.35}
 \contentsline {section}{\numberline {A}Graph Definitions}{i}{appendix.A}
 \contentsline {section}{\numberline {B}Old Statements about Old diametric}{iii}{appendix.B}
 \contentsline {section}{\numberline {C}Improvemening Hamiltonian bound}{iv}{appendix.C}
@@ -53,11 +56,13 @@
 \contentsline {subsection}{\numberline {C.2}Naive Improvement Complete analysis}{v}{subsection.C.2}
 \contentsline {subsection}{\numberline {C.3}Combinatorial Improvement Complete analysis}{vi}{subsection.C.3}
 \contentsline {subsection}{\numberline {C.4}Combinatorial loop improvement analysis}{vii}{subsection.C.4}
-\contentsline {section}{\numberline {D}Proof's}{vii}{appendix.D}
-\contentsline {subsection}{\numberline {D.1}Alternating Random Hamiltonian proof}{vii}{subsection.D.1}
-\contentsline {subsection}{\numberline {D.2}Condition on T for old diametric proof}{viii}{subsection.D.2}
-\contentsline {subsection}{\numberline {D.3}Time-limited diametric attack proof}{ix}{subsection.D.3}
-\contentsline {subsection}{\numberline {D.4}Polygonal attack proof}{x}{subsection.D.4}
-\contentsline {subsection}{\numberline {D.5}Time-delayed attack proof}{xi}{subsection.D.5}
-\contentsline {subsection}{\numberline {D.6}Type-delayed attack proof}{xxiii}{subsection.D.6}
-\contentsline {subsection}{\numberline {D.7}Stage-1-Step-point lemma proof}{xxviii}{subsection.D.7}
+\contentsline {section}{\numberline {D}Dual star graphs}{vii}{appendix.D}
+\contentsline {subsection}{\numberline {D.1}Decomposition of symmetric l-dual star into two stars and a line}{vii}{subsection.D.1}
+\contentsline {section}{\numberline {E}Proof's}{ix}{appendix.E}
+\contentsline {subsection}{\numberline {E.1}Alternating Random Hamiltonian proof}{ix}{subsection.E.1}
+\contentsline {subsection}{\numberline {E.2}Condition on T for old diametric proof}{x}{subsection.E.2}
+\contentsline {subsection}{\numberline {E.3}Time-limited diametric attack proof}{xi}{subsection.E.3}
+\contentsline {subsection}{\numberline {E.4}Polygonal attack proof}{xii}{subsection.E.4}
+\contentsline {subsection}{\numberline {E.5}Time-delayed attack proof}{xiii}{subsection.E.5}
+\contentsline {subsection}{\numberline {E.6}Type-delayed attack proof}{xxiv}{subsection.E.6}
+\contentsline {subsection}{\numberline {E.7}Stage-1-Step-point lemma proof}{xxix}{subsection.E.7}
