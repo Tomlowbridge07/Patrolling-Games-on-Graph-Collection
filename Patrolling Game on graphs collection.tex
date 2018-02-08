@@ -2461,6 +2461,13 @@ $$V= \frac{m}{2(n+|k|)} $$
 and when $m > 2(n+|k|)$ then $V=1$.
 \end{corollary}
 
+\begin{myfigure}
+\resizebox{0.95\linewidth}{!}{
+\input{Images/GeneralStarRegions(S_10_5,3,2,1).tex}
+}
+\caption{The value of the star graph, $S_{10}^{5,3,2,1}$}
+\end{myfigure}
+
 \section{Dual star graphs}
 This section involves linking two star graphs $S_{n_{1}}$ and $S_{n_{1}}$ by making the centres adjacent
 
@@ -2520,9 +2527,16 @@ When $T \geq m+2n$, then the symmetric dual star bound is $V \leq \frac{m}{4n+2}
 Proof: To be completed
 
 \begin{lemma}[Solution for $m \geq 2n+1$]
-By the attacker using the symmetric dual star attack and the patroller using an random oscillation patrol (in the usual fashion), we acheive the value when $m \geq 2n+1$ of
+By the attacker using the symmetric dual star attack and the patroller using an random oscillation patrol (in the usual fashion), we achieve the value when $m \geq 2n+1$ of
 $$ V=\frac{m}{4n+2} $$
 \end{lemma}
+
+\begin{myfigure}
+\resizebox{0.95\linewidth}{!}{
+\input{Images/DualStarRegions(S_6).tex}
+}
+\caption{The value of the dual star graph, $S_{6} \bigodot S_{6}$}
+\end{myfigure}
 
 \subsection{Uneven dual stars}
 We will now go back to \textit{uneven dual stars}, when $n_{1} \neq n_{2}$ and we will assume WLOG $n_{1} > n_{2}$.
@@ -2545,6 +2559,15 @@ Proof: To be completed
 By the attacker using the uneven dual star attack and the patroller using a random oscillation patrol (in the usual fashion), we achieve the value when $m \geq 2(n_{2}+1)$ of
 $$V=\frac{m}{2(n_{1}+n_{2}+1)}$$
 \end{lemma}
+
+\begin{myfigure}
+\resizebox{0.95\linewidth}{!}{
+\input{Images/DualStarRegions(S_6,4).tex}
+}
+\caption{The value of the dual star graph, $S_{6} \bigodot S_{4}$
+(Value at $m=9$ is unknown)}
+\end{myfigure}
+
 
 \section{Distant dual stars}
 We will now extend the idea of the dual star graph to have the connection between the centres now have an additional $l$ nodes between the two centres.
@@ -2912,7 +2935,7 @@ $$V \geq \frac{1}{\sum\limits_{i=1}^{k} \frac{2(n_{i}+|\bm{k}_{i}|)}{m}}=\frac{m
 \end{tikzpicture}
 \end{center}
 \caption{Example of decomposition on $(S_{3}^{1,1},S_{2}^{2},S_{2},S_{1})$}
-\label{myfigure: Example of labeling on multi general star graph}
+\label{myfigure: Example of decomposition on multi general star graph}
 \end{myfigure}
 
 Now under simplification of the centre's, i.e $\bigodot\limits_{i=1}^{p} S_{n_{i}}^{\bm{k}_{i}}$ to $S_{\sum\limits_{i=1}^{p} n_{i}}^{\bm{K}}$, where $\bm{K}$ is the concatenation of all the $\bm{k}_{i}$ vectors for $i=1,...,p$.
@@ -2964,7 +2987,7 @@ Now under simplification of the centre's, i.e $\bigodot\limits_{i=1}^{p} S_{n_{i
 \end{tikzpicture}
 \end{center}
 \caption{Example of simplification on $(S_{3}^{1,1},S_{2}^{2},S_{2},S_{1})$ to $S_{8}^{2,1,1}$}
-\label{myfigure: Example of labeling on multi general star graph}
+\label{myfigure: Example of simplification on multi general star graph}
 \end{myfigure}
 
 Then we get as long as $m \geq 2(\bm{K}_{\max}+1)=2(\max\limits_{i=1,...,p} \{\bm{k}_{max} \} +1 )$ then we get that
@@ -2982,6 +3005,10 @@ This solution may not be applicable if there is an long branch and a `small' gen
 \begin{note}
 We note that this is not the Hamiltonian bound for such a graph and the Hamiltonian bound would be,
 $$V=\frac{m}{2 \sum\limits_{i=1}^{p} (n_{i} + |\bm{k}|_{i}) + p}$$
+\end{note}
+
+\begin{note}
+Again the idea that all the centre's are connected in all combinations to each other centre is irrelevant to the decomposition and simplification.
 \end{note}
 
 %%%%%%%%%%%%%%%%%%%%%

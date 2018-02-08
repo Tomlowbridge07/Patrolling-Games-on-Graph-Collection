@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.6.5)  8 FEB 2018 12:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.6.5)  8 FEB 2018 17:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1367,14 +1367,6 @@ Package newfloat Info: \newfloat@ext@los is already defined on input line 77.
 LaTeX Warning: Label `myfigure: Example of labeling on dual star graph' multipl
 y defined.
 
-
-LaTeX Warning: Label `myfigure: Example of labeling on multi general star graph
-' multiply defined.
-
-
-LaTeX Warning: Label `myfigure: Example of labeling on multi general star graph
-' multiply defined.
-
 )
 \openout1 = `"Patrolling Game on graphs collection.aux"'.
 
@@ -1803,30 +1795,32 @@ Overfull \hbox (128.79584pt too wide) in paragraph at lines 2446--2447
  [] 
  []
 
-[38] [39] [40] [41] [42] [43] [44]
-Overfull \hbox (35.36191pt too wide) in paragraph at lines 2838--2839
+(./Images/GeneralStarRegions(S_10_5,3,2,1).tex) [38] [39]
+(./Images/DualStarRegions(S_6).tex) [40] (./Images/DualStarRegions(S_6,4).tex)
+[41] [42] [43] [44] [45] [46]
+Overfull \hbox (35.36191pt too wide) in paragraph at lines 2861--2862
  [] 
  []
 
-[45]
-Overfull \hbox (42.82784pt too wide) in paragraph at lines 2912--2913
+[47]
+Overfull \hbox (42.82784pt too wide) in paragraph at lines 2935--2936
  [] 
  []
 
-[46] [47]
+[48]
 No file "Patrolling Game on graphs collection".bbl.
-[48] [1] [2]
+[49] [1] [2]
 
 Package natbib Warning: Citation `Alpern2011' on page iii undefined on input li
-ne 3308.
+ne 3335.
 
 [3] [4]
-Overfull \hbox (20.23497pt too wide) detected at line 3398
+Overfull \hbox (20.23497pt too wide) detected at line 3425
 []
  []
 
 
-Overfull \hbox (23.26817pt too wide) in paragraph at lines 3401--3403
+Overfull \hbox (23.26817pt too wide) in paragraph at lines 3428--3430
 []\OT1/cmr/m/n/10 If $\OML/cmm/m/it/10 M \OMS/cmsy/m/n/10 6\OT1/cmr/m/n/10 = \O
 MS/cmsy/m/n/10 ;\OML/cmm/m/it/10 ; R \OMS/cmsy/m/n/10 6\OT1/cmr/m/n/10 = \OMS/c
 msy/m/n/10 ;$ \OT1/cmr/m/n/10 then $\OML/cmm/m/it/10 C[]\OT1/cmr/m/n/10 (\OML/c
@@ -1836,7 +1830,7 @@ C[]; C[]\OMS/cmsy/m/n/10 g \OT1/cmr/m/n/10 = []\OMS/cmsy/m/n/10 f\OML/cmm/m/it/
  []
 
 
-Overfull \hbox (25.40729pt too wide) in paragraph at lines 3401--3403
+Overfull \hbox (25.40729pt too wide) in paragraph at lines 3428--3430
 \OML/cmm/m/it/10 q[]; Pw\OT1/cmr/m/n/10 ([])\OML/cmm/m/it/10 ; Pw\OT1/cmr/m/n/1
 0 (\OML/cmm/m/it/10 k \OT1/cmr/m/n/10 + 1) + \OML/cmm/m/it/10 q[]; Pw\OT1/cmr/m
 /n/10 (\OMS/cmsy/m/n/10 ^^C\OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 q[]\OMS/cmsy/m/
@@ -1845,107 +1839,107 @@ n/10 g \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 P[] \OT1/cmr/m/n/10 + []\OMS/cmsy/m/n
  []
 
 
-Overfull \hbox (51.23727pt too wide) detected at line 3407
+Overfull \hbox (51.23727pt too wide) detected at line 3434
 []
  []
 
 [5]
-Overfull \hbox (28.89069pt too wide) detected at line 3428
+Overfull \hbox (28.89069pt too wide) detected at line 3455
 []
  []
 
 
-Overfull \hbox (31.41985pt too wide) in paragraph at lines 3428--3430
+Overfull \hbox (31.41985pt too wide) in paragraph at lines 3455--3457
 \OT1/cmr/m/n/10 creas-ing in $\OML/cmm/m/it/10 q[]$ \OT1/cmr/m/n/10 and one is 
 de-creas-ing in $\OML/cmm/m/it/10 q[]$\OT1/cmr/m/n/10 ). Mean-ing $\OML/cmm/m/i
 t/10 P \OT1/cmr/m/n/10 = []\OML/cmm/m/it/10 ; Q[] \OT1/cmr/m/n/10 =
  []
 
 [6]
-Overfull \hbox (11.59256pt too wide) detected at line 3450
+Overfull \hbox (11.59256pt too wide) detected at line 3477
 []
  []
 
 [7] [8] [9]
-Overfull \hbox (63.55418pt too wide) in paragraph at lines 3535--3536
+Overfull \hbox (63.55418pt too wide) in paragraph at lines 3562--3563
 []$\OML/cmm/m/it/10 m \OMS/cmsy/m/n/10 ^^@ [] \OT1/cmr/m/n/10 + [][] + [][] + [
 ][]$ 
  []
 
 
-Overfull \hbox (48.18863pt too wide) in paragraph at lines 3549--3552
+Overfull \hbox (48.18863pt too wide) in paragraph at lines 3576--3579
 []\OT1/cmr/m/n/10 so for-mula be-comes $[][] + [][] + [][]$.
  []
 
 [10]
-Overfull \hbox (8.2731pt too wide) in paragraph at lines 3581--3586
+Overfull \hbox (8.2731pt too wide) in paragraph at lines 3608--3613
 \OML/cmm/m/it/10 t[] \OT1/cmr/m/n/10 = [] []$, then we can form the pa-trol, $\
 OML/cmm/m/it/10 U\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) = []$
  []
 
 [11]
-Overfull \hbox (631.22052pt too wide) in paragraph at lines 3630--3630
+Overfull \hbox (631.22052pt too wide) in paragraph at lines 3657--3657
 [] 
  []
 
 [12]
-Overfull \hbox (499.85355pt too wide) in paragraph at lines 3647--3647
+Overfull \hbox (499.85355pt too wide) in paragraph at lines 3674--3674
 [] 
  []
 
 [13]
-Overfull \hbox (64.22472pt too wide) detected at line 3677
+Overfull \hbox (64.22472pt too wide) detected at line 3704
 [] \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 = []
  []
 
 
-Overfull \hbox (83.77396pt too wide) detected at line 3695
+Overfull \hbox (83.77396pt too wide) detected at line 3722
 [] \OT1/cmr/m/n/10 + [] + [] = [] + [] + [] = []
  []
 
 [14]
-Overfull \hbox (27.25238pt too wide) detected at line 3709
+Overfull \hbox (27.25238pt too wide) detected at line 3736
 [] \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 = []
  []
 
 [15]
-Overfull \hbox (49.25417pt too wide) detected at line 3751
+Overfull \hbox (49.25417pt too wide) detected at line 3778
 [] \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 + [] + [] \OMS/cmsy/m/n/10 ^^B [] \O
 T1/cmr/m/n/10 + [] = []
  []
 
 [16] [17] [18]
-Overfull \hbox (93.75484pt too wide) detected at line 3817
+Overfull \hbox (93.75484pt too wide) detected at line 3844
 [] \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 = []
  []
 
 [19]
-Overfull \hbox (31.21454pt too wide) detected at line 3847
+Overfull \hbox (31.21454pt too wide) detected at line 3874
 \OML/cmm/m/it/10 s \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 + [] = [] = []
  []
 
 [20]
-Overfull \hbox (46.0648pt too wide) in paragraph at lines 3879--3879
+Overfull \hbox (46.0648pt too wide) in paragraph at lines 3906--3906
 [] 
  []
 
 [21] [22] [23]
-Overfull \hbox (23.1488pt too wide) detected at line 4033
+Overfull \hbox (23.1488pt too wide) detected at line 4060
 [] \OT1/cmr/m/n/10 = [] \OMS/cmsy/m/n/10 ^^U []
  []
 
 [24]
-Overfull \hbox (16.56325pt too wide) detected at line 4036
+Overfull \hbox (16.56325pt too wide) detected at line 4063
 [] \OMS/cmsy/m/n/10 ^^U [] \OT1/cmr/m/n/10 = []
  []
 
 [25] [26] [27]
-Overfull \hbox (83.98665pt too wide) in paragraph at lines 4127--4127
+Overfull \hbox (83.98665pt too wide) in paragraph at lines 4154--4154
 [] 
  []
 
 
-Overfull \hbox (31.50774pt too wide) in paragraph at lines 4134--4136
+Overfull \hbox (31.50774pt too wide) in paragraph at lines 4161--4163
 []\OT1/cmr/m/n/10 If $\OML/cmm/m/it/10 m \OMS/cmsy/m/n/10 ^^U \OML/cmm/m/it/10 
 k[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 i \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 
 m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 t[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/1
@@ -1954,7 +1948,7 @@ m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 t[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/1
  []
 
 
-Overfull \hbox (31.50774pt too wide) in paragraph at lines 4137--4139
+Overfull \hbox (31.50774pt too wide) in paragraph at lines 4164--4166
 []\OT1/cmr/m/n/10 If $\OML/cmm/m/it/10 k[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/1
 0 i \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 
 t[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/1
@@ -1963,7 +1957,7 @@ t[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/1
  []
 
 
-Overfull \hbox (22.30688pt too wide) in paragraph at lines 4140--4142
+Overfull \hbox (22.30688pt too wide) in paragraph at lines 4167--4169
 []\OT1/cmr/m/n/10 If $\OML/cmm/m/it/10 k[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/1
 0 i \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 
 t[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/1
@@ -1973,7 +1967,7 @@ OMS/cmsy/m/n/10 ^^T
  []
 
 [28]
-Overfull \hbox (36.96565pt too wide) detected at line 4155
+Overfull \hbox (36.96565pt too wide) detected at line 4182
 [] \OMS/cmsy/m/n/10 ^^B [] \OT1/cmr/m/n/10 + [] + [] = [] + []
  []
 
@@ -1982,15 +1976,15 @@ Overfull \hbox (36.96565pt too wide) detected at line 4155
 Package natbib Warning: There were undefined citations.
 
 [30]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4183.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 4183.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4210.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4210.
  (./Patrolling Game on graphs collection.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4183.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4183.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4210.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4210.
 
 Package rerunfilecheck Info: File `"Patrolling Game on graphs collection".out' 
 has not changed.
-(rerunfilecheck)             Checksum: 25EFCBD8EC6E02A074778E92F7A32221;4894.
+(rerunfilecheck)             Checksum: 28314EB4414F136995DE805C523E875F;4894.
 
 
 LaTeX Warning: There were undefined references.
@@ -1998,13 +1992,13 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4183.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4210.
  ) 
 Here is how much of TeX's memory you used:
- 33567 strings out of 492995
- 646432 string characters out of 6132690
- 978573 words of memory out of 5000000
- 36356 multiletter control sequences out of 15000+600000
+ 33582 strings out of 492995
+ 646919 string characters out of 6132690
+ 978775 words of memory out of 5000000
+ 36358 multiletter control sequences out of 15000+600000
  24190 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,22n,103p,10508b,1046s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2041,11 +2035,11 @@ MD64/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></maths/
 linuxlocal/AMD64/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.p
 fb></maths/linuxlocal/AMD64/texlive/2017/texmf-dist/fonts/type1/public/amsfonts
 /symbols/msbm10.pfb>
-Output written on "Patrolling Game on graphs collection.pdf" (81 pages, 731563 
+Output written on "Patrolling Game on graphs collection.pdf" (82 pages, 744504 
 bytes).
 PDF statistics:
- 1035 PDF objects out of 1200 (max. 8388607)
- 912 compressed objects within 10 object streams
- 283 named destinations out of 1000 (max. 500000)
+ 1042 PDF objects out of 1200 (max. 8388607)
+ 918 compressed objects within 10 object streams
+ 287 named destinations out of 1000 (max. 500000)
  565 words of extra memory for PDF output out of 10000 (max. 10000000)
 

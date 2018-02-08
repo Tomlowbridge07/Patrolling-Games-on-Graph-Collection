@@ -41,15 +41,15 @@
 \contentsline {subsection}{\numberline {8.2}Basic Analysis}{35}{subsection.8.2}
 \contentsline {subsection}{\numberline {8.3}solution for $m \geq 2(k_{max}+1)$}{36}{subsection.8.3}
 \contentsline {section}{\numberline {9}Dual star graphs}{38}{section.9}
-\contentsline {subsection}{\numberline {9.1}Symmetric dual stars}{39}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}Uneven dual stars}{40}{subsection.9.2}
-\contentsline {section}{\numberline {10}Distant dual stars}{40}{section.10}
+\contentsline {subsection}{\numberline {9.1}Symmetric dual stars}{40}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Uneven dual stars}{41}{subsection.9.2}
+\contentsline {section}{\numberline {10}Distant dual stars}{41}{section.10}
 \contentsline {subsection}{\numberline {10.1}Symmetric l-dual stars}{41}{subsection.10.1}
-\contentsline {section}{\numberline {11}Mutli Star graphs}{43}{section.11}
-\contentsline {subsection}{\numberline {11.1}Symmetric multi stars}{43}{subsection.11.1}
-\contentsline {subsection}{\numberline {11.2}Uneven multi stars}{44}{subsection.11.2}
-\contentsline {section}{\numberline {12}Multi general star graphs}{45}{section.12}
-\contentsline {section}{Appendices}{i}{section*.38}
+\contentsline {section}{\numberline {11}Mutli Star graphs}{44}{section.11}
+\contentsline {subsection}{\numberline {11.1}Symmetric multi stars}{44}{subsection.11.1}
+\contentsline {subsection}{\numberline {11.2}Uneven multi stars}{46}{subsection.11.2}
+\contentsline {section}{\numberline {12}Multi general star graphs}{47}{section.12}
+\contentsline {section}{Appendices}{i}{section*.41}
 \contentsline {section}{\numberline {A}Graph Definitions}{i}{appendix.A}
 \contentsline {section}{\numberline {B}Old Statements about Old diametric}{iii}{appendix.B}
 \contentsline {section}{\numberline {C}Improvemening Hamiltonian bound}{iv}{appendix.C}

@@ -2461,6 +2461,13 @@ $$V= \frac{m}{2(n+|k|)} $$
 and when $m > 2(n+|k|)$ then $V=1$.
 \end{corollary}
 
+\begin{myfigure}
+\resizebox{0.95\linewidth}{!}{
+\input{Images/GeneralStarRegions(S_10_5,3,2,1).tex}
+}
+\caption{The value of the star graph, $S_{10}^{5,3,2,1}$}
+\end{myfigure}
+
 \section{Dual star graphs}
 This section involves linking two star graphs $S_{n_{1}}$ and $S_{n_{1}}$ by making the centres adjacent
 
@@ -2520,9 +2527,16 @@ When $T \geq m+2n$, then the symmetric dual star bound is $V \leq \frac{m}{4n+2}
 Proof: To be completed
 
 \begin{lemma}[Solution for $m \geq 2n+1$]
-By the attacker using the symmetric dual star attack and the patroller using an random oscillation patrol (in the usual fashion), we acheive the value when $m \geq 2n+1$ of
+By the attacker using the symmetric dual star attack and the patroller using an random oscillation patrol (in the usual fashion), we achieve the value when $m \geq 2n+1$ of
 $$ V=\frac{m}{4n+2} $$
 \end{lemma}
+
+\begin{myfigure}
+\resizebox{0.95\linewidth}{!}{
+\input{Images/DualStarRegions(S_6).tex}
+}
+\caption{The value of the dual star graph, $S_{6} \bigodot S_{6}$}
+\end{myfigure}
 
 \subsection{Uneven dual stars}
 We will now go back to \textit{uneven dual stars}, when $n_{1} \neq n_{2}$ and we will assume WLOG $n_{1} > n_{2}$.
@@ -2545,6 +2559,15 @@ Proof: To be completed
 By the attacker using the uneven dual star attack and the patroller using a random oscillation patrol (in the usual fashion), we achieve the value when $m \geq 2(n_{2}+1)$ of
 $$V=\frac{m}{2(n_{1}+n_{2}+1)}$$
 \end{lemma}
+
+\begin{myfigure}
+\resizebox{0.95\linewidth}{!}{
+\input{Images/DualStarRegions(S_6,4).tex}
+}
+\caption{The value of the dual star graph, $S_{6} \bigodot S_{4}$
+(Value at $m=9$ is unknown)}
+\end{myfigure}
+
 
 \section{Distant dual stars}
 We will now extend the idea of the dual star graph to have the connection between the centres now have an additional $l$ nodes between the two centres.
@@ -2831,15 +2854,8 @@ We define the \textit{multi general p-star graph}, $(s_{n_{1}}^{\bm{k}_{p}},...,
       edge (c4)
  (c2) edge (c3)
       edge (c4)
- (c3) edge (c4);  
+ (c3) edge (c4);
  
-   \node (Box1) [draw,thick,fit=(1) (2) (3) (4) (5),fill,red,opacity=0.2] {};
-   
-      \node (Box1) [draw,thick,fit=(6) (7) (8) (9) (10),fill,blue,opacity=0.2] {};
-      
-         \node (Box1) [draw,thick,fit=(1) (2) (3) (4) (5),fill,red,opacity=0.2] {};
-         
-            \node (Box1) [draw,thick,fit=(1) (2) (3) (4) (5),fill,red,opacity=0.2] {};
         
   
 \end{tikzpicture}
@@ -2905,17 +2921,74 @@ $$V \geq \frac{1}{\sum\limits_{i=1}^{k} \frac{2(n_{i}+|\bm{k}_{i}|)}{m}}=\frac{m
       edge (c4)
  (c2) edge (c3)
       edge (c4)
- (c3) edge (c4);
+ (c3) edge (c4);  
  
+   \node (Box1) [draw,thick,fit=(1) (2) (3) (4) (5),fill,gray,opacity=0.2] {};
+   
+      \node (Box2) [draw,thick,fit=(6) (7) (8) (9),fill,gray,opacity=0.2] {};
+      
+         \node (Box3) [draw,thick,fit=(10) (11),fill,gray,opacity=0.2] {};
+         
+            \node (Box4) [draw,thick,fit=(c4) (12),fill,gray,opacity=0.2] {};
         
   
 \end{tikzpicture}
 \end{center}
-\caption{Example of labelling on $(S_{3}^{1,1},S_{2}^{2},S_{2},S_{1})$}
-\label{myfigure: Example of labeling on multi general star graph}
+\caption{Example of decomposition on $(S_{3}^{1,1},S_{2}^{2},S_{2},S_{1})$}
+\label{myfigure: Example of decomposition on multi general star graph}
 \end{myfigure}
 
-Now under simplification of the centere's, i.e $\bigodot\limits_{i=1}^{p} S_{n_{i}}^{\bm{k}_{i}}$ to $S_{\sum\limits_{i=1}^{p} n_{i}}^{\bm{K}}$, where $\bm{K}$ is the concatenation of all the $\bm{k}_{i}$ vectors for $i=1,...,p$.
+Now under simplification of the centre's, i.e $\bigodot\limits_{i=1}^{p} S_{n_{i}}^{\bm{k}_{i}}$ to $S_{\sum\limits_{i=1}^{p} n_{i}}^{\bm{K}}$, where $\bm{K}$ is the concatenation of all the $\bm{k}_{i}$ vectors for $i=1,...,p$.
+
+
+\begin{myfigure}
+\begin{center}
+\begin{tikzpicture}[-,auto,node distance=2cm,
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+ \node[main node] (c1) {$C_{1}$};
+ \node[main node] (1) [above of=c1] {$*_{1}$};
+ \node[main node] (2) [above left of=c1] {$p_{1,1,1}$};
+ \node[main node] (3) [left of=c1] {$p_{1,2,1}$};
+ \node[main node] (4) [above left of=2] {$e_{1,1,2}$};
+ \node[main node] (5) [left of=3] {$e_{1,2,2}$};
+  
+ \path
+ (c1) edge (1)
+      edge (2)
+      edge (3)
+  (2) edge (4)
+  (3) edge (5);
+ 
+ \node[main node] (6) [above right of=c1] {$*_{2}$};
+ \node[main node] (7) [right of=c1] {$p_{2,1,1}$};
+ \node[main node] (8) [right of=7] {$p_{2,1,2}$};
+ \node[main node] (9) [right of=8] {$e_{2,1,3}$};
+ 
+  \path
+ (c1) edge (6)
+      edge (7)
+  (7) edge (8)
+  (8) edge (9);
+      
+ \node[main node] (10) [below of=c1] {$*_{3}$};
+ \node[main node] (11) [below left of=c1] {$*_{3}$};
+ 
+  \path
+ (c1) edge (10)
+      edge (11);
+      
+ \node[main node] (12) [below right of=c1] {$*_{4}$};
+ 
+  \path
+ (c1) edge (12);            
+ 
+  
+\end{tikzpicture}
+\end{center}
+\caption{Example of simplification on $(S_{3}^{1,1},S_{2}^{2},S_{2},S_{1})$ to $S_{8}^{2,1,1}$}
+\label{myfigure: Example of simplification on multi general star graph}
+\end{myfigure}
 
 Then we get as long as $m \geq 2(\bm{K}_{\max}+1)=2(\max\limits_{i=1,...,p} \{\bm{k}_{max} \} +1 )$ then we get that
 
@@ -2932,6 +3005,10 @@ This solution may not be applicable if there is an long branch and a `small' gen
 \begin{note}
 We note that this is not the Hamiltonian bound for such a graph and the Hamiltonian bound would be,
 $$V=\frac{m}{2 \sum\limits_{i=1}^{p} (n_{i} + |\bm{k}|_{i}) + p}$$
+\end{note}
+
+\begin{note}
+Again the idea that all the centre's are connected in all combinations to each other centre is irrelevant to the decomposition and simplification.
 \end{note}
 
 %%%%%%%%%%%%%%%%%%%%%
