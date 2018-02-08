@@ -48,21 +48,22 @@
 \BOOKMARK [1][-]{section.11}{Mutli Star graphs}{}% 48
 \BOOKMARK [2][-]{subsection.11.1}{Symmetric multi stars}{section.11}% 49
 \BOOKMARK [2][-]{subsection.11.2}{Uneven multi stars}{section.11}% 50
-\BOOKMARK [1][-]{section*.35}{Appendices}{}% 51
-\BOOKMARK [1][-]{appendix.A}{Graph Definitions}{}% 52
-\BOOKMARK [1][-]{appendix.B}{Old Statements about Old diametric}{}% 53
-\BOOKMARK [1][-]{appendix.C}{Improvemening Hamiltonian bound}{}% 54
-\BOOKMARK [2][-]{subsection.C.1}{Reason For Probability of Interception formula}{appendix.C}% 55
-\BOOKMARK [2][-]{subsection.C.2}{Naive Improvement Complete analysis}{appendix.C}% 56
-\BOOKMARK [2][-]{subsection.C.3}{Combinatorial Improvement Complete analysis}{appendix.C}% 57
-\BOOKMARK [2][-]{subsection.C.4}{Combinatorial loop improvement analysis}{appendix.C}% 58
-\BOOKMARK [1][-]{appendix.D}{Dual star graphs}{}% 59
-\BOOKMARK [2][-]{subsection.D.1}{Decomposition of symmetric l-dual star into two stars and a line}{appendix.D}% 60
-\BOOKMARK [1][-]{appendix.E}{Proof's}{}% 61
-\BOOKMARK [2][-]{subsection.E.1}{Alternating Random Hamiltonian proof}{appendix.E}% 62
-\BOOKMARK [2][-]{subsection.E.2}{Condition on T for old diametric proof}{appendix.E}% 63
-\BOOKMARK [2][-]{subsection.E.3}{Time-limited diametric attack proof}{appendix.E}% 64
-\BOOKMARK [2][-]{subsection.E.4}{Polygonal attack proof}{appendix.E}% 65
-\BOOKMARK [2][-]{subsection.E.5}{Time-delayed attack proof}{appendix.E}% 66
-\BOOKMARK [2][-]{subsection.E.6}{Type-delayed attack proof}{appendix.E}% 67
-\BOOKMARK [2][-]{subsection.E.7}{Stage-1-Step-point lemma proof}{appendix.E}% 68
+\BOOKMARK [1][-]{section.12}{Multi general star graphs}{}% 51
+\BOOKMARK [1][-]{section*.38}{Appendices}{}% 52
+\BOOKMARK [1][-]{appendix.A}{Graph Definitions}{}% 53
+\BOOKMARK [1][-]{appendix.B}{Old Statements about Old diametric}{}% 54
+\BOOKMARK [1][-]{appendix.C}{Improvemening Hamiltonian bound}{}% 55
+\BOOKMARK [2][-]{subsection.C.1}{Reason For Probability of Interception formula}{appendix.C}% 56
+\BOOKMARK [2][-]{subsection.C.2}{Naive Improvement Complete analysis}{appendix.C}% 57
+\BOOKMARK [2][-]{subsection.C.3}{Combinatorial Improvement Complete analysis}{appendix.C}% 58
+\BOOKMARK [2][-]{subsection.C.4}{Combinatorial loop improvement analysis}{appendix.C}% 59
+\BOOKMARK [1][-]{appendix.D}{Dual star graphs}{}% 60
+\BOOKMARK [2][-]{subsection.D.1}{Decomposition of symmetric l-dual star into two stars and a line}{appendix.D}% 61
+\BOOKMARK [1][-]{appendix.E}{Proof's}{}% 62
+\BOOKMARK [2][-]{subsection.E.1}{Alternating Random Hamiltonian proof}{appendix.E}% 63
+\BOOKMARK [2][-]{subsection.E.2}{Condition on T for old diametric proof}{appendix.E}% 64
+\BOOKMARK [2][-]{subsection.E.3}{Time-limited diametric attack proof}{appendix.E}% 65
+\BOOKMARK [2][-]{subsection.E.4}{Polygonal attack proof}{appendix.E}% 66
+\BOOKMARK [2][-]{subsection.E.5}{Time-delayed attack proof}{appendix.E}% 67
+\BOOKMARK [2][-]{subsection.E.6}{Type-delayed attack proof}{appendix.E}% 68
+\BOOKMARK [2][-]{subsection.E.7}{Stage-1-Step-point lemma proof}{appendix.E}% 69

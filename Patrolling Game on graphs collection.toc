@@ -48,7 +48,8 @@
 \contentsline {section}{\numberline {11}Mutli Star graphs}{43}{section.11}
 \contentsline {subsection}{\numberline {11.1}Symmetric multi stars}{43}{subsection.11.1}
 \contentsline {subsection}{\numberline {11.2}Uneven multi stars}{44}{subsection.11.2}
-\contentsline {section}{Appendices}{i}{section*.35}
+\contentsline {section}{\numberline {12}Multi general star graphs}{45}{section.12}
+\contentsline {section}{Appendices}{i}{section*.38}
 \contentsline {section}{\numberline {A}Graph Definitions}{i}{appendix.A}
 \contentsline {section}{\numberline {B}Old Statements about Old diametric}{iii}{appendix.B}
 \contentsline {section}{\numberline {C}Improvemening Hamiltonian bound}{iv}{appendix.C}
